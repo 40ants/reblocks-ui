@@ -20,7 +20,7 @@
   :version (:read-file-form "version.lisp-expr")
   :author "Alexander Artemenko"
   :license "BSD"
-  :depends-on ()
+  :depends-on (:weblocks)
   :serial t
   :components ((:module "src"
                 :components
