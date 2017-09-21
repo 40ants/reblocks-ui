@@ -2,8 +2,15 @@
  ChangeLog
 ===========
 
-0.1.0 (unreleased)
-==================
+0.1.1
+=====
+
+* Code was fixed to work with weblocks 0.14.0 where ``*action-string*``
+  was moved to weblocks.variables.
+* Added ``weblocks.ui.form:render-link`` function, from old ``weblocks/utils/html.lisp``.
+
+0.1.0
+=====
 
 * Number features here.
 * Like that.

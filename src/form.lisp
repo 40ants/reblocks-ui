@@ -10,7 +10,8 @@
    #:render-button
    #:render-form-and-button
    #:with-html-form
-   #:render-textarea))
+   #:render-textarea
+   #:render-link))
 (in-package weblocks.ui.form)
 
 
@@ -30,7 +31,7 @@
                                             (weblocks::session-name-string-pair))))
                 (:fieldset
                  ,@body
-                 (:input :name weblocks::*action-string* :type "hidden" :value ,action-code))))
+                 (:input :name weblocks.variables:*action-string* :type "hidden" :value ,action-code))))
        (weblocks::log-form ,action-code :id ,id :class ,class))))
 
 
@@ -54,6 +55,43 @@
             :disabled (when disabledp "disabled")
             :onclick "disableIrrelevantButtons(this);"
             :value value)))
+
+
+(defun render-link (action label &key (ajaxp t) id class title render-fn)
+  "Renders an action into a href link. If AJAXP is true (the
+default), the link will be rendered in such a way that the action will
+be invoked via AJAX or will fall back to a regular request if
+JavaScript is not available. When the user clicks on the link the
+action will be called on the server.
+
+ACTION may be a function or a result of a call to MAKE-ACTION.
+ID, CLASS and TITLE represent their HTML counterparts.
+RENDER-FN is an optional function of one argument that is reponsible
+for rendering the link's content (i.e. its label). The default rendering
+function just calls PRINC-TO-STRING on the label and renders it
+with escaping. Internally, render-fn should use weblocks:with-html macro
+to write output into the right stream."
+
+  (let* ((*print-pretty* nil)
+         (action-code (weblocks:function-or-action->action action))
+         (url (weblocks:make-action-url action-code))
+         (on-click (when ajaxp
+                     (format nil "initiateAction(\"~A\", \"~A\"); return false;"
+                             ;; TODO (svetlyak40wt): session-name-string-pair returns "" now
+                             ;;                      need to investigate if it is critical for
+                             ;;                      initiateAction call.
+                             action-code
+                             (weblocks:session-name-string-pair)))))
+    
+    (with-html
+      (:a :id id
+          :class class
+          :href url
+          :onclick on-click
+          :title title
+          (if render-fn
+              (funcall render-fn label)
+              (htm (esc (princ-to-string label))))))))
 
 
 (defun render-form-and-button (name action &key (value (humanize-name name))
