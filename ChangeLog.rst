@@ -2,6 +2,14 @@
  ChangeLog
 ===========
 
+0.2.0
+=====
+
+* Now UI widgets are depend on new ``weblocks.widget:widget`` class.
+
+  This is breaking rendering for widgets. Replace old ``weblocks:render-body``
+  methods with ``weblocks.widget:render``.
+
 0.1.1
 =====
 

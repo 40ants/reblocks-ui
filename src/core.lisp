@@ -7,7 +7,7 @@
 (in-package weblocks.ui.core)
 
 
-(weblocks:defwidget widget (weblocks:widget)
+(weblocks.widget:defwidget widget ()
   ()
   (:documentation "Use this class as a parent for all widgets, who use UI."))
 
