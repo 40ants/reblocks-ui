@@ -2,6 +2,12 @@
  ChangeLog
 ===========
 
+0.3.0
+=====
+
+* Package ``weblocks.ui.form`` was fixed to use ``spinneret`` instead of
+  ``cl-who``, because ``reblocks`` version of ``Weblocks`` moved to it.
+
 0.2.0
 =====
 

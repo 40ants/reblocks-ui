@@ -1,11 +1,9 @@
 (defpackage #:weblocks.ui.form
   (:use #:cl)
   (:import-from #:weblocks
-                #:with-html
                 #:humanize-name)
-  (:import-from #:cl-who
-                #:htm
-                #:esc)
+  (:import-from #:spinneret
+                #:with-html)
   (:export
    #:render-button
    #:render-form-and-button
@@ -83,7 +81,7 @@ to write output into the right stream."
                              action-code
                              (weblocks:session-name-string-pair)))))
     
-    (with-html
+    (spinneret:with-html
       (:a :id id
           :class class
           :href url
@@ -91,7 +89,7 @@ to write output into the right stream."
           :title title
           (if render-fn
               (funcall render-fn label)
-              (htm (esc (princ-to-string label))))))))
+              (princ-to-string label))))))
 
 
 (defun render-form-and-button (name action &key (value (humanize-name name))
@@ -126,10 +124,10 @@ cut to quickly render a sumbit button."
    'disabledp' - button is disabled if true."
   (with-html
     (when label
-      (htm (:label :for id
-                   (esc label))))
+      (:label :for id
+              label))
     (:textarea :name (weblocks::attributize-name name)
                :id id
                :class class
                :disabled (when disabledp "disabled")
-               (esc value))))
+               value)))
