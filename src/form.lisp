@@ -19,7 +19,7 @@
   (let ((action-code (gensym)))
     `(let ((,action-code (weblocks::function-or-action->action ,action)))
        (with-html
-         (:form :id ,id :class ,class :action (weblocks.request:request-path-info)
+         (:form :id ,id :class ,class :action (weblocks.request:get-path)
                 :method (weblocks::attributize-name ,method-type) :enctype ,enctype
                 :onsubmit (when ,use-ajax-p
                             (format nil "~@[~A~]~A; return false;"
