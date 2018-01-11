@@ -3,7 +3,8 @@
   (:import-from #:weblocks
                 #:deftemplate)
   (:export
-   #:widget))
+   #:widget
+   #:*foundation-dependencies*))
 (in-package weblocks.ui.core)
 
 
@@ -12,20 +13,29 @@
   (:documentation "Use this class as a parent for all widgets, who use UI."))
 
 
+(defvar *foundation-dependencies*
+  (list (weblocks.dependencies:make-dependency
+          "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js"
+          :integrity "sha256-mRYlCu5EG+ouD07WxLF8v4ZAZYCA6WrmdIXyn1Bv9Vk="
+          :crossorigin "anonymous")
+        (weblocks.dependencies:make-dependency
+          "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css"
+          :integrity "sha256-GSio8qamaXapM8Fq9JYdGNTvk/dgs+cMLgPeevOYEx0="
+          :crossorigin "anonymous"))
+
+  "Dependencies for widgets based on Foundation framework.
+
+   Also may be useful if you want to include them as a whole app's
+   dependencies.
+
+   To calculate right integity value, use:
+   curl https://url | openssl dgst -sha256 -binary | openssl enc -base64 -A")
+
+
 (defmethod weblocks.dependencies:get-dependencies ((widget widget))
   (log:debug "Returning new-style dependencies for UI widget.")
 
-  ;; To calculate right integity value, use:
-  ;; curl https://url | openssl dgst -sha256 -binary | openssl enc -base64 -A
-  (append (list (weblocks.dependencies:make-dependency
-                 "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js"
-                  :integrity "sha256-mRYlCu5EG+ouD07WxLF8v4ZAZYCA6WrmdIXyn1Bv9Vk="
-                  :crossorigin "anonymous")
-                (weblocks.dependencies:make-dependency
-                 "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css"
-                  :integrity "sha256-GSio8qamaXapM8Fq9JYdGNTvk/dgs+cMLgPeevOYEx0="
-                  :crossorigin "anonymous"))
-          
+  (append *foundation-dependencies*
           (call-next-method)))
 
 

@@ -2,6 +2,15 @@
  ChangeLog
 ===========
 
+0.5.0 (2018-01-11)
+==================
+
+* Now  ``*foundation-dependencies*`` is exported from
+  ``weblocks.ui.core``.
+  This is a list of CSS an JS dependencies of Zurb Foundation,
+  which you can with to add to your application wide dependencies
+  list to render pages without widgets, such as error pages.
+
 0.4.0 (2018-01-07)
 ==================
 
