@@ -2,6 +2,12 @@
  ChangeLog
 ===========
 
+0.6.0 (2018-02-01)
+==================
+
+System was moved to package inferred class and fixed to work with
+weblocks >= 0.25.0.
+
 0.5.0 (2018-01-11)
 ==================
 

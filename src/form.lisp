@@ -1,36 +1,53 @@
-(defpackage #:weblocks.ui.form
+(defpackage #:weblocks-ui/form
   (:use #:cl)
-  (:import-from #:weblocks
-                #:humanize-name)
-  (:import-from #:spinneret
+  (:import-from #:weblocks/actions
+                #:make-action-url
+                #:function-or-action->action)
+  (:import-from #:weblocks/html
                 #:with-html)
+  (:import-from #:weblocks/request
+                #:get-path)
+  (:import-from #:weblocks/utils/string
+                #:humanize-name
+                #:attributize-name)
+  (:import-from #:quri
+                #:url-encode)
+  (:import-from #:weblocks/variables
+                #:*action-string*)
   (:export
    #:render-button
    #:render-form-and-button
    #:with-html-form
    #:render-textarea
    #:render-link))
-(in-package weblocks.ui.form)
+(in-package weblocks-ui/form)
 
 
 (defmacro with-html-form ((method-type action &key id class enctype (use-ajax-p t) extra-submit-code
                                                 (submit-fn "initiateFormAction(\"~A\", $(this), \"~A\")")) &body body)
-  "Transforms to cl-who (:form) with standard form code (AJAX support, actions, etc.)"
+  "Transforms to a form like (:form) with standard form code (AJAX support, actions, etc.)"
   (let ((action-code (gensym)))
-    `(let ((,action-code (weblocks::function-or-action->action ,action)))
+    `(let ((,action-code (function-or-action->action ,action)))
        (with-html
-         (:form :id ,id :class ,class :action (weblocks.request:get-path)
-                :method (weblocks::attributize-name ,method-type) :enctype ,enctype
+         (:form :id ,id :class ,class :action (get-path)
+                :method (attributize-name ,method-type) :enctype ,enctype
                 :onsubmit (when ,use-ajax-p
                             (format nil "~@[~A~]~A; return false;"
                                     ,extra-submit-code
                                     (format nil ,submit-fn
-                                            (quri:url-encode (or ,action-code ""))
-                                            (weblocks::session-name-string-pair))))
+                                            (url-encode (or ,action-code ""))
+                                            ;; Function session-name-string-pair was removed
+                                            ;; during weblocks refactoring, so we just
+                                            ;; 
+                                            ""
+                                            ;; (weblocks::session-name-string-pair)
+                                            )))
                 (:fieldset
                  ,@body
-                 (:input :name weblocks.variables:*action-string* :type "hidden" :value ,action-code))))
-       (weblocks::log-form ,action-code :id ,id :class ,class))))
+                 (:input :name *action-string* :type "hidden" :value ,action-code))))
+       ;; TODO: may be return log-from into the Weblocks
+       ;; (weblocks::log-form ,action-code :id ,id :class ,class)
+       )))
 
 
 (defun render-button (name  &key (value (humanize-name name)) id (class "button") disabledp)
@@ -46,7 +63,7 @@
     ;; We could use <button...> here, but this way, it will
     ;; be impossible to distinguish which button was clicked if
     ;; there are many buttons in the form.
-    (:input :name (weblocks::attributize-name name)
+    (:input :name (attributize-name name)
             :type "submit"
             :id id
             :class class
@@ -71,17 +88,13 @@ with escaping. Internally, render-fn should use weblocks:with-html macro
 to write output into the right stream."
 
   (let* ((*print-pretty* nil)
-         (action-code (weblocks:function-or-action->action action))
-         (url (weblocks:make-action-url action-code))
+         (action-code (function-or-action->action action))
+         (url (make-action-url action-code))
          (on-click (when ajaxp
-                     (format nil "initiateAction(\"~A\", \"~A\"); return false;"
-                             ;; TODO (svetlyak40wt): session-name-string-pair returns "" now
-                             ;;                      need to investigate if it is critical for
-                             ;;                      initiateAction call.
-                             action-code
-                             (weblocks:session-name-string-pair)))))
+                     (format nil "initiateAction(\"~A\"); return false;"
+                             action-code))))
     
-    (spinneret:with-html
+    (with-html
       (:a :id id
           :class class
           :href url
@@ -109,7 +122,7 @@ cut to quickly render a sumbit button."
 
 
 (defun render-textarea (name &key
-                               (label (weblocks::humanize-name name))
+                               (label (humanize-name name))
                                value
                                id
                                class
@@ -126,7 +139,7 @@ cut to quickly render a sumbit button."
     (when label
       (:label :for id
               label))
-    (:textarea :name (weblocks::attributize-name name)
+    (:textarea :name (attributize-name name)
                :id id
                :class class
                :disabled (when disabledp "disabled")
