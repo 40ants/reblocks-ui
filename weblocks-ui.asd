@@ -4,7 +4,8 @@
   :license "BSD"
   :class :package-inferred-system
   :pathname "src"
-  :depends-on ("weblocks-ui/core"
+  :depends-on (:weblocks-parenscript
+               "weblocks-ui/core"
                "weblocks-ui/form")
   :description "A set of UI widgets for weblocks!"
   :long-description

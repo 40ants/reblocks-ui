@@ -2,6 +2,12 @@
  ChangeLog
 ===========
 
+0.7.0 (2018-02-06)
+==================
+
+* Added initialization of Foundation's javascript plugins.
+  This introduces dependency from ``weblocks-parenscript``.
+
 0.6.0 (2018-02-01)
 ==================
 

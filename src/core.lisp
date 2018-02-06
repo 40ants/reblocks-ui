@@ -1,8 +1,10 @@
 (defpackage #:weblocks-ui/core
   (:use #:cl)
   (:nicknames #:weblocks-ui)
-  ;; (:import-from #:weblocks
-  ;;               #:deftemplate)
+  
+  (:import-from #:weblocks-parenscript)
+  (:import-from #:parenscript
+                #:chain)
   (:import-from #:weblocks/widget
                 #:defwidget)
   (:import-from #:weblocks/dependencies
@@ -34,7 +36,14 @@
         (make-dependency
           "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css"
           :integrity "sha256-GSio8qamaXapM8Fq9JYdGNTvk/dgs+cMLgPeevOYEx0="
-          :crossorigin "anonymous"))
+          :crossorigin "anonymous")
+        
+        ;; After page will load, we have to activate Foundation plugins
+        (weblocks-parenscript:make-dependency
+          (chain (j-query document)
+                 (ready (lambda ()
+                          (chain (j-query document)
+                                 (foundation)))))))
 
   "Dependencies for widgets based on Foundation framework.
 
