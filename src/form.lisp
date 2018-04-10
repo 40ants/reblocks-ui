@@ -23,8 +23,15 @@
 (in-package weblocks-ui/form)
 
 
-(defmacro with-html-form ((method-type action &key id class enctype (use-ajax-p t) extra-submit-code
-                                                (submit-fn "initiateFormAction(\"~A\", $(this), \"~A\")")) &body body)
+(defmacro with-html-form ((method-type
+                           action &key
+                                    id
+                                    class
+                                    enctype
+                                    (use-ajax-p t)
+                                    extra-submit-code
+                                    (submit-fn "initiateFormAction(\"~A\", $(this), \"~A\")"))
+                          &body body)
   "Transforms to a form like (:form) with standard form code (AJAX support, actions, etc.)"
   (let ((action-code (gensym)))
     `(let ((,action-code (function-or-action->action ,action)))
@@ -50,7 +57,12 @@
        )))
 
 
-(defun render-button (name  &key (value (humanize-name name)) id (class "button") disabledp)
+(defun render-button (name  &key
+                              (value (humanize-name name))
+                              id
+                              (class "button")
+                              (onclick "disableIrrelevantButtons(this);")
+                              disabledp)
   "Renders a button in a form.
 
    'name' - name of the html control. The name is attributized before
@@ -68,8 +80,40 @@
             :id id
             :class class
             :disabled (when disabledp "disabled")
-            :onclick "disableIrrelevantButtons(this);"
+            :onclick onclick
             :value value)))
+
+
+;; TODO: find a way how to pass button's value into the action's arguments
+;;       right now jQuery.fn.serializeObject does not serialize values from <button> tags
+(defun render-html-button (text &key
+                             value
+                             (name (attributize-name text))
+                             id
+                             (class "button")
+                             (type "submit")
+                             (onclick "disableIrrelevantButtons(this);")
+                             disabledp)
+  "Renders a button in a form.
+
+   'name' - name of the html control. The name is attributized before
+   being rendered.
+   'value' - a value on html control. Humanized name is default.
+   'id' - id of the html control. Default is nil.
+   'class' - a class used for styling. By default, \"submit\".
+   'disabledp' - button is disabled if true."
+  (with-html
+    ;; We could use <button...> here, but this way, it will
+    ;; be impossible to distinguish which button was clicked if
+    ;; there are many buttons in the form.
+    (:button :name name
+             :type type
+             :id id
+             :class class
+             :disabled (when disabledp "disabled")
+             :onclick onclick
+             :value value
+             text)))
 
 
 (defun render-link (action label &key (ajaxp t) id class title render-fn)

@@ -2,6 +2,11 @@
  ChangeLog
 ===========
 
+0.7.1 (2018-02-10)
+==================
+
+* Function ``render-button`` now supports keyword argument ``:onclick``.
+
 0.7.0 (2018-02-06)
 ==================
 
