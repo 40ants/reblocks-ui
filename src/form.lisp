@@ -49,7 +49,7 @@
                                             ""
                                             ;; (weblocks::session-name-string-pair)
                                             )))
-                (:fieldset
+                (:span
                  ,@body
                  (:input :name *action-string* :type "hidden" :value ,action-code))))
        ;; TODO: may be return log-from into the Weblocks

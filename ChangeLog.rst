@@ -2,6 +2,12 @@
  ChangeLog
 ===========
 
+0.8 (2018-05-04)
+================
+
+* Do not use ``fieldset`` in ``with-html-form``. It usually draws a box
+  around the form elements and this isn't always wanted.
+
 0.7.1 (2018-02-10)
 ==================
 
