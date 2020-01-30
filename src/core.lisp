@@ -1,7 +1,7 @@
 (defpackage #:weblocks-ui/core
   (:use #:cl)
   (:nicknames #:weblocks-ui)
-  
+
   (:import-from #:weblocks-parenscript)
   (:import-from #:parenscript
                 #:chain)
@@ -18,14 +18,23 @@
   (:import-from #:weblocks/html
                 #:with-html-string)
   (:export
-   #:widget
+   #:ui-widget
    #:*foundation-dependencies*))
 (in-package weblocks-ui/core)
 
 
-(defwidget widget ()
+(defwidget ui-widget ()
   ()
   (:documentation "Use this class as a parent for all widgets, who use UI."))
+
+(defwidget widget (ui-widget)
+  ()
+  (:documentation "Use this class as a parent for all widgets, who use UI. Warning: 'widget' was renamed to 'ui-widget' and will be removed after 2020-06-01."))
+
+(defmethod initialize-instance :before ((widget widget) &rest initargs &key &allow-other-keys)
+  ;TODO: remove after 2020-06-01
+  (declare (ignore initargs))
+  (warn "Please, switch to the ui-widget class, because `widget' was renamed to `ui-widget' and will be removed after 2020-06-01."))
 
 
 (defvar *foundation-dependencies*
@@ -37,7 +46,7 @@
           "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css"
           :integrity "sha256-GSio8qamaXapM8Fq9JYdGNTvk/dgs+cMLgPeevOYEx0="
           :crossorigin "anonymous")
-        
+
         ;; After page will load, we have to activate Foundation plugins
         (weblocks-parenscript:make-dependency
           (chain (j-query document)
@@ -54,7 +63,7 @@
    curl https://url | openssl dgst -sha256 -binary | openssl enc -base64 -A")
 
 
-(defmethod get-dependencies ((widget widget))
+(defmethod get-dependencies ((widget ui-widget))
   (log:debug "Returning new-style dependencies for UI widget.")
 
   (append *foundation-dependencies*

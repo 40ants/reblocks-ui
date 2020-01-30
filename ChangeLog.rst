@@ -2,6 +2,11 @@
  ChangeLog
 ===========
 
+0.9 (2020-01-31)
+================
+
+* ``widget`` was renamed to ``ui-widget`` and a deprecation warning was added.
+
 0.8 (2018-05-04)
 ================
 
