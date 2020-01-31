@@ -11,37 +11,44 @@
    index page of the HTML documentation.
 .. include-from
 
-Give some introduction.
+Weblocks-ui brings `Foundation`_ styling to your Weblocks application.
 
-Reasoning
-=========
+Usage
+=====
 
-Explain why this project so outstanding and why it
-was created.
+Weblocks-ui defines a ``ui-widget``. Your widgets than inherit from it
+get automatic styling:
 
-You can give some examples. This is how common lisp
-code should be formatted:
 
 .. code-block:: common-lisp
 
-   (defvar log-item '(:|@message| "Some"
-                      :|@timestamp| 122434342
-                      ;; this field is wrong and
-                      ;; shouldn't be here
-                      :|@fields| nil))
+   (defwiget my-widget (weblocsk-ui:ui-widget)
+     ((…))
 
-And this is how you can provide REPL examples:
+The dependencies (Foundation and Jquery) are automatically fetched
+from a CDN (Cloudflare).
 
-.. code-block:: common-lisp-repl
+``weblocks-ui/form:with-html-form`` is used to quickly set up correct
+Weblocks forms (with Ajax calls, actions, etc).
 
-   TEST> (format nil "Blah minor: ~a"
-                     100500)
-   "Blah minor: 100500"
+This example is an except of the `quickstart tutorial`_:
 
-Roadmap
-=======
+.. code-block:: common-lisp
 
-Provide a Roadmap.
+    (defmethod render ((task-list task-list))
+      (with-html
+        (:h1 "Tasks")
+        (loop for task in (tasks task-list) do
+          (render task))
+        (with-html-form (:POST (lambda (&key title &allow-other-keys)
+                                       (add-task task-list title)))
+          (:input :type "text"
+                  :name "title"
+                  :placeholder "Task's title")
+          (:input :type "submit"
+                  :value "Add"))))
+
+
 
 .. Everything after this comment will be omitted from HTML docs.
 .. include-to
@@ -49,12 +56,11 @@ Provide a Roadmap.
 Building Documentation
 ======================
 
-Provide instruction how to build or use your library.
 
 How to build documentation
 --------------------------
 
-To build documentation, you need a Sphinx. It is
+To build documentation, you need Sphinx. It is a
 documentaion building tool written in Python.
 
 To install it, you need a virtualenv. Read
@@ -93,3 +99,6 @@ License
 =======
 
 Licensed under the BSD License.
+
+.. _Foundation: https://foundation.zurb.com/
+.. _quickstart tutorial: http://40ants.com/weblocks/quickstart.html
