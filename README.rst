@@ -23,7 +23,7 @@ get automatic styling:
 .. code-block:: common-lisp
 
    (defwiget my-widget (weblocsk-ui:ui-widget)
-     ((…))
+     ((...))
 
 The dependencies (Foundation and Jquery) are automatically fetched
 from a CDN (Cloudflare).
