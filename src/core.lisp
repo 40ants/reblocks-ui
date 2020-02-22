@@ -19,6 +19,7 @@
                 #:with-html-string)
   (:export
    #:ui-widget
+   #:widget
    #:*foundation-dependencies*))
 (in-package weblocks-ui/core)
 
