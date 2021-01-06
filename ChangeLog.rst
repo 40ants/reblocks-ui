@@ -2,6 +2,14 @@
  ChangeLog
 ===========
 
+0.10 (2021-01-07)
+=================
+
+* Macro ``with-html-form`` now can accept parameters ``requires-confirmation-p`` and ``confirm-question``.
+  If ``requires-confirmation-p`` is given, form shows a popup asking if user really wants to execute an action.
+  Argument ``confirm-question`` can accept a string or a forms for spinneret. They will be used to render
+  the content of the popup.
+
 0.9 (2020-01-31)
 ================
 

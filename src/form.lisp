@@ -23,38 +23,154 @@
 (in-package weblocks-ui/form)
 
 
+(defun %render-form (method-type
+                     action
+                     body
+                     &key id
+                          class
+                          enctype
+                          (use-ajax-p t)
+                          extra-submit-code
+                          requires-confirmation-p
+                          (confirm-question "Are you sure?")
+                          (submit-fn "initiateFormAction(\"~A\", $(this), \"~A\")"))
+  (let* ((action-code (function-or-action->action action))
+         (on-submit (cond
+                      (use-ajax-p
+                       (format nil "~@[~A~]~A; return false;"
+                               extra-submit-code
+                               (format nil submit-fn
+                                       (url-encode (or action-code ""))
+                                       ;; Function session-name-string-pair was removed
+                                       ;; during weblocks refactoring, so we just
+                                       ;; 
+                                       ""
+                                       ;; (weblocks::session-name-string-pair)
+                                       )))))
+         (popup-name (when requires-confirmation-p
+                       (symbol-name
+                        (gensym "popup"))))
+         ;; Here we'll close the popup and execute the real submit code.
+         ;; It should be executed only when user hits "OK" button
+         (on-confirmation-submit (when requires-confirmation-p
+                                   (format nil
+                                           "close_~A(); ~A; return false;"
+                                           popup-name
+                                           on-submit)))
+         (on-form-submit (if requires-confirmation-p
+                             (format nil "show_~A(); return false;"
+                                     popup-name)
+                             on-submit)))
+
+    (with-html
+      (when requires-confirmation-p
+        (:div
+         :class "reveal"
+         :id popup-name
+         :dataset (:reveal t)
+
+         (:form :id id :class class
+                :action (get-path)
+                :method (attributize-name method-type)
+                :enctype enctype
+                :onsubmit on-confirmation-submit
+
+                ;; (:h1 confirm-question)
+                (funcall confirm-question)
+
+                ;; We need this to make forms work when JS is turned off
+                (:input :name *action-string* :type "hidden" :value action-code)
+
+                (:div :class "float-right"
+                      (:input :type "button"
+                              :class "success button"
+                              :name "cancel"
+                              :value "Cancel"
+                              :onclick (format nil "close_~A();"
+                                               popup-name))
+                      (:input :type "submit"
+                              :class "alert button"
+                              :name "ok"
+                              :value "Ok"))))
+        
+        (:script (format nil "
+
+function show_~A () {
+   $('~A').foundation('open');
+}
+
+function close_~A () {
+   $('~A').foundation('close');
+}
+
+// Without this call, object will not
+// be initialized propertly, when widget get
+// loaded by AJAX call:
+$('~A').foundation();
+
+"
+                         popup-name
+                         popup-name
+                         popup-name
+                         popup-name
+                         popup-name) 
+                 
+                 ;; (parenscript:ps*
+                 ;;  `(defun show-popup ()))
+                 ))
+
+
+      (:form :id id
+             :class class
+             :action (get-path)
+             :method (attributize-name method-type)
+             :enctype enctype
+             :onsubmit on-form-submit
+             
+             ;; We need this to make forms work when JS is turned off
+             (:input :name *action-string* :type "hidden" :value action-code)
+
+             ;; And here is the form's content itself
+             (funcall body))
+      
+      )
+    ;; TODO: may be return log-from into the Weblocks
+    ;; (weblocks::log-form ,action-code :id ,id :class ,class)
+    )
+  )
+
 (defmacro with-html-form ((method-type
                            action &key
-                                    id
-                                    class
-                                    enctype
-                                    (use-ajax-p t)
-                                    extra-submit-code
-                                    (submit-fn "initiateFormAction(\"~A\", $(this), \"~A\")"))
-                          &body body)
+                                  id
+                                  class
+                                  enctype
+                                  (use-ajax-p t)
+                                  extra-submit-code
+                                  requires-confirmation-p
+                                  (confirm-question "Are you sure?")
+                                  (submit-fn "initiateFormAction(\"~A\", $(this), \"~A\")"))
+                          &body body
+                          &environment env)
   "Transforms to a form like (:form) with standard form code (AJAX support, actions, etc.)"
-  (let ((action-code (gensym)))
-    `(let ((,action-code (function-or-action->action ,action)))
-       (with-html
-         (:form :id ,id :class ,class :action (get-path)
-                :method (attributize-name ,method-type) :enctype ,enctype
-                :onsubmit (when ,use-ajax-p
-                            (format nil "~@[~A~]~A; return false;"
-                                    ,extra-submit-code
-                                    (format nil ,submit-fn
-                                            (url-encode (or ,action-code ""))
-                                            ;; Function session-name-string-pair was removed
-                                            ;; during weblocks refactoring, so we just
-                                            ;; 
-                                            ""
-                                            ;; (weblocks::session-name-string-pair)
-                                            )))
-                (:span
-                 ,@body
-                 (:input :name *action-string* :type "hidden" :value ,action-code))))
-       ;; TODO: may be return log-from into the Weblocks
-       ;; (weblocks::log-form ,action-code :id ,id :class ,class)
-       )))
+  (let ((body `(lambda ()
+                 ,@(spinneret::parse-html body env)))
+        (confirm-question `(lambda ()
+                             ,(spinneret::parse-html
+                               (typecase confirm-question
+                                 (string (list :h1 confirm-question))
+                                 (t confirm-question))
+                               env))))
+    `(%render-form ,method-type
+                   ,action
+                   ,body
+                   :id ,id
+                   :class ,class
+                   :enctype ,enctype
+                   :use-ajax-p ,use-ajax-p
+                   :extra-submit-code ,extra-submit-code
+                   :requires-confirmation-p ,requires-confirmation-p
+                   :confirm-question ,confirm-question
+                   :submit-fn ,submit-fn)))
 
 
 (defun render-button (name  &key
