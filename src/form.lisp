@@ -54,7 +54,7 @@
          ;; It should be executed only when user hits "OK" button
          (on-confirmation-submit (when requires-confirmation-p
                                    (format nil
-                                           "close_~A(); ~A; return false;"
+                                           "close_~A(); ~A;"
                                            popup-name
                                            on-submit)))
          (on-form-submit (if requires-confirmation-p
@@ -86,7 +86,7 @@
                               :class "success button"
                               :name "cancel"
                               :value "Cancel"
-                              :onclick (format nil "close_~A();"
+                              :onclick (format nil "close_~A(); return false;"
                                                popup-name))
                       (:input :type "submit"
                               :class "alert button"
