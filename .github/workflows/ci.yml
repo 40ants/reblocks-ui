@@ -62,7 +62,7 @@
         },
         {
           "name": "Install SBLint",
-          "run": "\necho 'dist ultralisp http://dist.ultralisp.org' > qlfile\necho 'Running update'\nqlot --version\nqlot update\necho \"Update exit code $?\"\nqlot exec ros install 40ants-linter\necho \"Linter install exit code $?\"\n",
+          "run": "\necho 'dist ultralisp http://dist.ultralisp.org' > qlfile\necho 'Running update'\nqlot --version\nqlot update > qlot.output 2>&1\n if [ $? -eq 0 ]; then\n echo 'Updated successfully'\n else\n echo \"Qlot failed with code $?\:\" >&2\n cat qlot.output >&2\n fi\n \necho \"Update exit code $?\"\nqlot exec ros install 40ants-linter\necho \"Linter install exit code $?\"\n",
           "shell": "bash"
         },
         {
