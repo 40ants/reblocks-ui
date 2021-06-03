@@ -2,6 +2,15 @@
  ChangeLog
 ===========
 
+0.11 (2021-06-02)
+=================
+
+Added a way to handle and show form and field errors.
+
+Use ``error-placeholder`` function and ``form-error-placeholder`` function
+inside the ``with-html-form`` macro. And signal errors using ``field-error``
+and ``form-error`` functions.
+
 0.10 (2021-01-07)
 =================
 
