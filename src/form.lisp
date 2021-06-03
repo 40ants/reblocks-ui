@@ -14,13 +14,64 @@
                 #:url-encode)
   (:import-from #:weblocks/variables
                 #:*action-string*)
+  (:import-from #:log4cl-extras/error
+                #:print-backtrace
+                #:with-log-unhandled)
+  (:import-from #:log4cl-extras/context
+                #:with-fields)
   (:export
    #:render-button
    #:render-form-and-button
    #:with-html-form
    #:render-textarea
-   #:render-link))
+   #:render-link
+   #:field-error
+   #:error-placeholder
+   #:form-error-placeholder
+   #:form-error))
 (in-package weblocks-ui/form)
+
+
+(define-condition form-error (error)
+  ((message :initarg :message
+            :accessor error-message))
+  (:report (lambda (condition stream)
+             (format stream "Form error: ~A"
+                     (error-message condition)))))
+
+
+(define-condition field-error (form-error)
+  ((name :initarg :name
+         :reader field-name))
+  (:report (lambda (condition stream)
+             (format stream "Error for field ~S: ~A"
+                     (field-name condition)
+                     (error-message condition)))))
+
+
+(defun field-error (name message)
+  "Signals an error which will be shown for the whole form.lisp
+
+   You need to use ERROR-PLACEHOLDER function inside the WITH-HTML-FORM macro
+   to set a place where an error message should be shown. Otherwise, the error
+   will be logged and ignored.
+
+   If there is no a ERROR-PLACEHOLDER call with corresponding NAME argument,
+   then error message can be shown for the whole form in a place where
+   FORM-ERROR-PLACEHOLDER function was called."
+  (error 'field-error
+         :name name
+         :message message))
+
+
+(defun form-error (message)
+  "Signals an error which will be shown for the whole form.lisp
+
+   You need to use FORM-ERROR-PLACEHOLDER function inside the WITH-HTML-FORM macro
+   to set a place where an error message should be shown. Otherwise, the error
+   will be logged and ignored."
+  (error 'form-error
+         :message message))
 
 
 (defun %render-form (method-type
@@ -33,8 +84,45 @@
                           extra-submit-code
                           requires-confirmation-p
                           (confirm-question "Are you sure?")
-                          (submit-fn "initiateFormAction(\"~A\", $(this), \"~A\")"))
-  (let* ((action-code (function-or-action->action action))
+                          (submit-fn "initiateFormAction(\"~A\", $(this), \"~A\")")
+                          ;; We need this reference to update a widget
+                          ;; after the field error was handled:
+                          widget
+                          ;; A hashmap with placeholders widgets
+                          error-placeholders)
+  (let* ((action (if (and (functionp action)
+                          widget)
+                     ;; We need this wrapper to handle form errors
+                     (lambda (&rest args)
+                       (block handled
+                         (handler-bind ((error
+                                          (lambda (c)
+                                            (let ((name (typecase c
+                                                          (field-error (field-name c))
+                                                          (t "form-error")))
+                                                  (message (typecase c
+                                                             (form-error (error-message c))
+                                                             (t (format nil "~A" c)))))
+                                              ;; Here we want to log all unusual exception only,
+                                              ;; because FORM-ERROR conditions are signaled
+                                              ;; when something is wrong with user input and
+                                              ;; usually we don't want to see them in application logs:
+                                              (unless (typep c 'form-error)
+                                                (with-fields (:traceback (print-backtrace :stream nil
+                                                                                          :condition c))
+                                                  (log:error "Unhandled exception")))
+                                              
+                                              (when (and error-placeholders
+                                                         (gethash name error-placeholders))
+                                                (let ((placeholder (gethash name error-placeholders)))
+                                                  (setf (error-placeholder-message placeholder)
+                                                        message)
+                                                  (weblocks/widget:update placeholder))
+                                                (return-from handled))))))
+                           (apply action args))))
+                     ;; Error handling works only when callback is a function
+                     action))
+         (action-code (function-or-action->action action))
          (on-submit (cond
                       (use-ajax-p
                        (format nil "~@[~A~]~A; return false;"
@@ -126,7 +214,7 @@ $('~A').foundation();
              :method (attributize-name method-type)
              :enctype enctype
              :onsubmit on-form-submit
-             
+              
              ;; We need this to make forms work when JS is turned off
              (:input :name *action-string* :type "hidden" :value action-code)
 
@@ -139,6 +227,44 @@ $('~A').foundation();
     )
   )
 
+
+(weblocks/widget:defwidget error-placeholder ()
+  ((name :initarg :name
+         :reader error-placeholder-name)
+   (message :initform nil
+            :accessor error-placeholder-message)))
+
+
+(defmethod weblocks/widget:render ((widget error-placeholder))
+  (when (error-placeholder-message widget)
+    (with-html
+      (:p :class (format nil "error ~A-error" (error-placeholder-name widget))
+          (error-placeholder-message widget)))))
+
+
+(defun error-placeholder (name &key (widget-class 'error-placeholder))
+  "This function creates and renders a widget to show an error message related to some form field.
+
+   It should be called inside WITH-HTML-FORM macro.
+
+   NAME argument should be a string denoting a form field. Later, you can call FIELD-ERROR function
+   to signal an error from the action function. You will need to pass the NAME as the first argument
+   to the FIELD-ERROR function."
+  (declare (ignore name widget-class))
+  (error "This function should be called inside WITH-HTML-FORM macro."))
+
+
+(defun form-error-placeholder (&key (widget-class 'error-placeholder))
+  "This function creates and renders a widget to show an error for the whole form.
+
+   It should be called inside WITH-HTML-FORM macro.
+
+   Later, you can call FORM-ERROR function to signal an error from the action function."
+  (declare (ignore widget-class))
+  (error "This function should be called inside WITH-HTML-FORM macro."))
+
+
+
 (defmacro with-html-form ((method-type
                            action &key
                                   id
@@ -148,7 +274,10 @@ $('~A').foundation();
                                   extra-submit-code
                                   requires-confirmation-p
                                   (confirm-question "Are you sure?")
-                                  (submit-fn "initiateFormAction(\"~A\", $(this), \"~A\")"))
+                                  (submit-fn "initiateFormAction(\"~A\", $(this), \"~A\")")
+                                  ;; We need this reference to update a widget
+                                  ;; after the field error was handled:
+                                  widget)
                           &body body
                           &environment env)
   "Transforms to a form like (:form) with standard form code (AJAX support, actions, etc.)"
@@ -160,17 +289,35 @@ $('~A').foundation();
                                  (string (list :h1 confirm-question))
                                  (t confirm-question))
                                env))))
-    `(%render-form ,method-type
-                   ,action
-                   ,body
-                   :id ,id
-                   :class ,class
-                   :enctype ,enctype
-                   :use-ajax-p ,use-ajax-p
-                   :extra-submit-code ,extra-submit-code
-                   :requires-confirmation-p ,requires-confirmation-p
-                   :confirm-question ,confirm-question
-                   :submit-fn ,submit-fn)))
+    `(let ((error-placeholders (make-hash-table :test 'equal)))
+       (flet ((error-placeholder (name &key (widget-class 'error-placeholder))
+                (check-type name string)
+                (let ((widget (make-instance widget-class
+                                             :name name)))
+                  (setf (gethash name error-placeholders)
+                        widget)
+                  (weblocks/widget:render widget)))
+              (form-error-placeholder (&key (widget-class 'error-placeholder))
+                (let* ((name "form-error")
+                       (widget (make-instance widget-class
+                                              :name name)))
+                  (setf (gethash name error-placeholders)
+                        widget)
+                  (weblocks/widget:render widget))))
+         
+         (%render-form ,method-type
+                       ,action
+                       ,body
+                       :id ,id
+                       :class ,class
+                       :enctype ,enctype
+                       :use-ajax-p ,use-ajax-p
+                       :extra-submit-code ,extra-submit-code
+                       :requires-confirmation-p ,requires-confirmation-p
+                       :confirm-question ,confirm-question
+                       :submit-fn ,submit-fn
+                       :widget ,widget
+                       :error-placeholders error-placeholders)))))
 
 
 (defun render-button (name  &key
