@@ -1,23 +1,13 @@
-#|
-  This file is a part of weblocks-ui project.
-  Copyright (c) 2017 Alexander Artemenko
-|#
-
-(in-package :cl-user)
-(defpackage weblocks-ui-test-asd
-  (:use :cl :asdf))
-(in-package :weblocks-ui-test-asd)
-
-(defsystem weblocks-ui-test
+(defsystem reblocks-ui-test
   :author "Alexander Artemenko"
   :license "BSD"
-  :depends-on (:weblocks-ui
+  :depends-on (:reblocks-ui
                :prove
                :hamcrest-prove)
   :components ((:module "t"
                 :components
-                ((:test-file "weblocks-ui"))))
-  :description "Test system for weblocks-ui"
+                ((:test-file "reblocks-ui"))))
+  :description "Test system for reblocks-ui"
 
   :defsystem-depends-on (:prove-asdf)
   :perform (test-op :after (op c)

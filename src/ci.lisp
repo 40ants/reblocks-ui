@@ -1,4 +1,4 @@
-(defpackage #:weblocks-ui/ci
+(defpackage #:reblocks-ui/ci
   (:use #:cl)
   (:import-from #:40ants-ci/jobs/linter
                 #:linter)
@@ -8,7 +8,7 @@
                 #:build-docs)
   (:import-from #:40ants-ci/workflow
                 #:defworkflow))
-(in-package weblocks-ui/ci)
+(in-package reblocks-ui/ci)
 
 
 ;; (defworkflow docs

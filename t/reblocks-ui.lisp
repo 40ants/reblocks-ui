@@ -1,10 +1,10 @@
 (in-package :cl-user)
-(defpackage weblocks-ui-test
+(defpackage reblocks-ui-test
   (:use :cl
-        :weblocks-ui
+        :reblocks-ui
         :prove
         :hamcrest.matchers))
-(in-package :weblocks-ui-test)
+(in-package :reblocks-ui-test)
 
 
 (plan 1)

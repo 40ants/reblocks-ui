@@ -1,13 +1,13 @@
-(defsystem weblocks-ui
+(defsystem reblocks-ui
   :version (:read-file-form "version.lisp-expr")
   :author "Alexander Artemenko"
   :license "BSD"
   :class :package-inferred-system
   :pathname "src"
   :depends-on (:weblocks-parenscript
-               "weblocks-ui/core"
-               "weblocks-ui/form")
-  :description "A set of UI widgets for weblocks!"
+               "reblocks-ui/core"
+               "reblocks-ui/form")
+  :description "A set of UI widgets for Reblocks web framework!"
   :long-description
   #.(with-open-file (stream (merge-pathnames
                              #p"README.rst"
@@ -21,4 +21,4 @@
           (setf (fill-pointer seq)
                 (read-sequence seq stream))
           seq)))
-  :in-order-to ((test-op (test-op weblocks-ui-test))))
+  :in-order-to ((test-op (test-op reblocks-ui-test))))

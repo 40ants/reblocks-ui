@@ -1,27 +1,27 @@
-(defpackage #:weblocks-ui/core
+(defpackage #:reblocks-ui/core
   (:use #:cl)
-  (:nicknames #:weblocks-ui)
+  (:nicknames #:reblocks-ui)
 
   (:import-from #:weblocks-parenscript)
   (:import-from #:parenscript
                 #:chain)
-  (:import-from #:weblocks/widget
+  (:import-from #:reblocks/widget
                 #:defwidget)
-  (:import-from #:weblocks/dependencies
+  (:import-from #:reblocks/dependencies
                 #:make-dependency
                 #:get-dependencies)
-  (:import-from #:weblocks/utils/string
+  (:import-from #:reblocks/utils/string
                 #:attributize-name
                 #:humanize-name)
-  (:import-from #:weblocks/utils/i18n
+  (:import-from #:reblocks/utils/i18n
                 #:translate)
-  (:import-from #:weblocks/html
+  (:import-from #:reblocks/html
                 #:with-html-string)
   (:export
    #:ui-widget
    #:widget
    #:*foundation-dependencies*))
-(in-package weblocks-ui/core)
+(in-package reblocks-ui/core)
 
 
 (defwidget ui-widget ()

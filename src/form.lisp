@@ -1,24 +1,25 @@
-(defpackage #:weblocks-ui/form
+(defpackage #:reblocks-ui/form
   (:use #:cl)
-  (:import-from #:weblocks/actions
+  (:import-from #:reblocks/actions
                 #:make-action-url
-                #:function-or-action->action)
-  (:import-from #:weblocks/html
+                #:make-action)
+  (:import-from #:reblocks/html
                 #:with-html)
-  (:import-from #:weblocks/request
+  (:import-from #:reblocks/request
                 #:get-path)
-  (:import-from #:weblocks/utils/string
+  (:import-from #:reblocks/utils/string
                 #:humanize-name
                 #:attributize-name)
   (:import-from #:quri
                 #:url-encode)
-  (:import-from #:weblocks/variables
+  (:import-from #:reblocks/variables
                 #:*action-string*)
   (:import-from #:log4cl-extras/error
                 #:print-backtrace
                 #:with-log-unhandled)
   (:import-from #:log4cl-extras/context
                 #:with-fields)
+  (:import-from #:reblocks/widget)
   (:export
    #:render-button
    #:render-form-and-button
@@ -29,7 +30,7 @@
    #:error-placeholder
    #:form-error-placeholder
    #:form-error))
-(in-package weblocks-ui/form)
+(in-package reblocks-ui/form)
 
 
 (define-condition form-error (error)
@@ -117,12 +118,12 @@
                                                 (let ((placeholder (gethash name error-placeholders)))
                                                   (setf (error-placeholder-message placeholder)
                                                         message)
-                                                  (weblocks/widget:update placeholder))
+                                                  (reblocks/widget:update placeholder))
                                                 (return-from handled))))))
                            (apply action args))))
                      ;; Error handling works only when callback is a function
                      action))
-         (action-code (function-or-action->action action))
+         (action-code (make-action action))
          (on-submit (cond
                       (use-ajax-p
                        (format nil "~@[~A~]~A; return false;"
@@ -228,14 +229,14 @@ $('~A').foundation();
   )
 
 
-(weblocks/widget:defwidget error-placeholder ()
+(reblocks/widget:defwidget error-placeholder ()
   ((name :initarg :name
          :reader error-placeholder-name)
    (message :initform nil
             :accessor error-placeholder-message)))
 
 
-(defmethod weblocks/widget:render ((widget error-placeholder))
+(defmethod reblocks/widget:render ((widget error-placeholder))
   (when (error-placeholder-message widget)
     (with-html
       (:p :class (format nil "error ~A-error" (error-placeholder-name widget))
@@ -296,14 +297,14 @@ $('~A').foundation();
                                              :name name)))
                   (setf (gethash name error-placeholders)
                         widget)
-                  (weblocks/widget:render widget)))
+                  (reblocks/widget:render widget)))
               (form-error-placeholder (&key (widget-class 'error-placeholder))
                 (let* ((name "form-error")
                        (widget (make-instance widget-class
                                               :name name)))
                   (setf (gethash name error-placeholders)
                         widget)
-                  (weblocks/widget:render widget))))
+                  (reblocks/widget:render widget))))
          
          (%render-form ,method-type
                        ,action
@@ -395,7 +396,7 @@ with escaping. Internally, render-fn should use weblocks:with-html macro
 to write output into the right stream."
 
   (let* ((*print-pretty* nil)
-         (action-code (function-or-action->action action))
+         (action-code (make-action action))
          (url (make-action-url action-code))
          (on-click (when ajaxp
                      (format nil "initiateAction(\"~A\"); return false;"
