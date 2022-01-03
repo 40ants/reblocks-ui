@@ -4,7 +4,12 @@
   :license "BSD"
   :class :package-inferred-system
   :pathname "src"
-  :depends-on (:weblocks-parenscript
+  :serial t
+  :depends-on ("weblocks-parenscript"
+               ;; We need this while will not support package inferred systems:
+               ;; https://github.com/ultralisp/ultralisp/issues/3
+               "40ants-doc"
+               
                "reblocks-ui/core"
                "reblocks-ui/form")
   :description "A set of UI widgets for Reblocks web framework!"
