@@ -2,7 +2,7 @@
   (:use #:cl)
   (:nicknames #:reblocks-ui)
 
-  (:import-from #:weblocks-parenscript)
+  (:import-from #:reblocks-parenscript)
   (:import-from #:parenscript
                 #:chain)
   (:import-from #:reblocks/widget
@@ -49,7 +49,7 @@
           :crossorigin "anonymous")
 
         ;; After page will load, we have to activate Foundation plugins
-        (weblocks-parenscript:make-dependency
+        (reblocks-parenscript:make-dependency
           (chain (j-query document)
                  (ready (lambda ()
                           (chain (j-query document)
@@ -84,7 +84,7 @@
             :onclick "disableIrrelevantButtons(this);")))
 
 ;; (deftemplate :button-wt 'button-wt 
-;;              :application-class 'weblocks::twitter-bootstrap-webapp)
+;;              :application-class 'reblocks::twitter-bootstrap-webapp)
 
 
 (defun render-button (name  &key (value (translate (humanize-name name)))

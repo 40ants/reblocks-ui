@@ -131,10 +131,10 @@
                                (format nil submit-fn
                                        (url-encode (or action-code ""))
                                        ;; Function session-name-string-pair was removed
-                                       ;; during weblocks refactoring, so we just
+                                       ;; during reblocks refactoring, so we just
                                        ;; 
                                        ""
-                                       ;; (weblocks::session-name-string-pair)
+                                       ;; (reblocks::session-name-string-pair)
                                        )))))
          (popup-name (when requires-confirmation-p
                        (symbol-name
@@ -223,8 +223,8 @@ $('~A').foundation();
              (funcall body))
       
       )
-    ;; TODO: may be return log-from into the Weblocks
-    ;; (weblocks::log-form ,action-code :id ,id :class ,class)
+    ;; TODO: may be return log-from into the Reblocks
+    ;; (reblocks::log-form ,action-code :id ,id :class ,class)
     )
   )
 
@@ -392,7 +392,7 @@ ID, CLASS and TITLE represent their HTML counterparts.
 RENDER-FN is an optional function of one argument that is reponsible
 for rendering the link's content (i.e. its label). The default rendering
 function just calls PRINC-TO-STRING on the label and renders it
-with escaping. Internally, render-fn should use weblocks:with-html macro
+with escaping. Internally, render-fn should use reblocks:with-html macro
 to write output into the right stream."
 
   (let* ((*print-pretty* nil)
