@@ -1,4 +1,4 @@
-(defsystem reblocks-ui
+(defsystem "reblocks-ui"
   :version (:read-file-form "version.lisp-expr")
   :author "Alexander Artemenko"
   :license "BSD"
@@ -15,7 +15,7 @@
   :description "A set of UI widgets for Reblocks web framework!"
   :long-description
   #.(with-open-file (stream (merge-pathnames
-                             #p"README.rst"
+                             #p"README.md"
                              (or *load-pathname* *compile-file-pathname*))
                             :if-does-not-exist nil
                             :direction :input)
