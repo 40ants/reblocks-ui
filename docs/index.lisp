@@ -232,12 +232,10 @@ Zurb Foundation styles and JS automatically:
                                              (length pass))))
       ((zerop (count-if #'digit-char-p pass))
        (reblocks-ui/form:field-error "password"
-                                     (format nil "Password should contain some digits."
-                                             (length pass))))
+                                     (format nil "Password should contain some digits.")))
       ((zerop (count-if #'alpha-char-p pass))
        (reblocks-ui/form:field-error "password"
-                                     (format nil "Password should contain some alpha caracters."
-                                             (length pass))))
+                                     (format nil "Password should contains some alpha characters.")))
       (t t)))
   
   (defmethod reblocks/widget:render ((widget login-widget))
