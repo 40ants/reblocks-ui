@@ -2,6 +2,33 @@
  ChangeLog
 ===========
 
+0.13.0 (2022-02-12)
+===================
+
+Backward Incompabilities
+------------------------
+
+* Now action execution continues after the call to ``FORM-ERROR``
+  or ``FIELD-ERROR``. This way, all form errors could be shown at once.
+* CSS classes for placeholders were changed. ``FIELD-ERROR-PLACEHOLDER``
+  now uses "form-error" instead of just "error" and ``FORM-ERROR-PLACEHOLDER``
+  uses "alert callout" instead of "error".
+* Argument ``WIDGET`` was removed from ``WITH-HTML-FORM`` macro.
+
+
+Changes
+-------
+
+* Documentation was rewritten using 40ANTS-DOC. Now it contains
+  more information plus interactive demos.
+
+
+Fixes
+-----
+
+* Fixed to work with latest Spinneret which now escapes double
+  and single quotes.
+
 0.12.0 (2022-01-04)
 ===================
 
