@@ -51,6 +51,9 @@ and to update the widget accordingly:
 
 ```
 
+
+Go to [HTML documentation](https://40ants.com/reblocks-ui/) to see this code in action.
+
 <a id="x-28REBLOCKS-UI-DOCS-2FINDEX-3A-3A-40CONFIRMATION-DEMO-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
 ## Submit Confirmation
@@ -58,7 +61,7 @@ and to update the widget accordingly:
 You might also want to warn user about some destructive actions.
 
 To do this, provide `REQUIRES-CONFIRMATION-P` argument to the
-[`with-html-form`][8736] macro. Optionally you might provide `CONFIRMATION-QUESTION`
+[`with-html-form`][f976] macro. Optionally you might provide `CONFIRMATION-QUESTION`
 argument with a text of the question. Pay attention how does question
 changes when you are clicking a button in this demo:
 
@@ -91,19 +94,22 @@ changes when you are clicking a button in this demo:
 
 ```
 
+
+Go to [HTML documentation](https://40ants.com/reblocks-ui/) to see this code in action.
+
 <a id="x-28REBLOCKS-UI-DOCS-2FINDEX-3A-3A-40ERRORS-DEMO-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
 ## Showing Errors
 
 Form processing usually includes error checking.
-You can use [`error-placeholder`][d70e] and [`form-error-placeholder`][d938] inside
-the body of [`with-html-form`][8736] macro to mark places where errors should be show.
+You can use [`error-placeholder`][8637] and [`form-error-placeholder`][3868] inside
+the body of [`with-html-form`][f976] macro to mark places where errors should be show.
 
 There can be only one form error placeholder and it will show errors which are not
 related to some particular field. Field error placeholders are named and usually
 should be placed above or below a field.
 
-After you've used placeholder inside the form, use [`field-error`][8a1e] function inside an
+After you've used placeholder inside the form, use [`field-error`][5162] function inside an
 action's code to display the error related to the field or just signal any `ERROR`
 to show a form-wide error.
 
@@ -187,13 +193,16 @@ how a form-wide error will look like:
 
 ```
 
+
+Go to [HTML documentation](https://40ants.com/reblocks-ui/) to see this code in action.
+
 <a id="x-28REBLOCKS-UI-DOCS-2FINDEX-3A-3A-40API-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
 ## API
 
 <a id="x-28REBLOCKS-UI-2FFORM-3AWITH-HTML-FORM-20-2840ANTS-DOC-2FLOCATIVES-3AMACRO-29-29"></a>
 
-### [macro](a9e5) `reblocks-ui/form:with-html-form` (METHOD-TYPE ACTION &KEY ID CLASS ENCTYPE (USE-AJAX-P T) EXTRA-SUBMIT-CODE REQUIRES-CONFIRMATION-P (CONFIRM-QUESTION "Are you sure?") (SUBMIT-FN "initiateFormAction(\"~A\", $(this), \"~A\")")) &BODY BODY
+### [macro](7585) `reblocks-ui/form:with-html-form` (METHOD-TYPE ACTION &KEY ID CLASS ENCTYPE (USE-AJAX-P T) EXTRA-SUBMIT-CODE REQUIRES-CONFIRMATION-P (CONFIRM-QUESTION "Are you sure?") (SUBMIT-FN "initiateFormAction(\"~A\", $(this), \"~A\")")) &BODY BODY
 
 Wraps a body with (:form ...) using [`reblocks/html:with-html`][f21e].
 
@@ -215,70 +224,70 @@ Wraps a body with (:form ...) using [`reblocks/html:with-html`][f21e].
 * If `REQUIRES-CONFIRMATION-P` is true, then user will be asked a question
   defined by `CONFIRM-QUESTION` argument. Zurb Foundation's
   [modal window][5ce9] will be used
-  to show a popup. See [`Submit Confirmation`][4596] section for
+  to show a popup. See [`Submit Confirmation`][068e] section for
   an example of code.
 
 <a id="x-28REBLOCKS-UI-2FFORM-3AERROR-PLACEHOLDER-20CLASS-29"></a>
 
-### [class](4cf0) `reblocks-ui/form:error-placeholder` (widget)
+### [class](9e4f) `reblocks-ui/form:error-placeholder` (widget)
 
 <a id="x-28REBLOCKS-UI-2FFORM-3AERROR-PLACEHOLDER-20FUNCTION-29"></a>
 
-### [function](ed2f) `reblocks-ui/form:error-placeholder` name &key (widget-class 'error-placeholder)
+### [function](8415) `reblocks-ui/form:error-placeholder` name &key (widget-class 'error-placeholder)
 
 This function creates and renders a widget to show an error message related to some form field.
 
-It should be called inside [`with-html-form`][8736] macro.
+It should be called inside [`with-html-form`][f976] macro.
 
-`NAME` argument should be a string denoting a form field. Later, you can call [`field-error`][8a1e] function
+`NAME` argument should be a string denoting a form field. Later, you can call [`field-error`][5162] function
 to signal an error from the action function. You will need to pass the `NAME` as the first argument
-to the [`field-error`][8a1e] function.
+to the [`field-error`][5162] function.
 
 <a id="x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-PLACEHOLDER-20FUNCTION-29"></a>
 
-### [function](4d24) `reblocks-ui/form:form-error-placeholder` &key (widget-class 'form-error-placeholder)
+### [function](8bf9) `reblocks-ui/form:form-error-placeholder` &key (widget-class 'form-error-placeholder)
 
 This function creates and renders a widget to show an error for the whole form.
 
-It should be called inside [`with-html-form`][8736] macro.
+It should be called inside [`with-html-form`][f976] macro.
 
-Later, you can call [`form-error`][4a1a] function to signal an error from the action function.
+Later, you can call [`form-error`][ea04] function to signal an error from the action function.
 
 <a id="x-28REBLOCKS-UI-2FFORM-3AFIELD-ERROR-20CONDITION-29"></a>
 
-### [condition](8e21) `reblocks-ui/form:field-error` (form-error)
+### [condition](9371) `reblocks-ui/form:field-error` (form-error)
 
 <a id="x-28REBLOCKS-UI-2FFORM-3AFIELD-ERROR-20FUNCTION-29"></a>
 
-### [function](a234) `reblocks-ui/form:field-error` name message
+### [function](e9d8) `reblocks-ui/form:field-error` name message
 
 Signals an error which will be shown for the whole form.lisp
 
-You need to use [`error-placeholder`][d70e] function inside the [`with-html-form`][8736] macro
+You need to use [`error-placeholder`][8637] function inside the [`with-html-form`][f976] macro
 to set a place where an error message should be shown. Otherwise, the error
 will be logged and ignored.
 
-If there is no a `error-placeholder` ([`1`][d70e] [`2`][1b14]) call with corresponding `NAME` argument,
+If there is no a `error-placeholder` ([`1`][8637] [`2`][5578]) call with corresponding `NAME` argument,
 then error message can be shown for the whole form in a place where
-[`form-error-placeholder`][d938] function was called.
+[`form-error-placeholder`][3868] function was called.
 
 <a id="x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-20CONDITION-29"></a>
 
-### [condition](10a4) `reblocks-ui/form:form-error` (error)
+### [condition](5389) `reblocks-ui/form:form-error` (error)
 
 <a id="x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-20FUNCTION-29"></a>
 
-### [function](cb97) `reblocks-ui/form:form-error` message
+### [function](7921) `reblocks-ui/form:form-error` message
 
 Signals an error which will be shown for the whole form.lisp
 
-You need to use [`form-error-placeholder`][d938] function inside the [`with-html-form`][8736] macro
+You need to use [`form-error-placeholder`][3868] function inside the [`with-html-form`][f976] macro
 to set a place where an error message should be shown. Otherwise, the error
 will be logged and ignored.
 
 <a id="x-28REBLOCKS-UI-2FFORM-3ARENDER-BUTTON-20FUNCTION-29"></a>
 
-### [function](bbb0) `reblocks-ui/form:render-button` NAME &KEY (VALUE (HUMANIZE-NAME NAME)) ID (CLASS "button") (ONCLICK "disableIrrelevantButtons(this);") DISABLEDP
+### [function](a28e) `reblocks-ui/form:render-button` NAME &KEY (VALUE (HUMANIZE-NAME NAME)) ID (CLASS "button") (ONCLICK "disableIrrelevantButtons(this);") DISABLEDP
 
 Renders a button in a form.
 
@@ -295,14 +304,14 @@ Renders a button in a form.
 
 <a id="x-28REBLOCKS-UI-2FFORM-3ARENDER-FORM-AND-BUTTON-20FUNCTION-29"></a>
 
-### [function](8e6a) `reblocks-ui/form:render-form-and-button` NAME ACTION &KEY (VALUE (HUMANIZE-NAME NAME)) (METHOD :GET) BUTTON-ID (BUTTON-CLASS "button") (USE-AJAX-P T) FORM-ID FORM-CLASS
+### [function](a2dc) `reblocks-ui/form:render-form-and-button` NAME ACTION &KEY (VALUE (HUMANIZE-NAME NAME)) (METHOD :GET) BUTTON-ID (BUTTON-CLASS "button") (USE-AJAX-P T) FORM-ID FORM-CLASS
 
 Renders a button within a form. This function can be used a short
 cut to quickly render a sumbit button.
 
 <a id="x-28REBLOCKS-UI-2FFORM-3ARENDER-LINK-20FUNCTION-29"></a>
 
-### [function](c76d) `reblocks-ui/form:render-link` action label &key (ajaxp t) id class title render-fn
+### [function](eecb) `reblocks-ui/form:render-link` action label &key (ajaxp t) id class title render-fn
 
 Renders an action into a href link. If `AJAXP` is true (the
 default), the link will be rendered in such a way that the action will
@@ -320,7 +329,7 @@ to write output into the right stream.
 
 <a id="x-28REBLOCKS-UI-2FFORM-3ARENDER-TEXTAREA-20FUNCTION-29"></a>
 
-### [function](661b) `reblocks-ui/form:render-textarea` name &key (label (humanize-name name)) value id class disabledp
+### [function](60f0) `reblocks-ui/form:render-textarea` name &key (label (humanize-name name)) value id class disabledp
 
 Renders a textarea.
 
@@ -337,29 +346,29 @@ Renders a textarea.
 
 
 [233f]: https://40ants.com/reblocks-ui/
+[5578]: https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AERROR-PLACEHOLDER-20CLASS-29
+[8637]: https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AERROR-PLACEHOLDER-20FUNCTION-29
+[5162]: https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AFIELD-ERROR-20FUNCTION-29
+[ea04]: https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-20FUNCTION-29
+[3868]: https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-PLACEHOLDER-20FUNCTION-29
+[f976]: https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AWITH-HTML-FORM-20-2840ANTS-DOC-2FLOCATIVES-3AMACRO-29-29
+[068e]: https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-DOCS-2FINDEX-3A-3A-40CONFIRMATION-DEMO-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29
 [f521]: https://40ants.com/reblocks/actions/#x-28REBLOCKS-2FACTIONS-3AMAKE-ACTION-URL-20FUNCTION-29
 [f21e]: https://40ants.com/reblocks/rendering/#x-28REBLOCKS-2FHTML-3AWITH-HTML-20-2840ANTS-DOC-2FLOCATIVES-3AMACRO-29-29
 [5ce9]: https://get.foundation/sites/docs/reveal.html
 [1818]: https://github.com/40ants/reblocks-ui
-[4cf0]: https://github.com/40ants/reblocks-ui/blob/fa73df952f6d6e013855743f941bef772e1183e0/src/form.lisp#L246
-[ed2f]: https://github.com/40ants/reblocks-ui/blob/fa73df952f6d6e013855743f941bef772e1183e0/src/form.lisp#L276
-[4d24]: https://github.com/40ants/reblocks-ui/blob/fa73df952f6d6e013855743f941bef772e1183e0/src/form.lisp#L288
-[a9e5]: https://github.com/40ants/reblocks-ui/blob/fa73df952f6d6e013855743f941bef772e1183e0/src/form.lisp#L299
-[bbb0]: https://github.com/40ants/reblocks-ui/blob/fa73df952f6d6e013855743f941bef772e1183e0/src/form.lisp#L367
-[10a4]: https://github.com/40ants/reblocks-ui/blob/fa73df952f6d6e013855743f941bef772e1183e0/src/form.lisp#L37
-[c76d]: https://github.com/40ants/reblocks-ui/blob/fa73df952f6d6e013855743f941bef772e1183e0/src/form.lisp#L426
-[8e21]: https://github.com/40ants/reblocks-ui/blob/fa73df952f6d6e013855743f941bef772e1183e0/src/form.lisp#L45
-[8e6a]: https://github.com/40ants/reblocks-ui/blob/fa73df952f6d6e013855743f941bef772e1183e0/src/form.lisp#L459
-[661b]: https://github.com/40ants/reblocks-ui/blob/fa73df952f6d6e013855743f941bef772e1183e0/src/form.lisp#L475
-[a234]: https://github.com/40ants/reblocks-ui/blob/fa73df952f6d6e013855743f941bef772e1183e0/src/form.lisp#L54
-[cb97]: https://github.com/40ants/reblocks-ui/blob/fa73df952f6d6e013855743f941bef772e1183e0/src/form.lisp#L70
-[1b14]: index.html#x-28REBLOCKS-UI-2FFORM-3AERROR-PLACEHOLDER-20CLASS-29
-[d70e]: index.html#x-28REBLOCKS-UI-2FFORM-3AERROR-PLACEHOLDER-20FUNCTION-29
-[8a1e]: index.html#x-28REBLOCKS-UI-2FFORM-3AFIELD-ERROR-20FUNCTION-29
-[4a1a]: index.html#x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-20FUNCTION-29
-[d938]: index.html#x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-PLACEHOLDER-20FUNCTION-29
-[8736]: index.html#x-28REBLOCKS-UI-2FFORM-3AWITH-HTML-FORM-20-2840ANTS-DOC-2FLOCATIVES-3AMACRO-29-29
-[4596]: index.html#x-28REBLOCKS-UI-DOCS-2FINDEX-3A-3A-40CONFIRMATION-DEMO-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29
+[9e4f]: https://github.com/40ants/reblocks-ui/blob/a375433f7cf174b9852591582d374b5fc73b9a7e/src/form.lisp#L246
+[8415]: https://github.com/40ants/reblocks-ui/blob/a375433f7cf174b9852591582d374b5fc73b9a7e/src/form.lisp#L276
+[8bf9]: https://github.com/40ants/reblocks-ui/blob/a375433f7cf174b9852591582d374b5fc73b9a7e/src/form.lisp#L288
+[7585]: https://github.com/40ants/reblocks-ui/blob/a375433f7cf174b9852591582d374b5fc73b9a7e/src/form.lisp#L299
+[a28e]: https://github.com/40ants/reblocks-ui/blob/a375433f7cf174b9852591582d374b5fc73b9a7e/src/form.lisp#L367
+[5389]: https://github.com/40ants/reblocks-ui/blob/a375433f7cf174b9852591582d374b5fc73b9a7e/src/form.lisp#L37
+[eecb]: https://github.com/40ants/reblocks-ui/blob/a375433f7cf174b9852591582d374b5fc73b9a7e/src/form.lisp#L426
+[9371]: https://github.com/40ants/reblocks-ui/blob/a375433f7cf174b9852591582d374b5fc73b9a7e/src/form.lisp#L45
+[a2dc]: https://github.com/40ants/reblocks-ui/blob/a375433f7cf174b9852591582d374b5fc73b9a7e/src/form.lisp#L459
+[60f0]: https://github.com/40ants/reblocks-ui/blob/a375433f7cf174b9852591582d374b5fc73b9a7e/src/form.lisp#L475
+[e9d8]: https://github.com/40ants/reblocks-ui/blob/a375433f7cf174b9852591582d374b5fc73b9a7e/src/form.lisp#L54
+[7921]: https://github.com/40ants/reblocks-ui/blob/a375433f7cf174b9852591582d374b5fc73b9a7e/src/form.lisp#L70
 
 * * *
 ###### [generated by [40ANTS-DOC](https://40ants.com/doc/)]
