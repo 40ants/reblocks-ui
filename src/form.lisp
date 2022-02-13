@@ -1,5 +1,6 @@
 (defpackage #:reblocks-ui/form
   (:use #:cl)
+  (:import-from #:log4cl)
   (:import-from #:reblocks/actions
                 #:make-action-url
                 #:make-action)
@@ -60,9 +61,10 @@
    If there is no a ERROR-PLACEHOLDER call with corresponding NAME argument,
    then error message can be shown for the whole form in a place where
    FORM-ERROR-PLACEHOLDER function was called."
-  (error 'field-error
-         :name name
-         :message message))
+  (with-simple-restart (check-next-form-field "Show error and continue")
+    (error 'field-error
+           :name name
+           :message message)))
 
 
 (defun form-error (message)
@@ -71,28 +73,25 @@
    You need to use FORM-ERROR-PLACEHOLDER function inside the WITH-HTML-FORM macro
    to set a place where an error message should be shown. Otherwise, the error
    will be logged and ignored."
-  (error 'form-error
-         :message message))
+  (with-simple-restart (check-next-form-field "Show error and continue")
+    (error 'form-error
+           :message message)))
 
 
 (defun %render-form (method-type
                      action
                      body
                      &key id
-                          class
-                          enctype
-                          (use-ajax-p t)
-                          extra-submit-code
-                          requires-confirmation-p
-                          (confirm-question "Are you sure?")
-                          (submit-fn "initiateFormAction(\"~A\", $(this), \"~A\")")
-                          ;; We need this reference to update a widget
-                          ;; after the field error was handled:
-                          widget
-                          ;; A hashmap with placeholders widgets
-                          error-placeholders)
-  (let* ((action (if (and (functionp action)
-                          widget)
+                       class
+                       enctype
+                       (use-ajax-p t)
+                       extra-submit-code
+                       requires-confirmation-p
+                       (confirm-question "Are you sure?")
+                       (submit-fn "initiateFormAction(\"~A\", $(this), \"~A\")")
+                       ;; A hashmap with placeholders widgets
+                       error-placeholders)
+  (let* ((action (if (functionp action)
                      ;; We need this wrapper to handle form errors
                      (lambda (&rest args)
                        (block handled
@@ -112,14 +111,29 @@
                                                 (with-fields (:traceback (print-backtrace :stream nil
                                                                                           :condition c))
                                                   (log:error "Unhandled exception")))
-                                              
+
+                                              ;; Now we need to show an error in a placeholder:
                                               (when (and error-placeholders
                                                          (gethash name error-placeholders))
                                                 (let ((placeholder (gethash name error-placeholders)))
                                                   (setf (error-placeholder-message placeholder)
                                                         message)
                                                   (reblocks/widget:update placeholder))
-                                                (return-from handled))))))
+                                                
+                                                (if (find-restart 'check-next-form-field)
+                                                    ;; We use continuable restarts
+                                                    ;; to show a errors for multiple fields
+                                                    ;; on a single form submit.
+                                                    (invoke-restart 'check-next-form-field)
+                                                    (return-from handled)))))))
+                           ;; First, we need to reset state of error placeholders,
+                           ;; because may be some of these errors are not actual now.
+                           (when error-placeholders
+                             (loop for placeholder being the hash-value of error-placeholders
+                                   when (error-placeholder-message placeholder)
+                                     do (setf (error-placeholder-message placeholder)
+                                              nil)
+                                        (reblocks/widget:update placeholder)))
                            (apply action args))))
                      ;; Error handling works only when callback is a function
                      action))
@@ -153,36 +167,36 @@
 
     (with-html
       (when requires-confirmation-p
-        (:div
-         :class "reveal"
-         :id popup-name
-         :dataset (:reveal t)
+        (:div :class "reveal"
+              :id popup-name
+              :dataset (:reveal t)
 
-         (:form :id id :class class
-                :action (get-path)
-                :method (attributize-name method-type)
-                :enctype enctype
-                :onsubmit on-confirmation-submit
+              (:form :id id :class class
+                     :action (get-path)
+                     :method (attributize-name method-type)
+                     :enctype enctype
+                     :onsubmit on-confirmation-submit
 
-                ;; (:h1 confirm-question)
-                (funcall confirm-question)
+                     ;; (:h1 confirm-question)
+                     (funcall confirm-question)
 
-                ;; We need this to make forms work when JS is turned off
-                (:input :name *action-string* :type "hidden" :value action-code)
+                     ;; We need this to make forms work when JS is turned off
+                     (:input :name *action-string* :type "hidden" :value action-code)
 
-                (:div :class "float-right"
-                      (:input :type "button"
-                              :class "success button"
-                              :name "cancel"
-                              :value "Cancel"
-                              :onclick (format nil "close_~A(); return false;"
-                                               popup-name))
-                      (:input :type "submit"
-                              :class "alert button"
-                              :name "ok"
-                              :value "Ok"))))
+                     (:div :class "float-right"
+                           (:input :type "button"
+                                   :class "success button"
+                                   :name "cancel"
+                                   :value "Cancel"
+                                   :onclick (format nil "close_~A(); return false;"
+                                                    popup-name))
+                           (:input :type "submit"
+                                   :class "alert button"
+                                   :name "ok"
+                                   :value "Ok"))))
         
-        (:script (format nil "
+        (:script (:raw
+                  (format nil "
 
 function show_~A () {
    $('~A').foundation('open');
@@ -198,11 +212,11 @@ function close_~A () {
 $('~A').foundation();
 
 "
-                         popup-name
-                         popup-name
-                         popup-name
-                         popup-name
-                         popup-name) 
+                          popup-name
+                          popup-name
+                          popup-name
+                          popup-name
+                          popup-name)) 
                  
                  ;; (parenscript:ps*
                  ;;  `(defun show-popup ()))
@@ -236,10 +250,26 @@ $('~A').foundation();
             :accessor error-placeholder-message)))
 
 
+(reblocks/widget:defwidget form-error-placeholder ()
+  ((message :initform nil
+            :accessor error-placeholder-message)))
+
+
 (defmethod reblocks/widget:render ((widget error-placeholder))
   (when (error-placeholder-message widget)
     (with-html
-      (:p :class (format nil "error ~A-error" (error-placeholder-name widget))
+      (:p :class (format nil "form-error ~A-error" (error-placeholder-name widget))
+          ;; CSS class "form-error" from Zurb Foundation
+          ;; has display: none by default, but we need block,
+          ;; because we render HTML only when an error was found:
+          :style "display: block"
+          (error-placeholder-message widget)))))
+
+
+(defmethod reblocks/widget:render ((widget form-error-placeholder))
+  (when (error-placeholder-message widget)
+    (with-html
+      (:p :class (format nil "alert callout")
           (error-placeholder-message widget)))))
 
 
@@ -255,7 +285,7 @@ $('~A').foundation();
   (error "This function should be called inside WITH-HTML-FORM macro."))
 
 
-(defun form-error-placeholder (&key (widget-class 'error-placeholder))
+(defun form-error-placeholder (&key (widget-class 'form-error-placeholder))
   "This function creates and renders a widget to show an error for the whole form.
 
    It should be called inside WITH-HTML-FORM macro.
@@ -268,20 +298,34 @@ $('~A').foundation();
 
 (defmacro with-html-form ((method-type
                            action &key
-                                  id
-                                  class
-                                  enctype
-                                  (use-ajax-p t)
-                                  extra-submit-code
-                                  requires-confirmation-p
-                                  (confirm-question "Are you sure?")
-                                  (submit-fn "initiateFormAction(\"~A\", $(this), \"~A\")")
-                                  ;; We need this reference to update a widget
-                                  ;; after the field error was handled:
-                                  widget)
+                                    id
+                                    class
+                                    enctype
+                                    (use-ajax-p t)
+                                    extra-submit-code
+                                    requires-confirmation-p
+                                    (confirm-question "Are you sure?")
+                                    (submit-fn "initiateFormAction(\"~A\", $(this), \"~A\")"))
                           &body body
                           &environment env)
-  "Transforms to a form like (:form) with standard form code (AJAX support, actions, etc.)"
+  "Wraps a body with (:form ...) using REBLOCKS/HTML:WITH-HTML.
+
+   * METHOD-TYPE argument should be a keyword :GET or :POST.
+   * ACTION argument should be a function callback which will be called on
+     form submit. Form fields will be passed as keyword arguments, using their
+     names. To make your code more robust, use &ALLOW-OTHER-KEYS in the lambda list.
+   * ID, CLASS and ENCTYPE arguments are transformed into appropriate arguments
+     of HTML `<form ...>...</form>` node.
+   * EXTRA-SUBMIT-CODE argument might contain a list of string with simple JS code,
+     which will be called on form submit before code provided in SUBMIT-FN argument.
+   * By default, form submission is done using AJAX. If you want to
+     do old-school GET or POST request, set USE-AJAX-P argument to NIL.
+   * If REQUIRES-CONFIRMATION-P is true, then user will be asked a question
+     defined by CONFIRM-QUESTION argument. Zurb Foundation's
+     [modal window](https://get.foundation/sites/docs/reveal.html) will be used
+     to show a popup. See REBLOCKS-UI-DOCS/INDEX::@CONFIRMATION-DEMO section for
+     an example of code.
+"
   (let ((body `(lambda ()
                  ,@(spinneret::parse-html body env)))
         (confirm-question `(lambda ()
@@ -297,14 +341,14 @@ $('~A').foundation();
                                              :name name)))
                   (setf (gethash name error-placeholders)
                         widget)
-                  (reblocks/widget:render widget)))
-              (form-error-placeholder (&key (widget-class 'error-placeholder))
-                (let* ((name "form-error")
-                       (widget (make-instance widget-class
-                                              :name name)))
-                  (setf (gethash name error-placeholders)
+                  (reblocks/widget:render widget)
+                  (values)))
+              (form-error-placeholder (&key (widget-class 'form-error-placeholder))
+                (let* ((widget (make-instance widget-class)))
+                  (setf (gethash "form-error" error-placeholders)
                         widget)
-                  (reblocks/widget:render widget))))
+                  (reblocks/widget:render widget)
+                  (values))))
          
          (%render-form ,method-type
                        ,action
@@ -317,7 +361,6 @@ $('~A').foundation();
                        :requires-confirmation-p ,requires-confirmation-p
                        :confirm-question ,confirm-question
                        :submit-fn ,submit-fn
-                       :widget ,widget
                        :error-placeholders error-placeholders)))))
 
 
@@ -329,12 +372,12 @@ $('~A').foundation();
                               disabledp)
   "Renders a button in a form.
 
-   'name' - name of the html control. The name is attributized before
-   being rendered.
-   'value' - a value on html control. Humanized name is default.
-   'id' - id of the html control. Default is nil.
-   'class' - a class used for styling. By default, \"submit\".
-   'disabledp' - button is disabled if true."
+   * NAME - name of the html control. The name is attributized before
+     being rendered.
+   * VALUE - a value on html control. Humanized name is default.
+   * ID - id of the html control. Default is nil.
+   * CLASS - a class used for styling. By default, \"submit\".
+   * DISABLEDP - button is disabled if true."
   (with-html
     ;; We could use <button...> here, but this way, it will
     ;; be impossible to distinguish which button was clicked if
@@ -387,7 +430,7 @@ be invoked via AJAX or will fall back to a regular request if
 JavaScript is not available. When the user clicks on the link the
 action will be called on the server.
 
-ACTION may be a function or a result of a call to MAKE-ACTION.
+ACTION may be a function or a result of a call to REBLOCKS/ACTIONS:MAKE-ACTION-URL.
 ID, CLASS and TITLE represent their HTML counterparts.
 RENDER-FN is an optional function of one argument that is reponsible
 for rendering the link's content (i.e. its label). The default rendering
@@ -435,14 +478,14 @@ cut to quickly render a sumbit button."
                                id
                                class
                                disabledp)
-  "Renders a textarea
+  "Renders a textarea.
 
-   'name' - name of the html control. The name is attributized before
-   being rendered.
-   'value' - a value on html control. Humanized name is default.
-   'id' - id of the html control. Default is nil.
-   'class' - a class used for styling. By default, \"submit\".
-   'disabledp' - button is disabled if true."
+   * NAME - name of the html control. The name is attributized before
+     being rendered.
+   * VALUE - a value on html control. Humanized name is default.
+   * ID - id of the html control. Default is nil.
+   * CLASS - a class used for styling. By default, \"submit\".
+   * DISABLEDP - button is disabled if true."
   (with-html
     (when label
       (:label :for id
