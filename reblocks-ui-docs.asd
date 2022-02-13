@@ -5,4 +5,6 @@
   :pathname "docs"
   :serial t
   :depends-on ("reblocks-ui-docs/index")
-  :description "Documentation for Reblocks UI widgets.")
+  :description "Documentation for Reblocks UI widgets."
+  :homepage "https://40ants.com/reblocks-ui/"
+  :source-control (:git "https://github.com/40ants/reblocks-ui"))

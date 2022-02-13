@@ -13,6 +13,8 @@
                "reblocks-ui/core"
                "reblocks-ui/form")
   :description "A set of UI widgets for Reblocks web framework!"
+  :homepage "https://40ants.com/reblocks-ui/"
+  :source-control (:git "https://github.com/40ants/reblocks-ui")
   :long-description
   #.(with-open-file (stream (merge-pathnames
                              #p"README.md"
