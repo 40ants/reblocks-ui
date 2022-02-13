@@ -11,11 +11,11 @@
 (in-package reblocks-ui/ci)
 
 
-;; (defworkflow docs
-;;   :on-push-to "master"
-;;   :by-cron "0 10 * * 1"
-;;   :cache t
-;;   :jobs ((build-docs)))
+(defworkflow docs
+  :on-push-to "master"
+  :on-pull-request t
+  :cache t
+  :jobs ((build-docs :asdf-system "reblocks-ui-docs")))
 
 
 (defworkflow ci
