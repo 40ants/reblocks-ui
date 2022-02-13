@@ -15,7 +15,8 @@
   (:import-from #:reblocks/html
                 #:with-html)
   (:export
-   #:@index))
+   #:@index
+   #:@readme))
 (in-package #:reblocks-ui-docs/index)
 
 
@@ -55,6 +56,26 @@
   (@confirmation-demo section)
   (@errors-demo section)
   (@api section))
+
+
+(40ants-doc:defsection-copy @readme @index)
+
+
+(defsection @intro (:title "Introduction")
+  "
+Reblocks-ui brings [Zurb Foundation][foundation] styling to your Weblocks application.
+
+When you inherit your widgets from REBLOCKS-UI/CORE:UI-WIDGET. Reblocks will fetch
+Zurb Foundation styles and JS automatically:
+
+```lisp
+(defwiget my-widget (reeblocks-ui:ui-widget)
+  ((...))
+```
+
+[foundation]: https://foundation.zurb.com/
+[quickstart]: https://40ants.com/reblocks/quickstart/
+")
 
 
 (defsection @api (:title "API")
