@@ -26,6 +26,8 @@
   :on-pull-request t
   :cache t
   :jobs ((linter)
-         (critic)
+         (critic :ignore-criticues
+                 ;; Seems Lisp Critic counts docstring lines too :(
+                 ("function-too-long"))
          ;; (run-tests :coverage t)
          ))
