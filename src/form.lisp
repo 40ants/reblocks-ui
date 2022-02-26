@@ -295,6 +295,33 @@ $('~A').foundation();
   (error "This function should be called inside WITH-HTML-FORM macro."))
 
 
+(defun %render-error-placeholder (name widget-class error-placeholders)
+  (check-type name string)
+  (let ((widget (make-instance widget-class
+                               :name name)))
+    (setf (gethash name error-placeholders)
+          widget)
+    (reblocks/widget:render widget)
+    (values)))
+
+
+(defun %render-form-error-placeholder (name widget-class error-placeholders)
+  (check-type name string)
+  (let ((widget (make-instance widget-class)))
+    (setf (gethash "form-error" error-placeholders)
+          widget)
+    (reblocks/widget:render widget)
+    (values)))
+
+
+(defun %make-confirm-question-func (confirm-question env)
+  `(lambda ()
+     ,(spinneret::parse-html
+       (typecase confirm-question
+         (string (list :h1 confirm-question))
+         (t confirm-question))
+       env)))
+
 
 (defmacro with-html-form ((method-type
                            action &key
@@ -328,27 +355,12 @@ $('~A').foundation();
 "
   (let ((body `(lambda ()
                  ,@(spinneret::parse-html body env)))
-        (confirm-question `(lambda ()
-                             ,(spinneret::parse-html
-                               (typecase confirm-question
-                                 (string (list :h1 confirm-question))
-                                 (t confirm-question))
-                               env))))
+        (confirm-question (%make-confirm-question-func confirm-question env)))
     `(let ((error-placeholders (make-hash-table :test 'equal)))
        (flet ((error-placeholder (name &key (widget-class 'error-placeholder))
-                (check-type name string)
-                (let ((widget (make-instance widget-class
-                                             :name name)))
-                  (setf (gethash name error-placeholders)
-                        widget)
-                  (reblocks/widget:render widget)
-                  (values)))
+                (%render-error-placeholder name widget-class error-placeholders))
               (form-error-placeholder (&key (widget-class 'form-error-placeholder))
-                (let* ((widget (make-instance widget-class)))
-                  (setf (gethash "form-error" error-placeholders)
-                        widget)
-                  (reblocks/widget:render widget)
-                  (values))))
+                (%render-form-error-placeholder name widget-class error-placeholders)))
          
          (%render-form ,method-type
                        ,action
