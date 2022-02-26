@@ -145,7 +145,7 @@
         },
         {
           "name": "Run Critic for \"reblocks-ui\" system",
-          "run": "qlot exec lisp-critic reblocks-ui --ignore 'function-too-long'",
+          "run": "qlot exec lisp-critic reblocks-ui --ignore function-too-long",
           "shell": "bash"
         }
       ]
