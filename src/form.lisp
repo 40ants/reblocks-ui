@@ -314,13 +314,14 @@ $('~A').foundation();
     (values)))
 
 
-(defun %make-confirm-question-func (confirm-question env)
-  `(lambda ()
-     ,(spinneret::parse-html
-       (typecase confirm-question
-         (string (list :h1 confirm-question))
-         (t confirm-question))
-       env)))
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (defun %make-confirm-question-func (confirm-question env)
+    `(lambda ()
+       ,(spinneret::parse-html
+         (typecase confirm-question
+           (string (list :h1 confirm-question))
+           (t confirm-question))
+         env))))
 
 
 (defmacro with-html-form ((method-type
