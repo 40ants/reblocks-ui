@@ -2,6 +2,7 @@
   (:use #:cl)
   (:import-from #:reblocks/widget
                 #:defwidget)
+  (:import-from #:reblocks-ui/core)
   (:import-from #:reblocks-lass)
   (:export #:visible-p
            #:popup-widget
