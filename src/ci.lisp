@@ -7,7 +7,9 @@
   (:import-from #:40ants-ci/jobs/docs
                 #:build-docs)
   (:import-from #:40ants-ci/workflow
-                #:defworkflow))
+                #:defworkflow)
+  (:import-from #:40ants-ci/jobs/critic
+                #:critic))
 (in-package reblocks-ui/ci)
 
 
@@ -24,5 +26,8 @@
   :on-pull-request t
   :cache t
   :jobs ((linter)
+         (critic :ignore-criticues
+                 ;; Seems Lisp Critic counts docstring lines too :(
+                 ("function-too-long"))
          ;; (run-tests :coverage t)
          ))
