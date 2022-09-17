@@ -9,6 +9,14 @@
                               "JS"
                               "UI"
                               "40ANTS-DOC"))
+  (0.14.0 2022-09-17
+          "
+New
+===
+
+* New class REBLOCKS-UI/POPUP:POPUP-WIDGET was added.
+  It can be used to show popup windows inside the main screen.
+")
   (0.13.0 2022-02-14
           "
 Backward Incompabilities

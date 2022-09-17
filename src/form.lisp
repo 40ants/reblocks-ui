@@ -78,6 +78,67 @@
            :message message)))
 
 
+(defun %render-confirmation-popup (action-code class confirm-question enctype id
+                                   method-type popup-name on-submit)
+  ;; Here we'll close the popup and execute the real submit code.
+  ;; It should be executed only when user hits "OK" button
+  (let ((on-confirmation-submit (format nil
+                                        "close_~A(); ~A;"
+                                        popup-name
+                                        on-submit)))
+    (with-html
+      (:div :class "reveal"
+            :id popup-name
+            :dataset (:reveal t)
+
+            (:form :id id :class class
+                   :action (get-path)
+                   :method (attributize-name method-type)
+                   :enctype enctype
+                   :onsubmit on-confirmation-submit
+
+                   ;; (:h1 confirm-question)
+                   (funcall confirm-question)
+
+                   ;; We need this to make forms work when JS is turned off
+                   (:input :name *action-string* :type "hidden" :value action-code)
+
+                   (:div :class "float-right"
+                         (:input :type "button"
+                                 :class "success button"
+                                 :name "cancel"
+                                 :value "Cancel"
+                                 :onclick (format nil "close_~A(); return false;"
+                                                  popup-name))
+                         (:input :type "submit"
+                                 :class "alert button"
+                                 :name "ok"
+                                 :value "Ok"))))
+     
+      (:script (:raw
+                (format nil "
+
+function show_~A () {
+   $('~A').foundation('open');
+}
+
+function close_~A () {
+   $('~A').foundation('close');
+}
+
+// Without this call, object will not
+// be initialized propertly, when widget get
+// loaded by AJAX call:
+$('~A').foundation();
+
+"
+                        popup-name
+                        popup-name
+                        popup-name
+                        popup-name
+                        popup-name))))))
+
+
 (defun %render-form (method-type
                      action
                      body
@@ -138,28 +199,20 @@
                      ;; Error handling works only when callback is a function
                      action))
          (action-code (make-action action))
-         (on-submit (cond
-                      (use-ajax-p
-                       (format nil "~@[~A~]~A; return false;"
-                               extra-submit-code
-                               (format nil submit-fn
-                                       (url-encode (or action-code ""))
-                                       ;; Function session-name-string-pair was removed
-                                       ;; during reblocks refactoring, so we just
-                                       ;; 
-                                       ""
-                                       ;; (reblocks::session-name-string-pair)
-                                       )))))
+         (on-submit (when use-ajax-p
+                      (format nil "~@[~A~]~A; return false;"
+                              extra-submit-code
+                              (format nil submit-fn
+                                      (url-encode (or action-code ""))
+                                      ;; Function session-name-string-pair was removed
+                                      ;; during reblocks refactoring, so we just
+                                      ;; 
+                                      ""
+                                      ;; (reblocks::session-name-string-pair)
+                                      ))))
          (popup-name (when requires-confirmation-p
                        (symbol-name
                         (gensym "popup"))))
-         ;; Here we'll close the popup and execute the real submit code.
-         ;; It should be executed only when user hits "OK" button
-         (on-confirmation-submit (when requires-confirmation-p
-                                   (format nil
-                                           "close_~A(); ~A;"
-                                           popup-name
-                                           on-submit)))
          (on-form-submit (if requires-confirmation-p
                              (format nil "show_~A(); return false;"
                                      popup-name)
@@ -167,60 +220,8 @@
 
     (with-html
       (when requires-confirmation-p
-        (:div :class "reveal"
-              :id popup-name
-              :dataset (:reveal t)
-
-              (:form :id id :class class
-                     :action (get-path)
-                     :method (attributize-name method-type)
-                     :enctype enctype
-                     :onsubmit on-confirmation-submit
-
-                     ;; (:h1 confirm-question)
-                     (funcall confirm-question)
-
-                     ;; We need this to make forms work when JS is turned off
-                     (:input :name *action-string* :type "hidden" :value action-code)
-
-                     (:div :class "float-right"
-                           (:input :type "button"
-                                   :class "success button"
-                                   :name "cancel"
-                                   :value "Cancel"
-                                   :onclick (format nil "close_~A(); return false;"
-                                                    popup-name))
-                           (:input :type "submit"
-                                   :class "alert button"
-                                   :name "ok"
-                                   :value "Ok"))))
-        
-        (:script (:raw
-                  (format nil "
-
-function show_~A () {
-   $('~A').foundation('open');
-}
-
-function close_~A () {
-   $('~A').foundation('close');
-}
-
-// Without this call, object will not
-// be initialized propertly, when widget get
-// loaded by AJAX call:
-$('~A').foundation();
-
-"
-                          popup-name
-                          popup-name
-                          popup-name
-                          popup-name
-                          popup-name)) 
-                 
-                 ;; (parenscript:ps*
-                 ;;  `(defun show-popup ()))
-                 ))
+        (%render-confirmation-popup action-code class confirm-question enctype id
+                                    method-type popup-name on-submit))
 
 
       (:form :id id
@@ -295,6 +296,33 @@ $('~A').foundation();
   (error "This function should be called inside WITH-HTML-FORM macro."))
 
 
+(defun %render-error-placeholder (name widget-class error-placeholders)
+  (check-type name string)
+  (let ((widget (make-instance widget-class
+                               :name name)))
+    (setf (gethash name error-placeholders)
+          widget)
+    (reblocks/widget:render widget)
+    (values)))
+
+
+(defun %render-form-error-placeholder (widget-class error-placeholders)
+  (let ((widget (make-instance widget-class)))
+    (setf (gethash "form-error" error-placeholders)
+          widget)
+    (reblocks/widget:render widget)
+    (values)))
+
+
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (defun %make-confirm-question-func (confirm-question env)
+    `(lambda ()
+       ,(spinneret::parse-html
+         (typecase confirm-question
+           (string (list :h1 confirm-question))
+           (t confirm-question))
+         env))))
+
 
 (defmacro with-html-form ((method-type
                            action &key
@@ -323,32 +351,19 @@ $('~A').foundation();
    * If REQUIRES-CONFIRMATION-P is true, then user will be asked a question
      defined by CONFIRM-QUESTION argument. Zurb Foundation's
      [modal window](https://get.foundation/sites/docs/reveal.html) will be used
-     to show a popup. See REBLOCKS-UI-DOCS/INDEX::@CONFIRMATION-DEMO section for
+     to show a popup. See REBLOCKS-UI-DOCS/FORM::@CONFIRMATION-DEMO section for
      an example of code.
 "
   (let ((body `(lambda ()
                  ,@(spinneret::parse-html body env)))
-        (confirm-question `(lambda ()
-                             ,(spinneret::parse-html
-                               (typecase confirm-question
-                                 (string (list :h1 confirm-question))
-                                 (t confirm-question))
-                               env))))
+        (confirm-question (%make-confirm-question-func confirm-question env)))
     `(let ((error-placeholders (make-hash-table :test 'equal)))
        (flet ((error-placeholder (name &key (widget-class 'error-placeholder))
-                (check-type name string)
-                (let ((widget (make-instance widget-class
-                                             :name name)))
-                  (setf (gethash name error-placeholders)
-                        widget)
-                  (reblocks/widget:render widget)
-                  (values)))
+                (%render-error-placeholder name widget-class error-placeholders))
               (form-error-placeholder (&key (widget-class 'form-error-placeholder))
-                (let* ((widget (make-instance widget-class)))
-                  (setf (gethash "form-error" error-placeholders)
-                        widget)
-                  (reblocks/widget:render widget)
-                  (values))))
+                (%render-form-error-placeholder widget-class error-placeholders)))
+         (declare (ignorable (function error-placeholder)
+                             (function form-error-placeholder)))
          
          (%render-form ,method-type
                        ,action
