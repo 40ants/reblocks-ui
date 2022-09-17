@@ -14,16 +14,24 @@
 
 (defwidget popup-widget (reblocks-ui:ui-widget)
   ((visible :initform nil
-            :accessor visible-p)))
+            :accessor visible-p))
+  (:documentation "This widgets shows a popup window.
+
+                   Inherit from this class and define a method for
+                   RENDER-POPUP-CONTENT generic-function. Then you
+                   will be able to instantiate your class instance
+                   and call SHOW-POPUP generic function."))
 
 
 (defgeneric show-popup (widget)
+  (:documentation "Shows popup window.")
   (:method ((widget popup-widget))
     (setf (visible-p widget) t)
     (reblocks/widget:update widget)))
 
 
 (defgeneric hide-popup (widget)
+  (:documentation "Hides popup window.")
   (:method ((widget popup-widget))
     (setf (visible-p widget) nil)
     (reblocks/widget:update widget)))
@@ -37,6 +45,9 @@
 
 
 (defgeneric render-popup-content (widget)
+  (:documentation "Renders inner HTML for popup window.
+                   You need to define a method for this generic function
+                   and specialize it for your own class.")
   (:method ((widget popup-widget))
     (reblocks/html:with-html
       (:p (format nil "Define RENDER-POPUP-CONTENT method for ~S class."
