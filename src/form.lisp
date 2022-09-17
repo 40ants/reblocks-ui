@@ -21,6 +21,16 @@
   (:import-from #:log4cl-extras/context
                 #:with-fields)
   (:import-from #:reblocks/widget)
+  (:import-from #:hu.dwim.walker
+                #:collect-variable-references)
+  (:import-from #:hu.dwim.walker
+                #:operator-of)
+  (:import-from #:hu.dwim.walker
+                #:free-application-form)
+  (:import-from #:hu.dwim.util
+                #:with-muffled-warnings)
+  (:import-from #:hu.dwim.walker
+                #:walk-form)
   (:export
    #:render-button
    #:render-form-and-button
@@ -295,17 +305,25 @@ $('~A').foundation();
   (error "This function should be called inside WITH-HTML-FORM macro."))
 
 
+(defun calls (function-name form)
+  (let* ((ast (with-muffled-warnings (style-warning)
+                (walk-form form)))
+         (func-calls (collect-variable-references ast
+                                                  :type 'free-application-form))
+         (called-names (mapcar #'operator-of func-calls)))
+    (member function-name called-names)))
+
 
 (defmacro with-html-form ((method-type
                            action &key
-                                    id
-                                    class
-                                    enctype
-                                    (use-ajax-p t)
-                                    extra-submit-code
-                                    requires-confirmation-p
-                                    (confirm-question "Are you sure?")
-                                    (submit-fn "initiateFormAction(\"~A\", $(this), \"~A\")"))
+                                  id
+                                  class
+                                  enctype
+                                  (use-ajax-p t)
+                                  extra-submit-code
+                                  requires-confirmation-p
+                                  (confirm-question "Are you sure?")
+                                  (submit-fn "initiateFormAction(\"~A\", $(this), \"~A\")"))
                           &body body
                           &environment env)
   "Wraps a body with (:form ...) using REBLOCKS/HTML:WITH-HTML.
@@ -326,29 +344,35 @@ $('~A').foundation();
      to show a popup. See REBLOCKS-UI-DOCS/INDEX::@CONFIRMATION-DEMO section for
      an example of code.
 "
-  (let ((body `(lambda ()
-                 ,@(spinneret::parse-html body env)))
-        (confirm-question `(lambda ()
-                             ,(spinneret::parse-html
-                               (typecase confirm-question
-                                 (string (list :h1 confirm-question))
-                                 (t confirm-question))
-                               env))))
+  (let* ((calls-error-placeholder (calls 'error-placeholder body))
+         (calls-form-error-placeholder (calls 'form-error-placeholder body))
+         (body `(lambda ()
+                  ,@(spinneret::parse-html body env)))
+         (confirm-question `(lambda ()
+                              ,(spinneret::parse-html
+                                (typecase confirm-question
+                                  (string (list :h1 confirm-question))
+                                  (t confirm-question))
+                                env)))
+         (flet-definitions
+           (append (when calls-error-placeholder
+                     '((error-placeholder (name &key (widget-class 'error-placeholder))
+                        (check-type name string)
+                        (let ((widget (make-instance widget-class
+                                                     :name name)))
+                          (setf (gethash name error-placeholders)
+                                widget)
+                          (reblocks/widget:render widget)
+                          (values)))))
+                   (when calls-form-error-placeholder
+                     '((form-error-placeholder (&key (widget-class 'form-error-placeholder))
+                        (let* ((widget (make-instance widget-class)))
+                          (setf (gethash "form-error" error-placeholders)
+                                widget)
+                          (reblocks/widget:render widget)
+                          (values))))))))
     `(let ((error-placeholders (make-hash-table :test 'equal)))
-       (flet ((error-placeholder (name &key (widget-class 'error-placeholder))
-                (check-type name string)
-                (let ((widget (make-instance widget-class
-                                             :name name)))
-                  (setf (gethash name error-placeholders)
-                        widget)
-                  (reblocks/widget:render widget)
-                  (values)))
-              (form-error-placeholder (&key (widget-class 'form-error-placeholder))
-                (let* ((widget (make-instance widget-class)))
-                  (setf (gethash "form-error" error-placeholders)
-                        widget)
-                  (reblocks/widget:render widget)
-                  (values))))
+       (flet (,@flet-definitions)
          
          (%render-form ,method-type
                        ,action

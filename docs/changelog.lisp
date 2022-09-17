@@ -9,6 +9,15 @@
                               "JS"
                               "UI"
                               "40ANTS-DOC"))
+  (0.13.1 2022-09-17
+          "
+Fixes
+=====
+
+* Macro REBLOCKS-UI/FORM:WITH-HTML-FORM does not generate style warnings anymore,
+  when a body does not use REBLOCKS-UI/FORM:ERROR-PLACEHOLDER or
+  REBLOCKS-UI/FORM:FORM-ERROR-PLACEHOLDER functions.
+")
   (0.13.0 2022-02-14
           "
 Backward Incompabilities
