@@ -351,7 +351,7 @@ $('~A').foundation();
    * If REQUIRES-CONFIRMATION-P is true, then user will be asked a question
      defined by CONFIRM-QUESTION argument. Zurb Foundation's
      [modal window](https://get.foundation/sites/docs/reveal.html) will be used
-     to show a popup. See REBLOCKS-UI-DOCS/INDEX::@CONFIRMATION-DEMO section for
+     to show a popup. See REBLOCKS-UI-DOCS/FORM::@CONFIRMATION-DEMO section for
      an example of code.
 "
   (let ((body `(lambda ()
