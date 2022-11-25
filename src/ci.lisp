@@ -25,8 +25,10 @@
   :by-cron "0 10 * * 1"
   :on-pull-request t
   :cache t
-  :jobs ((linter)
-         (critic :ignore-criticues
+  :jobs ((linter :asdf-systems ("reblocks-ui"
+                                "reblocks-ui-docs"
+                                "reblocks-ui-examples"))
+         (critic :ignore-critiques
                  ;; Seems Lisp Critic counts docstring lines too :(
                  ("function-too-long"))
          ;; (run-tests :coverage t)
