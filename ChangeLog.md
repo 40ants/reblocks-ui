@@ -2,6 +2,31 @@
 
 # ChangeLog
 
+<a id="x-28REBLOCKS-UI-DOCS-2FCHANGELOG-3A-3A-7C0-2E15-2E0-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+## 0.15.0 (2022-11-26)
+
+<a id="new"></a>
+
+### New
+
+Functions [`reblocks-ui/form:get-field-errors-count`][6059] and [`reblocks-ui/form:get-field-errors`][bcb5]
+were added to make it possible to check if there was any field errors during validation
+and to interrupt further form processing.
+
+An example was added to show how to process form errors and use placeholders. You'll find
+it inside examples/form-errors.lisp file. Load reblocks-ui-examples system to load it.
+
+<a id="fixed"></a>
+
+### Fixed
+
+Also, function a but inside [`reblocks-ui/form:form-error`][ea04] function was fixed and now it
+will interrupt action and show an error inside a placeholder, created with
+[`reblocks-ui/form:form-error-placeholder`][3868] function or open debugger otherwise.
+
+Previosly this function call was ignored if there was a form error placeholder widget on a page.
+
 <a id="x-28REBLOCKS-UI-DOCS-2FCHANGELOG-3A-3A-7C0-2E14-2E0-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
 ## 0.14.0 (2022-09-17)
@@ -157,6 +182,8 @@ This is breaking rendering for widgets. Replace old `weblocks:render-body`
 [3765]: https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-20CONDITION-29
 [ea04]: https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-20FUNCTION-29
 [3868]: https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-PLACEHOLDER-20FUNCTION-29
+[bcb5]: https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AGET-FIELD-ERRORS-20FUNCTION-29
+[6059]: https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AGET-FIELD-ERRORS-COUNT-20FUNCTION-29
 [f976]: https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AWITH-HTML-FORM-20-2840ANTS-DOC-2FLOCATIVES-3AMACRO-29-29
 [50b7]: https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FPOPUP-3APOPUP-WIDGET-20CLASS-29
 
