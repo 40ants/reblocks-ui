@@ -30,8 +30,15 @@
    #:field-error
    #:error-placeholder
    #:form-error-placeholder
-   #:form-error))
+   #:form-error
+   #:get-field-errors
+   #:get-field-errors-count))
 (in-package reblocks-ui/form)
+
+
+(serapeum:defvar-unbound *form-field-errors*
+  "This variable will hold a hash-table where keys are field names and values
+   are lists of strings of error messages.")
 
 
 (define-condition form-error (error)
@@ -73,9 +80,8 @@
    You need to use FORM-ERROR-PLACEHOLDER function inside the WITH-HTML-FORM macro
    to set a place where an error message should be shown. Otherwise, the error
    will be logged and ignored."
-  (with-simple-restart (check-next-form-field "Show error and continue")
-    (error 'form-error
-           :message message)))
+  (error 'form-error
+         :message message))
 
 
 (defun %render-confirmation-popup (action-code class confirm-question enctype id
@@ -139,63 +145,86 @@ $('~A').foundation();
                         popup-name))))))
 
 
+(defun get-field-errors-count ()
+  "Returns total number of errors, reported by FIELD-ERROR function.
+
+   You can use this function and call FORM-ERROR or interrupt action if
+   the result is not zero."
+  (unless (boundp '*form-field-errors*)
+    (error "Function GET-FIELD-ERRORS-COUNT should be called inside WITH-HTML-FORM macro."))
+  (loop for errors being the hash-value of *form-field-errors*
+        summing (length errors)))
+
+
+(defun get-field-errors (field-name)
+  "Returns all errors, reported for the field with name given in FIELD-NAME."
+  (unless (boundp '*form-field-errors*)
+    (error "Function GET-FIELD-ERRORS should be called inside WITH-HTML-FORM macro."))
+  (gethash field-name *form-field-errors*))
+
+
 (defun %render-form (method-type
                      action
                      body
                      &key id
-                       class
-                       enctype
-                       (use-ajax-p t)
-                       extra-submit-code
-                       requires-confirmation-p
-                       (confirm-question "Are you sure?")
-                       (submit-fn "initiateFormAction(\"~A\", $(this), \"~A\")")
-                       ;; A hashmap with placeholders widgets
-                       error-placeholders)
+                          class
+                          enctype
+                          (use-ajax-p t)
+                          extra-submit-code
+                          requires-confirmation-p
+                          (confirm-question "Are you sure?")
+                          (submit-fn "initiateFormAction(\"~A\", $(this), \"~A\")")
+                          ;; A hashmap with placeholders widgets
+                          error-placeholders)
   (let* ((action (if (functionp action)
                      ;; We need this wrapper to handle form errors
                      (lambda (&rest args)
                        (block handled
-                         (handler-bind ((error
-                                          (lambda (c)
-                                            (let ((name (typecase c
-                                                          (field-error (field-name c))
-                                                          (t "form-error")))
-                                                  (message (typecase c
-                                                             (form-error (error-message c))
-                                                             (t (format nil "~A" c)))))
-                                              ;; Here we want to log all unusual exception only,
-                                              ;; because FORM-ERROR conditions are signaled
-                                              ;; when something is wrong with user input and
-                                              ;; usually we don't want to see them in application logs:
-                                              (unless (typep c 'form-error)
-                                                (with-fields (:traceback (print-backtrace :stream nil
-                                                                                          :condition c))
-                                                  (log:error "Unhandled exception")))
-
-                                              ;; Now we need to show an error in a placeholder:
-                                              (when (and error-placeholders
-                                                         (gethash name error-placeholders))
-                                                (let ((placeholder (gethash name error-placeholders)))
-                                                  (setf (error-placeholder-message placeholder)
-                                                        message)
-                                                  (reblocks/widget:update placeholder))
+                         (let ((*form-field-errors* (make-hash-table :test 'equal)))
+                           (handler-bind ((error
+                                            (lambda (c)
+                                              (let ((name (typecase c
+                                                            (field-error (field-name c))
+                                                            (t "form-error")))
+                                                    (message (typecase c
+                                                               (form-error (error-message c))
+                                                               (t (format nil "~A" c)))))
+                                                ;; Here we want to log all unusual exception only,
+                                                ;; because FORM-ERROR conditions are signaled
+                                                ;; when something is wrong with user input and
+                                                ;; usually we don't want to see them in application logs:
+                                                (when (typep c 'field-error)
+                                                  (push message
+                                                        (gethash name *form-field-errors*)))
                                                 
-                                                (if (find-restart 'check-next-form-field)
-                                                    ;; We use continuable restarts
-                                                    ;; to show a errors for multiple fields
-                                                    ;; on a single form submit.
-                                                    (invoke-restart 'check-next-form-field)
-                                                    (return-from handled)))))))
-                           ;; First, we need to reset state of error placeholders,
-                           ;; because may be some of these errors are not actual now.
-                           (when error-placeholders
-                             (loop for placeholder being the hash-value of error-placeholders
-                                   when (error-placeholder-message placeholder)
+                                                (unless (typep c 'form-error)
+                                                  (with-fields (:traceback (print-backtrace :stream nil
+                                                                                            :condition c))
+                                                    (log:error "Unhandled exception")))
+
+                                                ;; Now we need to show an error in a placeholder:
+                                                (when (and error-placeholders
+                                                           (gethash name error-placeholders))
+                                                  (let ((placeholder (gethash name error-placeholders)))
+                                                    (setf (error-placeholder-message placeholder)
+                                                          message)
+                                                    (reblocks/widget:update placeholder))
+                                                 
+                                                  (if (find-restart 'check-next-form-field)
+                                                      ;; We use continuable restarts
+                                                      ;; to show a errors for multiple fields
+                                                      ;; on a single form submit.
+                                                      (invoke-restart 'check-next-form-field)
+                                                      (return-from handled)))))))
+                             ;; First, we need to reset state of error placeholders,
+                             ;; because may be some of these errors are not actual now.
+                             (when error-placeholders
+                               (loop for placeholder being the hash-value of error-placeholders
+                                     when (error-placeholder-message placeholder)
                                      do (setf (error-placeholder-message placeholder)
                                               nil)
                                         (reblocks/widget:update placeholder)))
-                           (apply action args))))
+                             (apply action args)))))
                      ;; Error handling works only when callback is a function
                      action))
          (action-code (make-action action))

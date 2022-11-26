@@ -43,6 +43,9 @@
 
   (reblocks-ui/form:form-error condition)
   (reblocks-ui/form:form-error function)
+  
+  (reblocks-ui/form:get-field-errors-count function)
+  (reblocks-ui/form:get-field-errors function)
 
   (reblocks-ui/form:render-button function)
   (reblocks-ui/form:render-form-and-button function)

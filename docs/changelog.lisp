@@ -9,6 +9,28 @@
                               "JS"
                               "UI"
                               "40ANTS-DOC"))
+  (0.15.0 2022-11-26
+          "
+New
+===
+
+Functions REBLOCKS-UI/FORM:GET-FIELD-ERRORS-COUNT and REBLOCKS-UI/FORM:GET-FIELD-ERRORS
+were added to make it possible to check if there was any field errors during validation
+and to interrupt further form processing.
+
+An example was added to show how to process form errors and use placeholders. You'll find
+it inside examples/form-errors.lisp file. Load reblocks-ui-examples system to load it.
+
+Fixed
+=====
+
+Also, function a but inside REBLOCKS-UI/FORM:FORM-ERROR function was fixed and now it
+will interrupt action and show an error inside a placeholder, created with
+REBLOCKS-UI/FORM:FORM-ERROR-PLACEHOLDER function or open debugger otherwise.
+
+Previosly this function call was ignored if there was a form error placeholder widget on a page.
+
+")
   (0.14.0 2022-09-17
           "
 New
