@@ -480,7 +480,10 @@ RENDER-FN is an optional function of one argument that is reponsible
 for rendering the link's content (i.e. its label). The default rendering
 function just calls PRINC-TO-STRING on the label and renders it
 with escaping. Internally, render-fn should use reblocks:with-html macro
-to write output into the right stream."
+to write output into the right stream.
+
+WARNING! This function generates <a href=\"...\">...</a> element and any
+bot, crawling the internet will hit this action with GET request."
 
   (let* ((*print-pretty* nil)
          (action-code (make-action action))
