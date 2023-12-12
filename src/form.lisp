@@ -1,6 +1,7 @@
 (defpackage #:reblocks-ui/form
   (:use #:cl)
-  (:import-from #:log4cl)
+  (:import-from #:log)
+  (:import-from #:spinneret)
   (:import-from #:reblocks/actions
                 #:make-action-url
                 #:make-action)

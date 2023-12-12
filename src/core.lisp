@@ -3,6 +3,7 @@
   (:nicknames #:reblocks-ui)
 
   (:import-from #:reblocks-parenscript)
+  (:import-from #:log)
   (:import-from #:parenscript
                 #:chain)
   (:import-from #:reblocks/widget

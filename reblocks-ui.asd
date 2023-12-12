@@ -29,3 +29,6 @@
                 (read-sequence seq stream))
           seq)))
   :in-order-to ((test-op (test-op reblocks-ui-test))))
+
+
+(asdf:register-system-packages "log4cl" '("LOG"))

@@ -3,7 +3,6 @@
         #:reblocks-ui/core)
   (:import-from #:40ants-doc
                 #:defsection)
-  (:import-from #:reblocks)
   (:export #:@core))
 (in-package #:reblocks-ui-docs/core)
 

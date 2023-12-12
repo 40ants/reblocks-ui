@@ -2,7 +2,6 @@
   (:use #:cl)
   (:import-from #:40ants-doc
                 #:defsection)
-  (:import-from #:reblocks)
   (:import-from #:reblocks/doc/example
                 #:defexample)
   (:import-from #:docs-config
@@ -20,6 +19,7 @@
                 #:@form)
   (:import-from #:reblocks-ui-docs/core
                 #:@core)
+  (:import-from #:reblocks/widget)
   (:export #:@index
            #:@readme))
 (in-package #:reblocks-ui-docs/index)
