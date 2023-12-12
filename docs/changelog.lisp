@@ -14,6 +14,9 @@
 Changed
 =======
 
+- Functions REBLOCKS-UI/FORM:ERROR-PLACEHOLDER and REBLOCKS-UI/FORM:FORM-ERROR-PLACEHOLDER now
+  can be called not only inside the REBLOCKS-UI/FORM:WITH-HTML-FORM macro body, but also in any
+  function within.
 - Added CSS attribute display none/block for popup.
 ")
   (0.15.0 2022-11-26

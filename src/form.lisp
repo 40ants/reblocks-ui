@@ -303,6 +303,9 @@ $('~A').foundation();
           (error-placeholder-message widget)))))
 
 
+(defvar *error-placeholder-func*)
+
+
 (defun error-placeholder (name &key (widget-class 'error-placeholder))
   "This function creates and renders a widget to show an error message related to some form field.
 
@@ -311,9 +314,14 @@ $('~A').foundation();
    NAME argument should be a string denoting a form field. Later, you can call FIELD-ERROR function
    to signal an error from the action function. You will need to pass the NAME as the first argument
    to the FIELD-ERROR function."
-  (declare (ignore name widget-class))
-  (error "This function should be called inside WITH-HTML-FORM macro."))
+  (cond
+    ((boundp '*error-placeholder-func*)
+     (funcall *error-placeholder-func* name :widget-class widget-class))
+    (t
+     (error "This function should be called inside WITH-HTML-FORM macro."))))
 
+
+(defvar *form-error-placeholder-func*)
 
 (defun form-error-placeholder (&key (widget-class 'form-error-placeholder))
   "This function creates and renders a widget to show an error for the whole form.
@@ -321,8 +329,11 @@ $('~A').foundation();
    It should be called inside WITH-HTML-FORM macro.
 
    Later, you can call FORM-ERROR function to signal an error from the action function."
-  (declare (ignore widget-class))
-  (error "This function should be called inside WITH-HTML-FORM macro."))
+  (cond
+    ((boundp '*form-error-placeholder-func*)
+     (funcall *form-error-placeholder-func* :widget-class widget-class))
+    (t
+     (error "This function should be called inside WITH-HTML-FORM macro."))))
 
 
 (defun %render-error-placeholder (name widget-class error-placeholders)
@@ -391,21 +402,20 @@ $('~A').foundation();
                 (%render-error-placeholder name widget-class error-placeholders))
               (form-error-placeholder (&key (widget-class 'form-error-placeholder))
                 (%render-form-error-placeholder widget-class error-placeholders)))
-         (declare (ignorable (function error-placeholder)
-                             (function form-error-placeholder)))
-         
-         (%render-form ,method-type
-                       ,action
-                       ,body
-                       :id ,id
-                       :class ,class
-                       :enctype ,enctype
-                       :use-ajax-p ,use-ajax-p
-                       :extra-submit-code ,extra-submit-code
-                       :requires-confirmation-p ,requires-confirmation-p
-                       :confirm-question ,confirm-question
-                       :submit-fn ,submit-fn
-                       :error-placeholders error-placeholders)))))
+         (let ((*error-placeholder-func* #'error-placeholder)
+               (*form-error-placeholder-func* #'form-error-placeholder))
+           (%render-form ,method-type
+                         ,action
+                         ,body
+                         :id ,id
+                         :class ,class
+                         :enctype ,enctype
+                         :use-ajax-p ,use-ajax-p
+                         :extra-submit-code ,extra-submit-code
+                         :requires-confirmation-p ,requires-confirmation-p
+                         :confirm-question ,confirm-question
+                         :submit-fn ,submit-fn
+                         :error-placeholders error-placeholders))))))
 
 
 (defun render-button (name  &key
