@@ -8,9 +8,15 @@
                 #:build-docs)
   (:import-from #:40ants-ci/workflow
                 #:defworkflow)
+  (:import-from #:40ants-ci/jobs/autotag)
   (:import-from #:40ants-ci/jobs/critic
                 #:critic))
 (in-package reblocks-ui/ci)
+
+
+(defworkflow release
+  :on-push-to "master"
+  :jobs ((40ants-ci/jobs/autotag:autotag)))
 
 
 (defworkflow docs
@@ -27,7 +33,8 @@
   :cache t
   :jobs ((linter :asdf-systems ("reblocks-ui"
                                 "reblocks-ui-docs"
-                                "reblocks-ui-examples"))
+                                "reblocks-ui-examples")
+                 :check-imports t)
          (critic :ignore-critiques
                  ;; Seems Lisp Critic counts docstring lines too :(
                  ("function-too-long"))
