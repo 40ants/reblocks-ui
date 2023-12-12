@@ -9,6 +9,13 @@
                               "JS"
                               "UI"
                               "40ANTS-DOC"))
+  (0.16.0 2022-12-12
+          "
+Changed
+=======
+
+- Added CSS attribute display none/block for popup.
+")
   (0.15.0 2022-11-26
           "
 New
