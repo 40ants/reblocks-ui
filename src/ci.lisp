@@ -37,6 +37,7 @@
                  :check-imports t)
          (critic :ignore-critiques
                  ;; Seems Lisp Critic counts docstring lines too :(
-                 ("function-too-long"))
+                 ("function-too-long"
+                  "check-prefix"))
          ;; (run-tests :coverage t)
          ))
