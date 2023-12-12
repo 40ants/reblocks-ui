@@ -2,6 +2,7 @@
   (:use #:cl)
   (:import-from #:40ants-doc
                 #:defsection)
+  (:import-from #:reblocks)
   (:import-from #:reblocks/doc/example
                 #:defexample)
   (:import-from #:docs-config
