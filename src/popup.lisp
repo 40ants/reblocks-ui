@@ -71,6 +71,7 @@
        :height 100vh
        :background "rgba(0,0,0,0.5)"
        :opacity 0
+       :display none
        :pointer-events none
        :transition 0.5s all
 
@@ -88,6 +89,7 @@
         :padding 25px
         :transition 0.5s all))
       ((:and .popup .active)
+       :display block
        :opacity 1
        :pointer-events all
        :transition 0.5s all

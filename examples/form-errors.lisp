@@ -2,6 +2,8 @@
     (:use #:cl)
     (:import-from #:reblocks/app
                   #:defapp)
+    (:import-from #:reblocks/server)
+    (:import-from #:reblocks/session)
     (:import-from #:reblocks/widget
                   #:update
                   #:defwidget)

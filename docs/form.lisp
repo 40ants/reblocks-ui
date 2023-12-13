@@ -2,7 +2,6 @@
   (:use #:cl)
   (:import-from #:40ants-doc
                 #:defsection)
-  (:import-from #:reblocks)
   (:import-from #:reblocks/doc/example
                 #:defexample)
   (:import-from #:reblocks-ui/form
@@ -12,6 +11,8 @@
                 #:field-error)
   (:import-from #:reblocks/html
                 #:with-html)
+  (:import-from #:reblocks-ui/core)
+  (:import-from #:reblocks/widget)
   (:export #:@form))
 (in-package #:reblocks-ui-docs/form)
 
