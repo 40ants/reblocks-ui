@@ -2,6 +2,19 @@
 
 # ChangeLog
 
+<a id="x-28REBLOCKS-UI-DOCS-2FCHANGELOG-3A-3A-7C0-2E16-2E0-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+## 0.16.0 (2022-12-12)
+
+<a id="changed"></a>
+
+### Changed
+
+* Functions `reblocks-ui/form:error-placeholder` ([`1`][8637] [`2`][5578]) and [`reblocks-ui/form:form-error-placeholder`][3868] now
+  can be called not only inside the [`reblocks-ui/form:with-html-form`][f976] macro body, but also in any
+  function within.
+* Added `CSS` attribute display none/block for popup.
+
 <a id="x-28REBLOCKS-UI-DOCS-2FCHANGELOG-3A-3A-7C0-2E15-2E0-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
 ## 0.15.0 (2022-11-26)
@@ -48,11 +61,9 @@ Previosly this function call was ignored if there was a form error placeholder w
 
 * Now action execution continues after the call to `reblocks-ui/form:form-error` ([`1`][ea04] [`2`][3765])
   or `reblocks-ui/form:field-error` ([`1`][5162] [`2`][62fd]). This way, all form errors could be shown at once.
-
 * `CSS` classes for placeholders were changed. `reblocks-ui/form:error-placeholder` ([`1`][8637] [`2`][5578])
   now uses "form-error" instead of just "error" and [`reblocks-ui/form:form-error-placeholder`][3868]
   uses "alert callout" instead of "error".
-
 * Argument `WIDGET` was removed from [`reblocks-ui/form:with-html-form`][f976] macro.
 
 <a id="changes"></a>
@@ -165,7 +176,6 @@ This is breaking rendering for widgets. Replace old `weblocks:render-body`
 
 * Code was fixed to work with weblocks 0.14.0 where `*action-string*`
   was moved to weblocks.variables.
-
 * Added `weblocks.ui.form:render-link` function, from old `weblocks/utils/html.lisp`.
 
 <a id="x-28REBLOCKS-UI-DOCS-2FCHANGELOG-3A-3A-7C0-2E1-2E0-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
