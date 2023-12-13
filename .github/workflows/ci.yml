@@ -54,7 +54,7 @@
         },
         {
           "name": "Setup Common Lisp Environment",
-          "uses": "40ants/setup-lisp@use-quicklisp-fix",
+          "uses": "40ants/setup-lisp@v3",
           "with": {
             "asdf-system": "reblocks-ui"
           },
@@ -122,7 +122,7 @@
         },
         {
           "name": "Setup Common Lisp Environment",
-          "uses": "40ants/setup-lisp@v2",
+          "uses": "40ants/setup-lisp@v3",
           "with": {
             "asdf-system": "reblocks-ui"
           },
