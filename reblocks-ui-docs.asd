@@ -11,7 +11,4 @@
   :source-control (:git "https://github.com/40ants/reblocks-ui"))
 
 
-(asdf:register-system-packages "reblocks"
-                               '("REBLOCKS/DOC/EXAMPLE"))
-
 
