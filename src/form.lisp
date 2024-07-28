@@ -2,6 +2,9 @@
   (:use #:cl)
   (:import-from #:log)
   (:import-from #:spinneret)
+  (:import-from #:serapeum
+                #:defvar-unbound
+                #:eval-always)
   (:import-from #:reblocks/actions
                 #:make-action-url
                 #:make-action)
@@ -36,11 +39,12 @@
    #:get-field-errors-count))
 (in-package reblocks-ui/form)
 
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (defvar *js-default-action* "return initiateAction(\"~A\")")
+(defvar *js-default-action* "return initiateAction(\"~A\")")
+
+(eval-always
   (defvar *js-default-form-action* "return initiateFormAction(\"~A\", event, this)"))
 
-(serapeum:defvar-unbound *form-field-errors*
+(defvar-unbound *form-field-errors*
   "This variable will hold a hash-table where keys are field names and values
    are lists of strings of error messages.")
 
