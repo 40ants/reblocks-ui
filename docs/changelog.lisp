@@ -9,6 +9,13 @@
                               "JS"
                               "UI"
                               "40ANTS-DOC"))
+  (0.17.0 2024-07-28
+          "
+Fixed
+=====
+
+- Code was fixed to work with latest changed to Reblocks, introduced in [PR 57](https://github.com/40ants/reblocks/pull/57).
+")
   (0.16.0 2022-12-12
           "
 Changed

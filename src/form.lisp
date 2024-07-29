@@ -2,6 +2,9 @@
   (:use #:cl)
   (:import-from #:log)
   (:import-from #:spinneret)
+  (:import-from #:serapeum
+                #:defvar-unbound
+                #:eval-always)
   (:import-from #:reblocks/actions
                 #:make-action-url
                 #:make-action)
@@ -36,8 +39,12 @@
    #:get-field-errors-count))
 (in-package reblocks-ui/form)
 
+(defvar *js-default-action* "return initiateAction(\"~A\")")
 
-(serapeum:defvar-unbound *form-field-errors*
+(eval-always
+  (defvar *js-default-form-action* "return initiateFormAction(\"~A\", event, this)"))
+
+(defvar-unbound *form-field-errors*
   "This variable will hold a hash-table where keys are field names and values
    are lists of strings of error messages.")
 
@@ -174,7 +181,7 @@ $('~A').foundation();
                           extra-submit-code
                           requires-confirmation-p
                           (confirm-question "Are you sure?")
-                          (submit-fn "initiateFormAction(\"~A\", $(this), \"~A\")")
+                          (submit-fn *js-default-form-action*)
                           ;; A hashmap with placeholders widgets
                           error-placeholders)
   (let* ((action (if (functionp action)
@@ -230,16 +237,9 @@ $('~A').foundation();
                      action))
          (action-code (make-action action))
          (on-submit (when use-ajax-p
-                      (format nil "~@[~A~]~A; return false;"
-                              extra-submit-code
-                              (format nil submit-fn
-                                      (url-encode (or action-code ""))
-                                      ;; Function session-name-string-pair was removed
-                                      ;; during reblocks refactoring, so we just
-                                      ;; 
-                                      ""
-                                      ;; (reblocks::session-name-string-pair)
-                                      ))))
+                      (concatenate 'string
+                                   (or extra-submit-code "")
+                                   (format nil submit-fn (url-encode (or action-code ""))))))
          (popup-name (when requires-confirmation-p
                        (symbol-name
                         (gensym "popup"))))
@@ -364,7 +364,6 @@ $('~A').foundation();
            (t confirm-question))
          env))))
 
-
 (defmacro with-html-form ((method-type
                            action &key
                                     id
@@ -374,7 +373,7 @@ $('~A').foundation();
                                     extra-submit-code
                                     requires-confirmation-p
                                     (confirm-question "Are you sure?")
-                                    (submit-fn "initiateFormAction(\"~A\", $(this), \"~A\")"))
+                                    (submit-fn *js-default-form-action*))
                           &body body
                           &environment env)
   "Wraps a body with (:form ...) using REBLOCKS/HTML:WITH-HTML.
@@ -500,8 +499,7 @@ bot, crawling the internet will hit this action with GET request."
          (action-code (make-action action))
          (url (make-action-url action-code))
          (on-click (when ajaxp
-                     (format nil "initiateAction(\"~A\"); return false;"
-                             action-code))))
+                     (format nil *js-default-action* action-code))))
     
     (with-html
       (:a :id id
