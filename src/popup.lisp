@@ -49,13 +49,13 @@
                    You need to define a method for this generic function
                    and specialize it for your own class.")
   (:method ((widget popup-widget))
-    (reblocks/html:with-html
+    (reblocks/html:with-html ()
       (:p (format nil "Define RENDER-POPUP-CONTENT method for ~S class."
                   (class-name (class-of widget)))))))
 
 
 (defmethod reblocks/widget:render ((widget popup-widget))
-  (reblocks/html:with-html
+  (reblocks/html:with-html ()
     (:div :class "popup-content"
           (render-popup-content widget))))
 

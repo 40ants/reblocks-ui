@@ -90,7 +90,7 @@
   (defmethod reblocks/widget:render ((widget demo))
     (cond
       ((done widget)
-       (with-html
+       (with-html ()
          (with-html-form
              (:POST (lambda (&rest args)
                       (declare (ignore args))
@@ -158,7 +158,7 @@
     (cond
       ((and (login widget)
             (password widget))
-       (with-html
+       (with-html ()
          (with-html-form
              (:POST (lambda (&key &allow-other-keys)
                       (setf (login widget) nil

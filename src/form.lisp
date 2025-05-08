@@ -100,7 +100,7 @@
                                         "close_~A(); ~A;"
                                         popup-name
                                         on-submit)))
-    (with-html
+    (with-html ()
       (:div :class "reveal"
             :id popup-name
             :dataset (:reveal t)
@@ -248,7 +248,7 @@ $('~A').foundation();
                                      popup-name)
                              on-submit)))
 
-    (with-html
+    (with-html ()
       (when requires-confirmation-p
         (%render-confirmation-popup action-code class confirm-question enctype id
                                     method-type popup-name on-submit))
@@ -288,7 +288,7 @@ $('~A').foundation();
 
 (defmethod reblocks/widget:render ((widget error-placeholder))
   (when (error-placeholder-message widget)
-    (with-html
+    (with-html ()
       (:p :class (format nil "form-error ~A-error" (error-placeholder-name widget))
           ;; CSS class "form-error" from Zurb Foundation
           ;; has display: none by default, but we need block,
@@ -299,7 +299,7 @@ $('~A').foundation();
 
 (defmethod reblocks/widget:render ((widget form-error-placeholder))
   (when (error-placeholder-message widget)
-    (with-html
+    (with-html ()
       (:p :class (format nil "alert callout")
           (error-placeholder-message widget)))))
 
@@ -432,7 +432,7 @@ $('~A').foundation();
    * ID - id of the html control. Default is nil.
    * CLASS - a class used for styling. By default, \"submit\".
    * DISABLEDP - button is disabled if true."
-  (with-html
+  (with-html ()
     ;; We could use <button...> here, but this way, it will
     ;; be impossible to distinguish which button was clicked if
     ;; there are many buttons in the form.
@@ -463,7 +463,7 @@ $('~A').foundation();
    'id' - id of the html control. Default is nil.
    'class' - a class used for styling. By default, \"submit\".
    'disabledp' - button is disabled if true."
-  (with-html
+  (with-html ()
     ;; We could use <button...> here, but this way, it will
     ;; be impossible to distinguish which button was clicked if
     ;; there are many buttons in the form.
@@ -501,7 +501,7 @@ bot, crawling the internet will hit this action with GET request."
          (on-click (when ajaxp
                      (format nil *js-default-action* action-code))))
     
-    (with-html
+    (with-html ()
       (:a :id id
           :class class
           :href url
@@ -542,7 +542,7 @@ cut to quickly render a sumbit button."
    * ID - id of the html control. Default is nil.
    * CLASS - a class used for styling. By default, \"submit\".
    * DISABLEDP - button is disabled if true."
-  (with-html
+  (with-html ()
     (when label
       (:label :for id
               label))

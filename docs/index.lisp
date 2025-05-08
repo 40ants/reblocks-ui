@@ -99,7 +99,7 @@ Zurb Foundation styles and JS automatically:
   (defmethod reblocks/widget:render ((widget hello))
     (cond
       ((name widget)
-       (with-html
+       (with-html ()
          (with-html-form
              (:POST (lambda (&key name &allow-other-keys)
                       (setf (name widget)
