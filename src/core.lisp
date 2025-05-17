@@ -73,7 +73,7 @@
 
 
 (defun button-wt (&key value name id class disabledp submitp)
-  (with-html-string
+  (with-html-string ()
     (:input :name name
             :type "submit"
             :id id
