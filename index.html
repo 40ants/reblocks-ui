@@ -1,0 +1,227 @@
+<html lang=en>
+ <head>
+  <meta charset=UTF-8><meta name=viewport
+      content="width=device-width, initial-scale=1">
+  <title>Reblocks-UI</title>
+  <link rel=alternate
+        href="https://40ants.com/reblocks-ui/changelog.xml"
+        type="application/rss+xml">
+  <link rel=stylesheet type="text/css"
+        href=theme.css>
+  <script type="text/javascript" src=jquery.js></script>
+  <script type="text/javascript" src=toc.js></script>
+  <script type="text/javascript">$(document).ready(function() {$('a:has(img)').css('border-bottom', 'none')})</script>
+  <link rel=stylesheet type="text/css"
+      href=highlight.min.css>
+  <script type="text/javascript"
+          src=highlight.min.js></script>
+  <script type="text/javascript">hljs.highlightAll();</script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FL71WXK73K"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-FL71WXK73K');
+    </script>
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();
+       for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+       k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+       ym(42462884, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+       });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/42462884" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+
+ </head>
+ <body>
+  <div class=page><a id=fork-me href="https://github.com/40ants/reblocks-ui">Fork me on GitHub</a>
+   <div class=navbar>
+    <div class=navbar-inner>
+     <a class=brand href="/">
+      <img class=logo
+           src="https://40ants.com/img/logo.svg"></a>
+     <ul class=nav>
+      <li><a href="/posts/">Blog</a>
+      <li><a href="/ru/posts/">Blog (RU)</a>
+      <li><a href="/tips/">Lisp Tips</a>
+      <li><a href="/projects/">Our Projects</a>
+      <li><a href="/about/">About</a>
+     </ul>
+    </div>
+   </div>
+   <input type=checkbox id=sidebar-check>
+   <label for=sidebar-check>
+    <div id=sidebar-trigger>
+     <span></span><span></span><span></span>
+    </div></label><div class=sidebar><div class=header><form class=search method=GET action="search/">
+      <input type=text name=q>
+      <input type=submit value=Search><span id=search-progress></span>
+     </form>
+    </div><div class=content><div class=page-toc><ul><li><p><a href="#x-28REBLOCKS-UI-DOCS-2FINDEX-3A-40INDEX-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" data-document="" data-node="x-28REBLOCKS-UI-DOCS-2FINDEX-3A-40INDEX-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29">Reblocks-UI</a></p><ul><li><p><a href="#reblocks-ui-asdf-system-details" data-document="" data-node="reblocks-ui-asdf-system-details">REBLOCKS-UI ASDF System Details</a></p></li><li><p><a href="#x-28REBLOCKS-UI-DOCS-2FINDEX-3A-3A-40INTRO-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" data-document="" data-node="x-28REBLOCKS-UI-DOCS-2FINDEX-3A-3A-40INTRO-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29">Introduction</a></p></li><li><p><a href="#x-28REBLOCKS-UI-DOCS-2FINDEX-3A-3A-40SIMPLE-DEMO-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" data-document="" data-node="x-28REBLOCKS-UI-DOCS-2FINDEX-3A-3A-40SIMPLE-DEMO-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29">Simple Demo</a></p></li><li><p><a href="#x-28REBLOCKS-UI-DOCS-2FCORE-3A-40CORE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" data-document="" data-node="x-28REBLOCKS-UI-DOCS-2FCORE-3A-40CORE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29">Core</a></p><ul><li><p><a href="#x-28REBLOCKS-UI-DOCS-2FCORE-3A-3A-40API-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" data-document="" data-node="x-28REBLOCKS-UI-DOCS-2FCORE-3A-3A-40API-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29">API</a></p></li></ul></li><li><p><a href="#x-28REBLOCKS-UI-DOCS-2FFORM-3A-40FORM-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" data-document="" data-node="x-28REBLOCKS-UI-DOCS-2FFORM-3A-40FORM-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29">HTML Forms</a></p><ul><li><p><a href="#x-28REBLOCKS-UI-DOCS-2FFORM-3A-3A-40CONFIRMATION-DEMO-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" data-document="" data-node="x-28REBLOCKS-UI-DOCS-2FFORM-3A-3A-40CONFIRMATION-DEMO-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29">Submit Confirmation</a></p></li><li><p><a href="#x-28REBLOCKS-UI-DOCS-2FFORM-3A-3A-40ERRORS-DEMO-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" data-document="" data-node="x-28REBLOCKS-UI-DOCS-2FFORM-3A-3A-40ERRORS-DEMO-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29">Showing Errors</a></p></li><li><p><a href="#x-28REBLOCKS-UI-DOCS-2FFORM-3A-3A-40API-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" data-document="" data-node="x-28REBLOCKS-UI-DOCS-2FFORM-3A-3A-40API-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29">API</a></p></li></ul></li><li><p><a href="#x-28REBLOCKS-UI-DOCS-2FPOPUP-3A-3A-40POPUP-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" data-document="" data-node="x-28REBLOCKS-UI-DOCS-2FPOPUP-3A-3A-40POPUP-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29">Untitled</a></p></li></ul></li><li><p><a href="changelog/#x-28REBLOCKS-UI-DOCS-2FCHANGELOG-3A-40CHANGELOG-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" data-document="changelog/" data-node="x-28REBLOCKS-UI-DOCS-2FCHANGELOG-3A-40CHANGELOG-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29">ChangeLog</a></p></li></ul>
+     </div>
+    </div><div class=footer>
+     <a href="https://40ants.com/doc">[generated by 40ANTS-DOC]</a>
+    </div>
+   </div><div class=content role=main><h1>Reblocks-UI<a class=header-link
+     href=#x-28REBLOCKS-UI-DOCS-2FINDEX-3A-40INDEX-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29
+     title="Permalink to this headline"
+     id=x-28REBLOCKS-UI-DOCS-2FINDEX-3A-40INDEX-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29></a></h1><h2 id="reblocks-ui-asdf-system-details">REBLOCKS-UI ASDF System Details</h2><ul><li><p>Version: 0.12.0</p></li><li><p>Description: A set of <code>UI</code> widgets for Reblocks web framework!</p></li><li><p>Licence: <code>BSD</code></p></li><li><p>Author: Alexander Artemenko</p></li><li><p>Homepage: <a href="https://40ants.com/reblocks-ui/">https://40ants.com/reblocks-ui/</a></p></li><li><p>Source control: <a href="https://github.com/40ants/reblocks-ui">GIT</a></p></li><li><p>Depends on: <a href="https://quickdocs.org/40ants-doc">40ants-doc</a>, <a href="https://quickdocs.org/log4cl">log4cl</a>, <a href="https://quickdocs.org/log4cl-extras">log4cl-extras</a>, <a href="https://quickdocs.org/parenscript">parenscript</a>, <a href="https://quickdocs.org/quri">quri</a>, <a href="https://quickdocs.org/reblocks">reblocks</a>, <a href="https://quickdocs.org/reblocks-parenscript">reblocks-parenscript</a>, <a href="https://quickdocs.org/serapeum">serapeum</a>, <a href="https://quickdocs.org/spinneret">spinneret</a></p></li></ul><h2>Introduction<a class=header-link
+     href=#x-28REBLOCKS-UI-DOCS-2FINDEX-3A-3A-40INTRO-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29
+     title="Permalink to this headline"
+     id=x-28REBLOCKS-UI-DOCS-2FINDEX-3A-3A-40INTRO-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29></a></h2><p>Reblocks-ui brings <a href="https://foundation.zurb.com/">Zurb Foundation</a> styling to your Weblocks application.</p><p>When you inherit your widgets from <a href="https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FCORE-3AUI-WIDGET-20CLASS-29" data-document="https://40ants.com/reblocks-ui/" data-node="x-28REBLOCKS-UI-2FCORE-3AUI-WIDGET-20CLASS-29"><code>reblocks-ui/core:ui-widget</code></a>. Reblocks will fetch
+Zurb Foundation styles and <code>JS</code> automatically:</p><pre><code class="lisp">(defwiget my-widget (reeblocks-ui:ui-widget)
+  ((...))</code></pre><h2>Simple Demo<a class=header-link
+     href=#x-28REBLOCKS-UI-DOCS-2FINDEX-3A-3A-40SIMPLE-DEMO-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29
+     title="Permalink to this headline"
+     id=x-28REBLOCKS-UI-DOCS-2FINDEX-3A-3A-40SIMPLE-DEMO-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29></a></h2><p>This demo shows how to process form data in a callback
+and to update the widget accordingly:</p><div class=demo>
+     <iframe
+             sandbox="allow-forms allow-same-origin allow-scripts"
+             id=example-1
+             src="https://com-40ants-reblocks-ui.herokuapp.com/examples/reblocks-ui-docs/index/simple-example?iframe-id=example-1"
+             style="width: 100%; height: 10em; border: 0"></iframe>
+    </div>
+    <script>
+window.addEventListener('message', function(e) {
+  let message = e.data;
+  let iframe_id = message.iframe_id;
+  let iframe = document.querySelector('#' + iframe_id);
+  if (iframe) {
+    iframe.style.height = message.height + 'px';
+    iframe.style.width = message.width + 'px';
+  } else {
+    console.log('Unable to find iframe with id', iframe_id);
+  }
+} , false);
+</script><h2>Core<a class=header-link
+     href=#x-28REBLOCKS-UI-DOCS-2FCORE-3A-40CORE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29
+     title="Permalink to this headline"
+     id=x-28REBLOCKS-UI-DOCS-2FCORE-3A-40CORE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29></a></h2><h3>API<a class=header-link
+     href=#x-28REBLOCKS-UI-DOCS-2FCORE-3A-3A-40API-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29
+     title="Permalink to this headline"
+     id=x-28REBLOCKS-UI-DOCS-2FCORE-3A-3A-40API-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29></a></h3><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/core.lisp#L28">class</a><div class=reference-object><div class=object-name><a href=#x-28REBLOCKS-UI-2FCORE-3AUI-WIDGET-20CLASS-29 id=x-28REBLOCKS-UI-2FCORE-3AUI-WIDGET-20CLASS-29>reblocks-ui/core:ui-widget</a></div><div class=object-args><span class=locative-args></span></div></div><a class=bullet-link href=#x-28REBLOCKS-UI-2FCORE-3AUI-WIDGET-20CLASS-29></a></div><div class=bullet-content><p>Use this class as a parent for all widgets, who use <code>UI</code>.</p></div></div><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/core.lisp#L32">class</a><div class=reference-object><div class=object-name><a href=#x-28REBLOCKS-UI-2FCORE-3AWIDGET-20CLASS-29 id=x-28REBLOCKS-UI-2FCORE-3AWIDGET-20CLASS-29>reblocks-ui/core:widget</a></div><div class=object-args><span class=locative-args></span></div></div><a class=bullet-link href=#x-28REBLOCKS-UI-2FCORE-3AWIDGET-20CLASS-29></a></div><div class=bullet-content><p>Use this class as a parent for all widgets, who use <code>UI</code>. Warning: 'widget' was renamed to 'ui-widget' and will be removed after 2020-06-01.</p></div></div><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/core.lisp#L42">variable</a><div class=reference-object><div class=object-name><a href=#x-28REBLOCKS-UI-2FCORE-3A-2AFOUNDATION-DEPENDENCIES-2A-20-28VARIABLE-29-29 id=x-28REBLOCKS-UI-2FCORE-3A-2AFOUNDATION-DEPENDENCIES-2A-20-28VARIABLE-29-29>reblocks-ui/core:*foundation-dependencies*</a></div><div class=object-args><span class=locative-args>(#&lt;REBLOCKS/DEPENDENCIES:REMOTE-DEPENDENCY url: &quot;https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js&quot;&gt;
+ #&lt;REBLOCKS/DEPENDENCIES:REMOTE-DEPENDENCY url: &quot;https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css&quot;&gt;
+ #&lt;REBLOCKS-PARENSCRIPT:PARENSCRIPT-DEPENDENCY &gt;)</span></div></div><a class=bullet-link href=#x-28REBLOCKS-UI-2FCORE-3A-2AFOUNDATION-DEPENDENCIES-2A-20-28VARIABLE-29-29></a></div><div class=bullet-content><p>Dependencies for widgets based on Foundation framework.</p><p>Also may be useful if you want to include them as a whole app's
+dependencies.</p><p>To calculate right integity value, use:
+curl https://url | openssl dgst -sha256 -binary | openssl enc -base64 -A</p></div></div><h2>HTML Forms<a class=header-link
+     href=#x-28REBLOCKS-UI-DOCS-2FFORM-3A-40FORM-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29
+     title="Permalink to this headline"
+     id=x-28REBLOCKS-UI-DOCS-2FFORM-3A-40FORM-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29></a></h2><h3>Submit Confirmation<a class=header-link
+     href=#x-28REBLOCKS-UI-DOCS-2FFORM-3A-3A-40CONFIRMATION-DEMO-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29
+     title="Permalink to this headline"
+     id=x-28REBLOCKS-UI-DOCS-2FFORM-3A-3A-40CONFIRMATION-DEMO-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29></a></h3><p>You might also want to warn user about some destructive actions.</p><p>To do this, provide <code>REQUIRES-CONFIRMATION-P</code> argument to the
+<a href="https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AWITH-HTML-FORM-20-2840ANTS-DOC-2FLOCATIVES-3AMACRO-29-29" data-document="https://40ants.com/reblocks-ui/" data-node="x-28REBLOCKS-UI-2FFORM-3AWITH-HTML-FORM-20-2840ANTS-DOC-2FLOCATIVES-3AMACRO-29-29"><code>with-html-form</code></a> macro. Optionally you might provide <code>CONFIRMATION-QUESTION</code>
+argument with a text of the question. Pay attention how does question
+changes when you are clicking a button in this demo:</p><div class=demo>
+     <iframe
+             sandbox="allow-forms allow-same-origin allow-scripts"
+             id=example-2
+             src="https://com-40ants-reblocks-ui.herokuapp.com/examples/reblocks-ui-docs/form/confirmation-example?iframe-id=example-2"
+             style="width: 100%; height: 10em; border: 0"></iframe>
+    </div>
+    <script>
+window.addEventListener('message', function(e) {
+  let message = e.data;
+  let iframe_id = message.iframe_id;
+  let iframe = document.querySelector('#' + iframe_id);
+  if (iframe) {
+    iframe.style.height = message.height + 'px';
+    iframe.style.width = message.width + 'px';
+  } else {
+    console.log('Unable to find iframe with id', iframe_id);
+  }
+} , false);
+</script><h3>Showing Errors<a class=header-link
+     href=#x-28REBLOCKS-UI-DOCS-2FFORM-3A-3A-40ERRORS-DEMO-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29
+     title="Permalink to this headline"
+     id=x-28REBLOCKS-UI-DOCS-2FFORM-3A-3A-40ERRORS-DEMO-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29></a></h3><p>Form processing usually includes error checking.
+You can use <a href="https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AERROR-PLACEHOLDER-20FUNCTION-29" data-document="https://40ants.com/reblocks-ui/" data-node="x-28REBLOCKS-UI-2FFORM-3AERROR-PLACEHOLDER-20FUNCTION-29"><code>error-placeholder</code></a> and <a href="https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-PLACEHOLDER-20FUNCTION-29" data-document="https://40ants.com/reblocks-ui/" data-node="x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-PLACEHOLDER-20FUNCTION-29"><code>form-error-placeholder</code></a> inside
+the body of <a href="https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AWITH-HTML-FORM-20-2840ANTS-DOC-2FLOCATIVES-3AMACRO-29-29" data-document="https://40ants.com/reblocks-ui/" data-node="x-28REBLOCKS-UI-2FFORM-3AWITH-HTML-FORM-20-2840ANTS-DOC-2FLOCATIVES-3AMACRO-29-29"><code>with-html-form</code></a> macro to mark places where errors should be show.</p><p>There can be only one form error placeholder and it will show errors which are not
+related to some particular field. Field error placeholders are named and usually
+should be placed above or below a field.</p><p>After you've used placeholder inside the form, use <a href="https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AFIELD-ERROR-20FUNCTION-29" data-document="https://40ants.com/reblocks-ui/" data-node="x-28REBLOCKS-UI-2FFORM-3AFIELD-ERROR-20FUNCTION-29"><code>field-error</code></a> function inside an
+action's code to display the error related to the field or just signal any <code>ERROR</code>
+to show a form-wide error.</p><p>An example below, shows both types of error. Enter &quot;bob&quot; as a login, to check
+how a form-wide error will look like:</p><div class=demo>
+     <iframe
+             sandbox="allow-forms allow-same-origin allow-scripts"
+             id=example-3
+             src="https://com-40ants-reblocks-ui.herokuapp.com/examples/reblocks-ui-docs/form/errors-example?iframe-id=example-3"
+             style="width: 100%; height: 10em; border: 0"></iframe>
+    </div>
+    <script>
+window.addEventListener('message', function(e) {
+  let message = e.data;
+  let iframe_id = message.iframe_id;
+  let iframe = document.querySelector('#' + iframe_id);
+  if (iframe) {
+    iframe.style.height = message.height + 'px';
+    iframe.style.width = message.width + 'px';
+  } else {
+    console.log('Unable to find iframe with id', iframe_id);
+  }
+} , false);
+</script><h3>API<a class=header-link
+     href=#x-28REBLOCKS-UI-DOCS-2FFORM-3A-3A-40API-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29
+     title="Permalink to this headline"
+     id=x-28REBLOCKS-UI-DOCS-2FFORM-3A-3A-40API-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29></a></h3><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/form.lisp#L367">macro</a><div class=reference-object><div class=object-name><a href=#x-28REBLOCKS-UI-2FFORM-3AWITH-HTML-FORM-20-2840ANTS-DOC-2FLOCATIVES-3AMACRO-29-29 id=x-28REBLOCKS-UI-2FFORM-3AWITH-HTML-FORM-20-2840ANTS-DOC-2FLOCATIVES-3AMACRO-29-29>reblocks-ui/form:with-html-form</a></div><div class=object-args><span class=locative-args>(METHOD-TYPE ACTION &amp;KEY ID CLASS ENCTYPE (USE-AJAX-P T) EXTRA-SUBMIT-CODE REQUIRES-CONFIRMATION-P (CONFIRM-QUESTION &quot;Are you sure?&quot;) (SUBMIT-FN \*JS-DEFAULT-FORM-ACTION\*)) &amp;BODY BODY</span></div></div><a class=bullet-link href=#x-28REBLOCKS-UI-2FFORM-3AWITH-HTML-FORM-20-2840ANTS-DOC-2FLOCATIVES-3AMACRO-29-29></a></div><div class=bullet-content><p>Wraps a body with (:form ...) using <a href="https://40ants.com/reblocks/api/#x-28REBLOCKS-2FHTML-3AWITH-HTML-20-2840ANTS-DOC-2FLOCATIVES-3AMACRO-29-29"><code>reblocks/html:with-html</code></a>.</p><ul><li><p><code>METHOD-TYPE</code> argument should be a keyword <code>:GET</code> or <code>:POST</code>.</p></li><li><p><code>ACTION</code> argument should be a function callback which will be called on
+  form submit. Form fields will be passed as keyword arguments, using their
+  names. To make your code more robust, use <code>&amp;ALLOW-OTHER-KEYS</code> in the lambda list.</p></li><li><p><code>ID</code>, <code>CLASS</code> and <code>ENCTYPE</code> arguments are transformed into appropriate arguments
+  of <code>HTML</code> <code>&lt;form ...&gt;...&lt;/form&gt;</code> node.</p></li><li><p><code>EXTRA-SUBMIT-CODE</code> argument might contain a list of string with simple <code>JS</code> code,
+  which will be called on form submit before code provided in <code>SUBMIT-FN</code> argument.</p></li><li><p>By default, form submission is done using <code>AJAX</code>. If you want to
+  do old-school <code>GET</code> or <code>POST</code> request, set <code>USE-AJAX-P</code> argument to <code>NIL</code>.</p></li><li><p>If <code>REQUIRES-CONFIRMATION-P</code> is true, then user will be asked a question
+  defined by <code>CONFIRM-QUESTION</code> argument. Zurb Foundation's
+  <a href="https://get.foundation/sites/docs/reveal.html">modal window</a> will be used
+  to show a popup. See <a href="https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-DOCS-2FFORM-3A-3A-40CONFIRMATION-DEMO-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" data-document="https://40ants.com/reblocks-ui/" data-node="x-28REBLOCKS-UI-DOCS-2FFORM-3A-3A-40CONFIRMATION-DEMO-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"><code>Submit Confirmation</code></a> section for
+  an example of code.</p></li></ul></div></div><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/core.lisp#L28">class</a><div class=reference-object><div class=object-name><a href=#x-28REBLOCKS-UI-2FCORE-3AUI-WIDGET-20CLASS-29 id=x-28REBLOCKS-UI-2FCORE-3AUI-WIDGET-20CLASS-29>reblocks-ui/core:ui-widget</a></div><div class=object-args><span class=locative-args></span></div></div><a class=bullet-link href=#x-28REBLOCKS-UI-2FCORE-3AUI-WIDGET-20CLASS-29></a></div><div class=bullet-content><p>Use this class as a parent for all widgets, who use <code>UI</code>.</p></div></div><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/form.lisp#L277">class</a><div class=reference-object><div class=object-name><a href=#x-28REBLOCKS-UI-2FFORM-3AERROR-PLACEHOLDER-20CLASS-29 id=x-28REBLOCKS-UI-2FFORM-3AERROR-PLACEHOLDER-20CLASS-29>reblocks-ui/form:error-placeholder</a></div><div class=object-args><span class=locative-args></span></div></div><a class=bullet-link href=#x-28REBLOCKS-UI-2FFORM-3AERROR-PLACEHOLDER-20CLASS-29></a></div></div><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/form.lisp#L310">function</a><div class=reference-object><div class=object-name><a href=#x-28REBLOCKS-UI-2FFORM-3AERROR-PLACEHOLDER-20FUNCTION-29 id=x-28REBLOCKS-UI-2FFORM-3AERROR-PLACEHOLDER-20FUNCTION-29>reblocks-ui/form:error-placeholder</a></div><div class=object-args><span class=locative-args>name &amp;key (widget-class &#39;error-placeholder)</span></div></div><a class=bullet-link href=#x-28REBLOCKS-UI-2FFORM-3AERROR-PLACEHOLDER-20FUNCTION-29></a></div><div class=bullet-content><p>This function creates and renders a widget to show an error message related to some form field.</p><p>It should be called inside <a href="https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AWITH-HTML-FORM-20-2840ANTS-DOC-2FLOCATIVES-3AMACRO-29-29" data-document="https://40ants.com/reblocks-ui/" data-node="x-28REBLOCKS-UI-2FFORM-3AWITH-HTML-FORM-20-2840ANTS-DOC-2FLOCATIVES-3AMACRO-29-29"><code>with-html-form</code></a> macro.</p><p><code>NAME</code> argument should be a string denoting a form field. Later, you can call <a href="https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AFIELD-ERROR-20FUNCTION-29" data-document="https://40ants.com/reblocks-ui/" data-node="x-28REBLOCKS-UI-2FFORM-3AFIELD-ERROR-20FUNCTION-29"><code>field-error</code></a> function
+to signal an error from the action function. You will need to pass the <code>NAME</code> as the first argument
+to the <a href="https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AFIELD-ERROR-20FUNCTION-29" data-document="https://40ants.com/reblocks-ui/" data-node="x-28REBLOCKS-UI-2FFORM-3AFIELD-ERROR-20FUNCTION-29"><code>field-error</code></a> function.</p></div></div><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/form.lisp#L327">function</a><div class=reference-object><div class=object-name><a href=#x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-PLACEHOLDER-20FUNCTION-29 id=x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-PLACEHOLDER-20FUNCTION-29>reblocks-ui/form:form-error-placeholder</a></div><div class=object-args><span class=locative-args>&amp;key (widget-class &#39;form-error-placeholder)</span></div></div><a class=bullet-link href=#x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-PLACEHOLDER-20FUNCTION-29></a></div><div class=bullet-content><p>This function creates and renders a widget to show an error for the whole form.</p><p>It should be called inside <a href="https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AWITH-HTML-FORM-20-2840ANTS-DOC-2FLOCATIVES-3AMACRO-29-29" data-document="https://40ants.com/reblocks-ui/" data-node="x-28REBLOCKS-UI-2FFORM-3AWITH-HTML-FORM-20-2840ANTS-DOC-2FLOCATIVES-3AMACRO-29-29"><code>with-html-form</code></a> macro.</p><p>Later, you can call <a href="https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-20FUNCTION-29" data-document="https://40ants.com/reblocks-ui/" data-node="x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-20FUNCTION-29"><code>form-error</code></a> function to signal an error from the action function.</p></div></div><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/form.lisp#L60">condition</a><div class=reference-object><div class=object-name><a href=#x-28REBLOCKS-UI-2FFORM-3AFIELD-ERROR-20CONDITION-29 id=x-28REBLOCKS-UI-2FFORM-3AFIELD-ERROR-20CONDITION-29>reblocks-ui/form:field-error</a></div><div class=object-args><span class=locative-args></span></div></div><a class=bullet-link href=#x-28REBLOCKS-UI-2FFORM-3AFIELD-ERROR-20CONDITION-29></a></div></div><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/form.lisp#L69">function</a><div class=reference-object><div class=object-name><a href=#x-28REBLOCKS-UI-2FFORM-3AFIELD-ERROR-20FUNCTION-29 id=x-28REBLOCKS-UI-2FFORM-3AFIELD-ERROR-20FUNCTION-29>reblocks-ui/form:field-error</a></div><div class=object-args><span class=locative-args>name message</span></div></div><a class=bullet-link href=#x-28REBLOCKS-UI-2FFORM-3AFIELD-ERROR-20FUNCTION-29></a></div><div class=bullet-content><p>Signals an error which will be shown for the whole form.lisp</p><p>You need to use <a href="https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AERROR-PLACEHOLDER-20FUNCTION-29" data-document="https://40ants.com/reblocks-ui/" data-node="x-28REBLOCKS-UI-2FFORM-3AERROR-PLACEHOLDER-20FUNCTION-29"><code>error-placeholder</code></a> function inside the <a href="https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AWITH-HTML-FORM-20-2840ANTS-DOC-2FLOCATIVES-3AMACRO-29-29" data-document="https://40ants.com/reblocks-ui/" data-node="x-28REBLOCKS-UI-2FFORM-3AWITH-HTML-FORM-20-2840ANTS-DOC-2FLOCATIVES-3AMACRO-29-29"><code>with-html-form</code></a> macro
+to set a place where an error message should be shown. Otherwise, the error
+will be logged and ignored.</p><p>If there is no a <code>error-placeholder</code> (<a href="https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AERROR-PLACEHOLDER-20FUNCTION-29" data-document="https://40ants.com/reblocks-ui/" data-node="x-28REBLOCKS-UI-2FFORM-3AERROR-PLACEHOLDER-20FUNCTION-29"><code>1</code></a> <a href="https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AERROR-PLACEHOLDER-20CLASS-29" data-document="https://40ants.com/reblocks-ui/" data-node="x-28REBLOCKS-UI-2FFORM-3AERROR-PLACEHOLDER-20CLASS-29"><code>2</code></a>) call with corresponding <code>NAME</code> argument,
+then error message can be shown for the whole form in a place where
+<a href="https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-PLACEHOLDER-20FUNCTION-29" data-document="https://40ants.com/reblocks-ui/" data-node="x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-PLACEHOLDER-20FUNCTION-29"><code>form-error-placeholder</code></a> function was called.</p></div></div><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/form.lisp#L52">condition</a><div class=reference-object><div class=object-name><a href=#x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-20CONDITION-29 id=x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-20CONDITION-29>reblocks-ui/form:form-error</a></div><div class=object-args><span class=locative-args></span></div></div><a class=bullet-link href=#x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-20CONDITION-29></a></div></div><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/form.lisp#L85">function</a><div class=reference-object><div class=object-name><a href=#x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-20FUNCTION-29 id=x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-20FUNCTION-29>reblocks-ui/form:form-error</a></div><div class=object-args><span class=locative-args>message</span></div></div><a class=bullet-link href=#x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-20FUNCTION-29></a></div><div class=bullet-content><p>Signals an error which will be shown for the whole form.lisp</p><p>You need to use <a href="https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-PLACEHOLDER-20FUNCTION-29" data-document="https://40ants.com/reblocks-ui/" data-node="x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-PLACEHOLDER-20FUNCTION-29"><code>form-error-placeholder</code></a> function inside the <a href="https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AWITH-HTML-FORM-20-2840ANTS-DOC-2FLOCATIVES-3AMACRO-29-29" data-document="https://40ants.com/reblocks-ui/" data-node="x-28REBLOCKS-UI-2FFORM-3AWITH-HTML-FORM-20-2840ANTS-DOC-2FLOCATIVES-3AMACRO-29-29"><code>with-html-form</code></a> macro
+to set a place where an error message should be shown. Otherwise, the error
+will be logged and ignored.</p></div></div><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/form.lisp#L156">function</a><div class=reference-object><div class=object-name><a href=#x-28REBLOCKS-UI-2FFORM-3AGET-FIELD-ERRORS-COUNT-20FUNCTION-29 id=x-28REBLOCKS-UI-2FFORM-3AGET-FIELD-ERRORS-COUNT-20FUNCTION-29>reblocks-ui/form:get-field-errors-count</a></div></div><a class=bullet-link href=#x-28REBLOCKS-UI-2FFORM-3AGET-FIELD-ERRORS-COUNT-20FUNCTION-29></a></div><div class=bullet-content><p>Returns total number of errors, reported by <a href="https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AFIELD-ERROR-20FUNCTION-29" data-document="https://40ants.com/reblocks-ui/" data-node="x-28REBLOCKS-UI-2FFORM-3AFIELD-ERROR-20FUNCTION-29"><code>field-error</code></a> function.</p><p>You can use this function and call <code>form-error</code> (<a href="https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-20FUNCTION-29" data-document="https://40ants.com/reblocks-ui/" data-node="x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-20FUNCTION-29"><code>1</code></a> <a href="https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-20CONDITION-29" data-document="https://40ants.com/reblocks-ui/" data-node="x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-20CONDITION-29"><code>2</code></a>) or interrupt action if
+the result is not zero.</p></div></div><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/form.lisp#L167">function</a><div class=reference-object><div class=object-name><a href=#x-28REBLOCKS-UI-2FFORM-3AGET-FIELD-ERRORS-20FUNCTION-29 id=x-28REBLOCKS-UI-2FFORM-3AGET-FIELD-ERRORS-20FUNCTION-29>reblocks-ui/form:get-field-errors</a></div><div class=object-args><span class=locative-args>field-name</span></div></div><a class=bullet-link href=#x-28REBLOCKS-UI-2FFORM-3AGET-FIELD-ERRORS-20FUNCTION-29></a></div><div class=bullet-content><p>Returns all errors, reported for the field with name given in <code>FIELD-NAME</code>.</p></div></div><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/form.lisp#L421">function</a><div class=reference-object><div class=object-name><a href=#x-28REBLOCKS-UI-2FFORM-3ARENDER-BUTTON-20FUNCTION-29 id=x-28REBLOCKS-UI-2FFORM-3ARENDER-BUTTON-20FUNCTION-29>reblocks-ui/form:render-button</a></div><div class=object-args><span class=locative-args>NAME &amp;KEY (VALUE (HUMANIZE-NAME NAME)) ID (CLASS &quot;button&quot;) (ONCLICK &quot;disableIrrelevantButtons(this);&quot;) DISABLEDP</span></div></div><a class=bullet-link href=#x-28REBLOCKS-UI-2FFORM-3ARENDER-BUTTON-20FUNCTION-29></a></div><div class=bullet-content><p>Renders a button in a form.</p><ul><li><p><code>NAME</code> - name of the html control. The name is attributized before
+  being rendered.</p></li><li><p><code>VALUE</code> - a value on html control. Humanized name is default.</p></li><li><p><code>ID</code> - id of the html control. Default is nil.</p></li><li><p><code>CLASS</code> - a class used for styling. By default, &quot;submit&quot;.</p></li><li><p><code>DISABLEDP</code> - button is disabled if true.</p></li></ul></div></div><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/form.lisp#L515">function</a><div class=reference-object><div class=object-name><a href=#x-28REBLOCKS-UI-2FFORM-3ARENDER-FORM-AND-BUTTON-20FUNCTION-29 id=x-28REBLOCKS-UI-2FFORM-3ARENDER-FORM-AND-BUTTON-20FUNCTION-29>reblocks-ui/form:render-form-and-button</a></div><div class=object-args><span class=locative-args>NAME ACTION &amp;KEY (VALUE (HUMANIZE-NAME NAME)) (METHOD :GET) BUTTON-ID (BUTTON-CLASS &quot;button&quot;) (USE-AJAX-P T) FORM-ID FORM-CLASS</span></div></div><a class=bullet-link href=#x-28REBLOCKS-UI-2FFORM-3ARENDER-FORM-AND-BUTTON-20FUNCTION-29></a></div><div class=bullet-content><p>Renders a button within a form. This function can be used a short
+cut to quickly render a sumbit button.</p></div></div><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/form.lisp#L480">function</a><div class=reference-object><div class=object-name><a href=#x-28REBLOCKS-UI-2FFORM-3ARENDER-LINK-20FUNCTION-29 id=x-28REBLOCKS-UI-2FFORM-3ARENDER-LINK-20FUNCTION-29>reblocks-ui/form:render-link</a></div><div class=object-args><span class=locative-args>action label &amp;key (ajaxp t) id class title render-fn</span></div></div><a class=bullet-link href=#x-28REBLOCKS-UI-2FFORM-3ARENDER-LINK-20FUNCTION-29></a></div><div class=bullet-content><p>Renders an action into a href link. If <code>AJAXP</code> is true (the
+default), the link will be rendered in such a way that the action will
+be invoked via <code>AJAX</code> or will fall back to a regular request if
+JavaScript is not available. When the user clicks on the link the
+action will be called on the server.</p><p><code>ACTION</code> may be a function or a result of a call to <a href="https://40ants.com/reblocks/api/#x-28REBLOCKS-2FACTIONS-3AMAKE-ACTION-URL-20FUNCTION-29"><code>reblocks/actions:make-action-url</code></a>.
+<code>ID</code>, <code>CLASS</code> and <code>TITLE</code> represent their <code>HTML</code> counterparts.
+<code>RENDER-FN</code> is an optional function of one argument that is reponsible
+for rendering the link's content (i.e. its label). The default rendering
+function just calls <code>PRINC-TO-STRING</code> on the label and renders it
+with escaping. Internally, render-fn should use reblocks:with-html macro
+to write output into the right stream.</p><p><code>WARNING</code>! This function generates <a href="...">...</a> element and any
+bot, crawling the internet will hit this action with <code>GET</code> request.</p></div></div><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/form.lisp#L531">function</a><div class=reference-object><div class=object-name><a href=#x-28REBLOCKS-UI-2FFORM-3ARENDER-TEXTAREA-20FUNCTION-29 id=x-28REBLOCKS-UI-2FFORM-3ARENDER-TEXTAREA-20FUNCTION-29>reblocks-ui/form:render-textarea</a></div><div class=object-args><span class=locative-args>name &amp;key (label (humanize-name name)) value id class disabledp</span></div></div><a class=bullet-link href=#x-28REBLOCKS-UI-2FFORM-3ARENDER-TEXTAREA-20FUNCTION-29></a></div><div class=bullet-content><p>Renders a textarea.</p><ul><li><p><code>NAME</code> - name of the html control. The name is attributized before
+  being rendered.</p></li><li><p><code>VALUE</code> - a value on html control. Humanized name is default.</p></li><li><p><code>ID</code> - id of the html control. Default is nil.</p></li><li><p><code>CLASS</code> - a class used for styling. By default, &quot;submit&quot;.</p></li><li><p><code>DISABLEDP</code> - button is disabled if true.</p></li></ul></div></div><h2>Untitled<a class=header-link
+     href=#x-28REBLOCKS-UI-DOCS-2FPOPUP-3A-3A-40POPUP-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29
+     title="Permalink to this headline"
+     id=x-28REBLOCKS-UI-DOCS-2FPOPUP-3A-3A-40POPUP-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29></a></h2><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/popup.lisp#L15">class</a><div class=reference-object><div class=object-name><a href=#x-28REBLOCKS-UI-2FPOPUP-3APOPUP-WIDGET-20CLASS-29 id=x-28REBLOCKS-UI-2FPOPUP-3APOPUP-WIDGET-20CLASS-29>reblocks-ui/popup:popup-widget</a></div><div class=object-args><span class=locative-args></span></div></div><a class=bullet-link href=#x-28REBLOCKS-UI-2FPOPUP-3APOPUP-WIDGET-20CLASS-29></a></div><div class=bullet-content><p>This widgets shows a popup window.</p><p>Inherit from this class and define a method for
+<a href="https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FPOPUP-3ARENDER-POPUP-CONTENT-20GENERIC-FUNCTION-29" data-document="https://40ants.com/reblocks-ui/" data-node="x-28REBLOCKS-UI-2FPOPUP-3ARENDER-POPUP-CONTENT-20GENERIC-FUNCTION-29"><code>render-popup-content</code></a> generic-function. Then you
+will be able to instantiate your class instance
+and call <a href="https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FPOPUP-3ASHOW-POPUP-20GENERIC-FUNCTION-29" data-document="https://40ants.com/reblocks-ui/" data-node="x-28REBLOCKS-UI-2FPOPUP-3ASHOW-POPUP-20GENERIC-FUNCTION-29"><code>show-popup</code></a> generic function.</p></div></div><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/popup.lisp#L26">generic-function</a><div class=reference-object><div class=object-name><a href=#x-28REBLOCKS-UI-2FPOPUP-3ASHOW-POPUP-20GENERIC-FUNCTION-29 id=x-28REBLOCKS-UI-2FPOPUP-3ASHOW-POPUP-20GENERIC-FUNCTION-29>reblocks-ui/popup:show-popup</a></div><div class=object-args><span class=locative-args>widget</span></div></div><a class=bullet-link href=#x-28REBLOCKS-UI-2FPOPUP-3ASHOW-POPUP-20GENERIC-FUNCTION-29></a></div><div class=bullet-content><p>Shows popup window.</p></div></div><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/popup.lisp#L33">generic-function</a><div class=reference-object><div class=object-name><a href=#x-28REBLOCKS-UI-2FPOPUP-3AHIDE-POPUP-20GENERIC-FUNCTION-29 id=x-28REBLOCKS-UI-2FPOPUP-3AHIDE-POPUP-20GENERIC-FUNCTION-29>reblocks-ui/popup:hide-popup</a></div><div class=object-args><span class=locative-args>widget</span></div></div><a class=bullet-link href=#x-28REBLOCKS-UI-2FPOPUP-3AHIDE-POPUP-20GENERIC-FUNCTION-29></a></div><div class=bullet-content><p>Hides popup window.</p></div></div><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/popup.lisp#L47">generic-function</a><div class=reference-object><div class=object-name><a href=#x-28REBLOCKS-UI-2FPOPUP-3ARENDER-POPUP-CONTENT-20GENERIC-FUNCTION-29 id=x-28REBLOCKS-UI-2FPOPUP-3ARENDER-POPUP-CONTENT-20GENERIC-FUNCTION-29>reblocks-ui/popup:render-popup-content</a></div><div class=object-args><span class=locative-args>widget</span></div></div><a class=bullet-link href=#x-28REBLOCKS-UI-2FPOPUP-3ARENDER-POPUP-CONTENT-20GENERIC-FUNCTION-29></a></div><div class=bullet-content><p>Renders inner <code>HTML</code> for popup window.
+You need to define a method for this generic function
+and specialize it for your own class.</p></div></div><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/popup.lisp#L16">accessor</a><div class=reference-object><div class=object-name><a href=#x-28REBLOCKS-UI-2FPOPUP-3AVISIBLE-P-20-2840ANTS-DOC-2FLOCATIVES-3AACCESSOR-20REBLOCKS-UI-2FPOPUP-3APOPUP-WIDGET-29-29 id=x-28REBLOCKS-UI-2FPOPUP-3AVISIBLE-P-20-2840ANTS-DOC-2FLOCATIVES-3AACCESSOR-20REBLOCKS-UI-2FPOPUP-3APOPUP-WIDGET-29-29>reblocks-ui/popup:visible-p</a></div><div class=object-args><span class=locative-args></span><span class=locative-args>(= nil)</span></div></div><a class=bullet-link href=#x-28REBLOCKS-UI-2FPOPUP-3AVISIBLE-P-20-2840ANTS-DOC-2FLOCATIVES-3AACCESSOR-20REBLOCKS-UI-2FPOPUP-3APOPUP-WIDGET-29-29></a></div></div>
+   </div><div class=footer>
+    <hr class=separator>
+    <p class=fineprint>Created with passion by <em>40Ants</em><a class=lisp-logo
+     href="http://lisp-lang.org/">
+      <img
+           src="https://40ants.com/img/made-with-lisp.svg"></a>
+   </div>
+  </div>
+ </body>
+</html>
