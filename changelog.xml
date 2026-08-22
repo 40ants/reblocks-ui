@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<rss version="2.0">
+    <channel>
+        <title>reblocks-ui-docs ChangeLog</title>
+        <link>https://40ants.com/reblocks-ui/</link>
+        <generator>xml-emitter</generator>
+        <language>en-us</language>
+        <item>
+            <title>0.17.0  (2024-07-28)</title>
+            <description>&lt;h1 id=&quot;fixed&quot;&gt;Fixed&lt;/h1&gt;&lt;ul&gt;&lt;li&gt;&lt;p&gt;Code was fixed to work with latest changed to Reblocks, introduced in &lt;a href=&quot;https://github.com/40ants/reblocks/pull/57&quot;&gt;PR 57&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.16.0  (2022-12-12)</title>
+            <description>&lt;h1 id=&quot;changed&quot;&gt;Changed&lt;/h1&gt;&lt;ul&gt;&lt;li&gt;&lt;p&gt;Functions &lt;code&gt;reblocks-ui/form:error-placeholder&lt;/code&gt; (&lt;a href=&quot;https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AERROR-PLACEHOLDER-20FUNCTION-29&quot; data-document=&quot;https://40ants.com/reblocks-ui/&quot; data-node=&quot;x-28REBLOCKS-UI-2FFORM-3AERROR-PLACEHOLDER-20FUNCTION-29&quot;&gt;&lt;code&gt;1&lt;/code&gt;&lt;/a&gt; &lt;a href=&quot;https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AERROR-PLACEHOLDER-20CLASS-29&quot; data-document=&quot;https://40ants.com/reblocks-ui/&quot; data-node=&quot;x-28REBLOCKS-UI-2FFORM-3AERROR-PLACEHOLDER-20CLASS-29&quot;&gt;&lt;code&gt;2&lt;/code&gt;&lt;/a&gt;) and &lt;a href=&quot;https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-PLACEHOLDER-20FUNCTION-29&quot; data-document=&quot;https://40ants.com/reblocks-ui/&quot; data-node=&quot;x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-PLACEHOLDER-20FUNCTION-29&quot;&gt;&lt;code&gt;reblocks-ui/form:form-error-placeholder&lt;/code&gt;&lt;/a&gt; now
+  can be called not only inside the &lt;a href=&quot;https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AWITH-HTML-FORM-20-2840ANTS-DOC-2FLOCATIVES-3AMACRO-29-29&quot; data-document=&quot;https://40ants.com/reblocks-ui/&quot; data-node=&quot;x-28REBLOCKS-UI-2FFORM-3AWITH-HTML-FORM-20-2840ANTS-DOC-2FLOCATIVES-3AMACRO-29-29&quot;&gt;&lt;code&gt;reblocks-ui/form:with-html-form&lt;/code&gt;&lt;/a&gt; macro body, but also in any
+  function within.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Added &lt;code&gt;CSS&lt;/code&gt; attribute display none/block for popup.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Mon, 12 Dec 2022 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.15.0  (2022-11-26)</title>
+            <description>&lt;h1 id=&quot;new&quot;&gt;New&lt;/h1&gt;&lt;p&gt;Functions &lt;a href=&quot;https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AGET-FIELD-ERRORS-COUNT-20FUNCTION-29&quot; data-document=&quot;https://40ants.com/reblocks-ui/&quot; data-node=&quot;x-28REBLOCKS-UI-2FFORM-3AGET-FIELD-ERRORS-COUNT-20FUNCTION-29&quot;&gt;&lt;code&gt;reblocks-ui/form:get-field-errors-count&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AGET-FIELD-ERRORS-20FUNCTION-29&quot; data-document=&quot;https://40ants.com/reblocks-ui/&quot; data-node=&quot;x-28REBLOCKS-UI-2FFORM-3AGET-FIELD-ERRORS-20FUNCTION-29&quot;&gt;&lt;code&gt;reblocks-ui/form:get-field-errors&lt;/code&gt;&lt;/a&gt;
+were added to make it possible to check if there was any field errors during validation
+and to interrupt further form processing.&lt;/p&gt;&lt;p&gt;An example was added to show how to process form errors and use placeholders. You&apos;ll find
+it inside examples/form-errors.lisp file. Load reblocks-ui-examples system to load it.&lt;/p&gt;&lt;h1 id=&quot;fixed&quot;&gt;Fixed&lt;/h1&gt;&lt;p&gt;Also, function a but inside &lt;a href=&quot;https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-20FUNCTION-29&quot; data-document=&quot;https://40ants.com/reblocks-ui/&quot; data-node=&quot;x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-20FUNCTION-29&quot;&gt;&lt;code&gt;reblocks-ui/form:form-error&lt;/code&gt;&lt;/a&gt; function was fixed and now it
+will interrupt action and show an error inside a placeholder, created with
+&lt;a href=&quot;https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-PLACEHOLDER-20FUNCTION-29&quot; data-document=&quot;https://40ants.com/reblocks-ui/&quot; data-node=&quot;x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-PLACEHOLDER-20FUNCTION-29&quot;&gt;&lt;code&gt;reblocks-ui/form:form-error-placeholder&lt;/code&gt;&lt;/a&gt; function or open debugger otherwise.&lt;/p&gt;&lt;p&gt;Previosly this function call was ignored if there was a form error placeholder widget on a page.&lt;/p&gt;</description>
+            <pubDate>Sat, 26 Nov 2022 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.14.0  (2022-09-17)</title>
+            <description>&lt;h1 id=&quot;new&quot;&gt;New&lt;/h1&gt;&lt;ul&gt;&lt;li&gt;&lt;p&gt;New class &lt;a href=&quot;https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FPOPUP-3APOPUP-WIDGET-20CLASS-29&quot; data-document=&quot;https://40ants.com/reblocks-ui/&quot; data-node=&quot;x-28REBLOCKS-UI-2FPOPUP-3APOPUP-WIDGET-20CLASS-29&quot;&gt;&lt;code&gt;reblocks-ui/popup:popup-widget&lt;/code&gt;&lt;/a&gt; was added.
+  It can be used to show popup windows inside the main screen.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Sat, 17 Sep 2022 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.13.0  (2022-02-14)</title>
+            <description>&lt;h1 id=&quot;backward-incompabilities&quot;&gt;Backward Incompabilities&lt;/h1&gt;&lt;ul&gt;&lt;li&gt;&lt;p&gt;Now action execution continues after the call to &lt;code&gt;reblocks-ui/form:form-error&lt;/code&gt; (&lt;a href=&quot;https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-20FUNCTION-29&quot; data-document=&quot;https://40ants.com/reblocks-ui/&quot; data-node=&quot;x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-20FUNCTION-29&quot;&gt;&lt;code&gt;1&lt;/code&gt;&lt;/a&gt; &lt;a href=&quot;https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-20CONDITION-29&quot; data-document=&quot;https://40ants.com/reblocks-ui/&quot; data-node=&quot;x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-20CONDITION-29&quot;&gt;&lt;code&gt;2&lt;/code&gt;&lt;/a&gt;)
+  or &lt;code&gt;reblocks-ui/form:field-error&lt;/code&gt; (&lt;a href=&quot;https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AFIELD-ERROR-20FUNCTION-29&quot; data-document=&quot;https://40ants.com/reblocks-ui/&quot; data-node=&quot;x-28REBLOCKS-UI-2FFORM-3AFIELD-ERROR-20FUNCTION-29&quot;&gt;&lt;code&gt;1&lt;/code&gt;&lt;/a&gt; &lt;a href=&quot;https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AFIELD-ERROR-20CONDITION-29&quot; data-document=&quot;https://40ants.com/reblocks-ui/&quot; data-node=&quot;x-28REBLOCKS-UI-2FFORM-3AFIELD-ERROR-20CONDITION-29&quot;&gt;&lt;code&gt;2&lt;/code&gt;&lt;/a&gt;). This way, all form errors could be shown at once.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;&lt;code&gt;CSS&lt;/code&gt; classes for placeholders were changed. &lt;code&gt;reblocks-ui/form:error-placeholder&lt;/code&gt; (&lt;a href=&quot;https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AERROR-PLACEHOLDER-20FUNCTION-29&quot; data-document=&quot;https://40ants.com/reblocks-ui/&quot; data-node=&quot;x-28REBLOCKS-UI-2FFORM-3AERROR-PLACEHOLDER-20FUNCTION-29&quot;&gt;&lt;code&gt;1&lt;/code&gt;&lt;/a&gt; &lt;a href=&quot;https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AERROR-PLACEHOLDER-20CLASS-29&quot; data-document=&quot;https://40ants.com/reblocks-ui/&quot; data-node=&quot;x-28REBLOCKS-UI-2FFORM-3AERROR-PLACEHOLDER-20CLASS-29&quot;&gt;&lt;code&gt;2&lt;/code&gt;&lt;/a&gt;)
+  now uses &amp;quot;form-error&amp;quot; instead of just &amp;quot;error&amp;quot; and &lt;a href=&quot;https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-PLACEHOLDER-20FUNCTION-29&quot; data-document=&quot;https://40ants.com/reblocks-ui/&quot; data-node=&quot;x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-PLACEHOLDER-20FUNCTION-29&quot;&gt;&lt;code&gt;reblocks-ui/form:form-error-placeholder&lt;/code&gt;&lt;/a&gt;
+  uses &amp;quot;alert callout&amp;quot; instead of &amp;quot;error&amp;quot;.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Argument &lt;code&gt;WIDGET&lt;/code&gt; was removed from &lt;a href=&quot;https://40ants.com/reblocks-ui/#x-28REBLOCKS-UI-2FFORM-3AWITH-HTML-FORM-20-2840ANTS-DOC-2FLOCATIVES-3AMACRO-29-29&quot; data-document=&quot;https://40ants.com/reblocks-ui/&quot; data-node=&quot;x-28REBLOCKS-UI-2FFORM-3AWITH-HTML-FORM-20-2840ANTS-DOC-2FLOCATIVES-3AMACRO-29-29&quot;&gt;&lt;code&gt;reblocks-ui/form:with-html-form&lt;/code&gt;&lt;/a&gt; macro.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;h1 id=&quot;changes&quot;&gt;Changes&lt;/h1&gt;&lt;ul&gt;&lt;li&gt;&lt;p&gt;Documentation was rewritten using &lt;code&gt;40ANTS-DOC&lt;/code&gt;. Now it contains
+  more information plus interactive demos.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;h1 id=&quot;fixes&quot;&gt;Fixes&lt;/h1&gt;&lt;ul&gt;&lt;li&gt;&lt;p&gt;Fixed to work with latest Spinneret which now escapes double
+  and single quotes.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Mon, 14 Feb 2022 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.12.0  (2022-01-04)</title>
+            <description>&lt;p&gt;Move to Reblocks.&lt;/p&gt;</description>
+            <pubDate>Tue, 04 Jan 2022 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.11.0  (2021-06-02)</title>
+            <description>&lt;p&gt;Added a way to handle and show form and field errors.&lt;/p&gt;&lt;p&gt;Use &lt;code&gt;error-placeholder&lt;/code&gt; function and &lt;code&gt;form-error-placeholder&lt;/code&gt; function
+inside the &lt;code&gt;with-html-form&lt;/code&gt; macro. And signal errors using &lt;code&gt;field-error&lt;/code&gt;
+and &lt;code&gt;form-error&lt;/code&gt; functions.&lt;/p&gt;</description>
+            <pubDate>Wed, 02 Jun 2021 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.10.0  (2021-01-07)</title>
+            <description>&lt;ul&gt;&lt;li&gt;&lt;p&gt;Macro &lt;code&gt;with-html-form&lt;/code&gt; now can accept parameters &lt;code&gt;requires-confirmation-p&lt;/code&gt; and &lt;code&gt;confirm-question&lt;/code&gt;.
+  If &lt;code&gt;requires-confirmation-p&lt;/code&gt; is given, form shows a popup asking if user really wants to execute an action.
+  Argument &lt;code&gt;confirm-question&lt;/code&gt; can accept a string or a forms for spinneret. They will be used to render
+  the content of the popup.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Thu, 07 Jan 2021 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.9.0  (2020-01-31)</title>
+            <description>&lt;ul&gt;&lt;li&gt;&lt;p&gt;&lt;code&gt;widget&lt;/code&gt; was renamed to &lt;code&gt;ui-widget&lt;/code&gt; and a deprecation warning was added.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Fri, 31 Jan 2020 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.8.0  (2018-05-04)</title>
+            <description>&lt;ul&gt;&lt;li&gt;&lt;p&gt;Do not use &lt;code&gt;fieldset&lt;/code&gt; in &lt;code&gt;with-html-form&lt;/code&gt;. It usually draws a box
+  around the form elements and this isn&apos;t always wanted.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Fri, 04 May 2018 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.7.1  (2018-02-10)</title>
+            <description>&lt;ul&gt;&lt;li&gt;&lt;p&gt;Function &lt;code&gt;render-button&lt;/code&gt; now supports keyword argument &lt;code&gt;:onclick&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Sat, 10 Feb 2018 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.7.0  (2018-02-06)</title>
+            <description>&lt;ul&gt;&lt;li&gt;&lt;p&gt;Added initialization of Foundation&apos;s javascript plugins.
+  This introduces dependency from &lt;code&gt;weblocks-parenscript&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Tue, 06 Feb 2018 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.6.0  (2018-02-01)</title>
+            <description>&lt;p&gt;System was moved to package inferred class and fixed to work with
+weblocks &amp;gt;= 0.25.0.&lt;/p&gt;</description>
+            <pubDate>Thu, 01 Feb 2018 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.5.0  (2018-01-11)</title>
+            <description>&lt;ul&gt;&lt;li&gt;&lt;p&gt;Now  &lt;code&gt;*foundation-dependencies*&lt;/code&gt; is exported from
+  &lt;code&gt;weblocks.ui.core&lt;/code&gt;.
+  This is a list of &lt;code&gt;CSS&lt;/code&gt; an &lt;code&gt;JS&lt;/code&gt; dependencies of Zurb Foundation,
+  which you can with to add to your application wide dependencies
+  list to render pages without widgets, such as error pages.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Thu, 11 Jan 2018 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.4.0  (2018-01-07)</title>
+            <description>&lt;ul&gt;&lt;li&gt;&lt;p&gt;Fixed to work with weblocks &amp;gt;= 0.22.0&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Sun, 07 Jan 2018 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.3.0  (2017-11-23)</title>
+            <description>&lt;ul&gt;&lt;li&gt;&lt;p&gt;Package &lt;code&gt;weblocks.ui.form&lt;/code&gt; was fixed to use &lt;code&gt;spinneret&lt;/code&gt; instead of
+  &lt;code&gt;cl-who&lt;/code&gt;, because &lt;code&gt;reblocks&lt;/code&gt; version of &lt;code&gt;Weblocks&lt;/code&gt; moved to it.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Thu, 23 Nov 2017 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.2.0  (2017-11-11)</title>
+            <description>&lt;ul&gt;&lt;li&gt;&lt;p&gt;Now &lt;code&gt;UI&lt;/code&gt; widgets are depend on new &lt;code&gt;weblocks.widget:widget&lt;/code&gt; class.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;This is breaking rendering for widgets. Replace old &lt;code&gt;weblocks:render-body&lt;/code&gt;
+  methods with &lt;code&gt;weblocks.widget:render&lt;/code&gt;.&lt;/p&gt;</description>
+            <pubDate>Sat, 11 Nov 2017 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.1.1  (2017-09-21)</title>
+            <description>&lt;ul&gt;&lt;li&gt;&lt;p&gt;Code was fixed to work with weblocks 0.14.0 where &lt;code&gt;*action-string*&lt;/code&gt;
+  was moved to weblocks.variables.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Added &lt;code&gt;weblocks.ui.form:render-link&lt;/code&gt; function, from old &lt;code&gt;weblocks/utils/html.lisp&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Thu, 21 Sep 2017 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.1.0  (2017-09-01)</title>
+            <description>&lt;ul&gt;&lt;li&gt;&lt;p&gt;Initial version.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Fri, 01 Sep 2017 00:00:00 +0000</pubDate>
+        </item>
+    </channel>
+</rss>
