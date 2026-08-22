@@ -73,19 +73,19 @@ Go to [HTML documentation](https://40ants.com/reblocks-ui/) to see this code in 
 
 <a id="x-28REBLOCKS-UI-2FCORE-3AUI-WIDGET-20CLASS-29"></a>
 
-#### [class](2802) `reblocks-ui/core:ui-widget` (widget)
+#### [class](4b3c) `reblocks-ui/core:ui-widget` (widget)
 
 Use this class as a parent for all widgets, who use `UI`.
 
 <a id="x-28REBLOCKS-UI-2FCORE-3AWIDGET-20CLASS-29"></a>
 
-#### [class](dcf2) `reblocks-ui/core:widget` (ui-widget)
+#### [class](9445) `reblocks-ui/core:widget` (ui-widget)
 
 Use this class as a parent for all widgets, who use `UI`. Warning: 'widget' was renamed to 'ui-widget' and will be removed after 2020-06-01.
 
 <a id="x-28REBLOCKS-UI-2FCORE-3A-2AFOUNDATION-DEPENDENCIES-2A-20-28VARIABLE-29-29"></a>
 
-#### [variable](8f3d) `reblocks-ui/core:*foundation-dependencies*` (#<REBLOCKS/DEPENDENCIES:REMOTE-DEPENDENCY url: "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js">
+#### [variable](9750) `reblocks-ui/core:*foundation-dependencies*` (#<REBLOCKS/DEPENDENCIES:REMOTE-DEPENDENCY url: "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js">
  #<REBLOCKS/DEPENDENCIES:REMOTE-DEPENDENCY url: "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css">
  #<REBLOCKS-PARENSCRIPT:PARENSCRIPT-DEPENDENCY >)
 
@@ -247,7 +247,7 @@ Go to [HTML documentation](https://40ants.com/reblocks-ui/) to see this code in 
 
 <a id="x-28REBLOCKS-UI-2FFORM-3AWITH-HTML-FORM-20-2840ANTS-DOC-2FLOCATIVES-3AMACRO-29-29"></a>
 
-#### [macro](cdcf) `reblocks-ui/form:with-html-form` (METHOD-TYPE ACTION &KEY ID CLASS ENCTYPE (USE-AJAX-P T) EXTRA-SUBMIT-CODE REQUIRES-CONFIRMATION-P (CONFIRM-QUESTION "Are you sure?") (SUBMIT-FN \*JS-DEFAULT-FORM-ACTION\*)) &BODY BODY
+#### [macro](bf5a) `reblocks-ui/form:with-html-form` (METHOD-TYPE ACTION &KEY ID CLASS ENCTYPE (USE-AJAX-P T) EXTRA-SUBMIT-CODE REQUIRES-CONFIRMATION-P (CONFIRM-QUESTION "Are you sure?") (SUBMIT-FN \*JS-DEFAULT-FORM-ACTION\*)) &BODY BODY
 
 Wraps a body with (:form ...) using [`reblocks/html:with-html`][ec02].
 
@@ -269,17 +269,17 @@ Wraps a body with (:form ...) using [`reblocks/html:with-html`][ec02].
 
 <a id="x-28REBLOCKS-UI-2FCORE-3AUI-WIDGET-20CLASS-29"></a>
 
-#### [class](2802) `reblocks-ui/core:ui-widget` (widget)
+#### [class](4b3c) `reblocks-ui/core:ui-widget` (widget)
 
 Use this class as a parent for all widgets, who use `UI`.
 
 <a id="x-28REBLOCKS-UI-2FFORM-3AERROR-PLACEHOLDER-20CLASS-29"></a>
 
-#### [class](6188) `reblocks-ui/form:error-placeholder` (widget)
+#### [class](46a8) `reblocks-ui/form:error-placeholder` (widget)
 
 <a id="x-28REBLOCKS-UI-2FFORM-3AERROR-PLACEHOLDER-20FUNCTION-29"></a>
 
-#### [function](a507) `reblocks-ui/form:error-placeholder` name &key (widget-class 'error-placeholder)
+#### [function](c0c6) `reblocks-ui/form:error-placeholder` name &key (widget-class 'error-placeholder)
 
 This function creates and renders a widget to show an error message related to some form field.
 
@@ -291,7 +291,7 @@ to the [`field-error`][5162] function.
 
 <a id="x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-PLACEHOLDER-20FUNCTION-29"></a>
 
-#### [function](d7d5) `reblocks-ui/form:form-error-placeholder` &key (widget-class 'form-error-placeholder)
+#### [function](a18e) `reblocks-ui/form:form-error-placeholder` &key (widget-class 'form-error-placeholder)
 
 This function creates and renders a widget to show an error for the whole form.
 
@@ -301,11 +301,11 @@ Later, you can call [`form-error`][ea04] function to signal an error from the ac
 
 <a id="x-28REBLOCKS-UI-2FFORM-3AFIELD-ERROR-20CONDITION-29"></a>
 
-#### [condition](ce9d) `reblocks-ui/form:field-error` (form-error)
+#### [condition](7f08) `reblocks-ui/form:field-error` (form-error)
 
 <a id="x-28REBLOCKS-UI-2FFORM-3AFIELD-ERROR-20FUNCTION-29"></a>
 
-#### [function](0f35) `reblocks-ui/form:field-error` name message
+#### [function](8214) `reblocks-ui/form:field-error` name message
 
 Signals an error which will be shown for the whole form.lisp
 
@@ -319,11 +319,11 @@ then error message can be shown for the whole form in a place where
 
 <a id="x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-20CONDITION-29"></a>
 
-#### [condition](f1e1) `reblocks-ui/form:form-error` (error)
+#### [condition](0294) `reblocks-ui/form:form-error` (error)
 
 <a id="x-28REBLOCKS-UI-2FFORM-3AFORM-ERROR-20FUNCTION-29"></a>
 
-#### [function](c5ad) `reblocks-ui/form:form-error` message
+#### [function](5738) `reblocks-ui/form:form-error` message
 
 Signals an error which will be shown for the whole form.lisp
 
@@ -333,7 +333,7 @@ will be logged and ignored.
 
 <a id="x-28REBLOCKS-UI-2FFORM-3AGET-FIELD-ERRORS-COUNT-20FUNCTION-29"></a>
 
-#### [function](99f9) `reblocks-ui/form:get-field-errors-count`
+#### [function](8105) `reblocks-ui/form:get-field-errors-count`
 
 Returns total number of errors, reported by [`field-error`][5162] function.
 
@@ -342,13 +342,13 @@ the result is not zero.
 
 <a id="x-28REBLOCKS-UI-2FFORM-3AGET-FIELD-ERRORS-20FUNCTION-29"></a>
 
-#### [function](3582) `reblocks-ui/form:get-field-errors` field-name
+#### [function](dc94) `reblocks-ui/form:get-field-errors` field-name
 
 Returns all errors, reported for the field with name given in `FIELD-NAME`.
 
 <a id="x-28REBLOCKS-UI-2FFORM-3ARENDER-BUTTON-20FUNCTION-29"></a>
 
-#### [function](6769) `reblocks-ui/form:render-button` NAME &KEY (VALUE (HUMANIZE-NAME NAME)) ID (CLASS "button") (ONCLICK "disableIrrelevantButtons(this);") DISABLEDP
+#### [function](463f) `reblocks-ui/form:render-button` NAME &KEY (VALUE (HUMANIZE-NAME NAME)) ID (CLASS "button") (ONCLICK "disableIrrelevantButtons(this);") DISABLEDP
 
 Renders a button in a form.
 
@@ -361,14 +361,14 @@ Renders a button in a form.
 
 <a id="x-28REBLOCKS-UI-2FFORM-3ARENDER-FORM-AND-BUTTON-20FUNCTION-29"></a>
 
-#### [function](0099) `reblocks-ui/form:render-form-and-button` NAME ACTION &KEY (VALUE (HUMANIZE-NAME NAME)) (METHOD :GET) BUTTON-ID (BUTTON-CLASS "button") (USE-AJAX-P T) FORM-ID FORM-CLASS
+#### [function](bb00) `reblocks-ui/form:render-form-and-button` NAME ACTION &KEY (VALUE (HUMANIZE-NAME NAME)) (METHOD :GET) BUTTON-ID (BUTTON-CLASS "button") (USE-AJAX-P T) FORM-ID FORM-CLASS
 
 Renders a button within a form. This function can be used a short
 cut to quickly render a sumbit button.
 
 <a id="x-28REBLOCKS-UI-2FFORM-3ARENDER-LINK-20FUNCTION-29"></a>
 
-#### [function](f70b) `reblocks-ui/form:render-link` action label &key (ajaxp t) id class title render-fn
+#### [function](f98b) `reblocks-ui/form:render-link` action label &key (ajaxp t) id class title render-fn
 
 Renders an action into a href link. If `AJAXP` is true (the
 default), the link will be rendered in such a way that the action will
@@ -389,7 +389,7 @@ bot, crawling the internet will hit this action with `GET` request.
 
 <a id="x-28REBLOCKS-UI-2FFORM-3ARENDER-TEXTAREA-20FUNCTION-29"></a>
 
-#### [function](e14a) `reblocks-ui/form:render-textarea` name &key (label (humanize-name name)) value id class disabledp
+#### [function](87db) `reblocks-ui/form:render-textarea` name &key (label (humanize-name name)) value id class disabledp
 
 Renders a textarea.
 
@@ -406,7 +406,7 @@ Renders a textarea.
 
 <a id="x-28REBLOCKS-UI-2FPOPUP-3APOPUP-WIDGET-20CLASS-29"></a>
 
-### [class](16b8) `reblocks-ui/popup:popup-widget` (ui-widget)
+### [class](d7c5) `reblocks-ui/popup:popup-widget` (ui-widget)
 
 This widgets shows a popup window.
 
@@ -417,19 +417,19 @@ and call [`show-popup`][5ada] generic function.
 
 <a id="x-28REBLOCKS-UI-2FPOPUP-3ASHOW-POPUP-20GENERIC-FUNCTION-29"></a>
 
-### [generic-function](96da) `reblocks-ui/popup:show-popup` widget
+### [generic-function](1be2) `reblocks-ui/popup:show-popup` widget
 
 Shows popup window.
 
 <a id="x-28REBLOCKS-UI-2FPOPUP-3AHIDE-POPUP-20GENERIC-FUNCTION-29"></a>
 
-### [generic-function](c844) `reblocks-ui/popup:hide-popup` widget
+### [generic-function](9b85) `reblocks-ui/popup:hide-popup` widget
 
 Hides popup window.
 
 <a id="x-28REBLOCKS-UI-2FPOPUP-3ARENDER-POPUP-CONTENT-20GENERIC-FUNCTION-29"></a>
 
-### [generic-function](c46f) `reblocks-ui/popup:render-popup-content` widget
+### [generic-function](8d7c) `reblocks-ui/popup:render-popup-content` widget
 
 Renders inner `HTML` for popup window.
 You need to define a method for this generic function
@@ -437,7 +437,7 @@ and specialize it for your own class.
 
 <a id="x-28REBLOCKS-UI-2FPOPUP-3AVISIBLE-P-20-2840ANTS-DOC-2FLOCATIVES-3AACCESSOR-20REBLOCKS-UI-2FPOPUP-3APOPUP-WIDGET-29-29"></a>
 
-### [accessor](1145) `reblocks-ui/popup:visible-p` (popup-widget) (= nil)
+### [accessor](108b) `reblocks-ui/popup:visible-p` (popup-widget) (= nil)
 
 
 [233f]: https://40ants.com/reblocks-ui/
@@ -457,28 +457,28 @@ and specialize it for your own class.
 [4fd9]: https://foundation.zurb.com/
 [5ce9]: https://get.foundation/sites/docs/reveal.html
 [1818]: https://github.com/40ants/reblocks-ui
-[2802]: https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/core.lisp#L28
-[dcf2]: https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/core.lisp#L32
-[8f3d]: https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/core.lisp#L42
-[99f9]: https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/form.lisp#L156
-[3582]: https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/form.lisp#L167
-[6188]: https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/form.lisp#L277
-[a507]: https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/form.lisp#L310
-[d7d5]: https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/form.lisp#L327
-[cdcf]: https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/form.lisp#L367
-[6769]: https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/form.lisp#L421
-[f70b]: https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/form.lisp#L480
-[0099]: https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/form.lisp#L515
-[f1e1]: https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/form.lisp#L52
-[e14a]: https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/form.lisp#L531
-[ce9d]: https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/form.lisp#L60
-[0f35]: https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/form.lisp#L69
-[c5ad]: https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/form.lisp#L85
-[16b8]: https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/popup.lisp#L15
-[1145]: https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/popup.lisp#L16
-[96da]: https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/popup.lisp#L26
-[c844]: https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/popup.lisp#L33
-[c46f]: https://github.com/40ants/reblocks-ui/blob/a8ef7c46884c8a8331a51d8fe589d5c5a80bc1be/src/popup.lisp#L47
+[4b3c]: https://github.com/40ants/reblocks-ui/blob/7a862b249d611b46307837a8df9442784dccca35/src/core.lisp#L28
+[9445]: https://github.com/40ants/reblocks-ui/blob/7a862b249d611b46307837a8df9442784dccca35/src/core.lisp#L32
+[9750]: https://github.com/40ants/reblocks-ui/blob/7a862b249d611b46307837a8df9442784dccca35/src/core.lisp#L42
+[8105]: https://github.com/40ants/reblocks-ui/blob/7a862b249d611b46307837a8df9442784dccca35/src/form.lisp#L156
+[dc94]: https://github.com/40ants/reblocks-ui/blob/7a862b249d611b46307837a8df9442784dccca35/src/form.lisp#L167
+[46a8]: https://github.com/40ants/reblocks-ui/blob/7a862b249d611b46307837a8df9442784dccca35/src/form.lisp#L277
+[c0c6]: https://github.com/40ants/reblocks-ui/blob/7a862b249d611b46307837a8df9442784dccca35/src/form.lisp#L310
+[a18e]: https://github.com/40ants/reblocks-ui/blob/7a862b249d611b46307837a8df9442784dccca35/src/form.lisp#L327
+[bf5a]: https://github.com/40ants/reblocks-ui/blob/7a862b249d611b46307837a8df9442784dccca35/src/form.lisp#L367
+[463f]: https://github.com/40ants/reblocks-ui/blob/7a862b249d611b46307837a8df9442784dccca35/src/form.lisp#L421
+[f98b]: https://github.com/40ants/reblocks-ui/blob/7a862b249d611b46307837a8df9442784dccca35/src/form.lisp#L480
+[bb00]: https://github.com/40ants/reblocks-ui/blob/7a862b249d611b46307837a8df9442784dccca35/src/form.lisp#L515
+[0294]: https://github.com/40ants/reblocks-ui/blob/7a862b249d611b46307837a8df9442784dccca35/src/form.lisp#L52
+[87db]: https://github.com/40ants/reblocks-ui/blob/7a862b249d611b46307837a8df9442784dccca35/src/form.lisp#L531
+[7f08]: https://github.com/40ants/reblocks-ui/blob/7a862b249d611b46307837a8df9442784dccca35/src/form.lisp#L60
+[8214]: https://github.com/40ants/reblocks-ui/blob/7a862b249d611b46307837a8df9442784dccca35/src/form.lisp#L69
+[5738]: https://github.com/40ants/reblocks-ui/blob/7a862b249d611b46307837a8df9442784dccca35/src/form.lisp#L85
+[d7c5]: https://github.com/40ants/reblocks-ui/blob/7a862b249d611b46307837a8df9442784dccca35/src/popup.lisp#L15
+[108b]: https://github.com/40ants/reblocks-ui/blob/7a862b249d611b46307837a8df9442784dccca35/src/popup.lisp#L16
+[1be2]: https://github.com/40ants/reblocks-ui/blob/7a862b249d611b46307837a8df9442784dccca35/src/popup.lisp#L26
+[9b85]: https://github.com/40ants/reblocks-ui/blob/7a862b249d611b46307837a8df9442784dccca35/src/popup.lisp#L33
+[8d7c]: https://github.com/40ants/reblocks-ui/blob/7a862b249d611b46307837a8df9442784dccca35/src/popup.lisp#L47
 [2c00]: https://quickdocs.org/40ants-doc
 [7f8b]: https://quickdocs.org/log4cl
 [691c]: https://quickdocs.org/log4cl-extras
